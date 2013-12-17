@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="10" height="10" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="textureAtlas" tilewidth="32" tileheight="32" margin="2">
+  <image source="../textureAtlas.png" width="64" height="64"/>
+ </tileset>
+ <layer name="Level1" width="10" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYBzFgwYDAFB4AGU=
+  </data>
+ </layer>
+</map>
