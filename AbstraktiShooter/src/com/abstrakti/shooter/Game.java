@@ -1,55 +1,29 @@
 package com.abstrakti.shooter;
 
-import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import java.util.Stack;
 
-public class Game implements ApplicationListener {
-	private OrthographicCamera camera;
-	private SpriteBatch batch;
-	private Texture texture;
-	private Sprite sprite;
+import com.abstrakti.shooter.states.State;
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+public class Game implements ApplicationListener, StateManager {
+	private SpriteBatch batch;	
+	private Stack<State> states = new Stack<State>();
 	
 	@Override
-	public void create() {		
-		float w = Gdx.graphics.getWidth();
-		float h = Gdx.graphics.getHeight();
-		
-		camera = new OrthographicCamera(1, h/w);
-		batch = new SpriteBatch();
-		
-		texture = new Texture(Gdx.files.internal("data/libgdx.png"));
-		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		
-		TextureRegion region = new TextureRegion(texture, 0, 0, 512, 275);
-		
-		sprite = new Sprite(region);
-		sprite.setSize(0.9f, 0.9f * sprite.getHeight() / sprite.getWidth());
-		sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
-		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);
+	public void create() {
+		this.batch = new SpriteBatch();	
+		this.states.push(State.createMainGameState(this, batch));
 	}
 
 	@Override
 	public void dispose() {
 		batch.dispose();
-		texture.dispose();
 	}
 
 	@Override
 	public void render() {		
-		Gdx.gl.glClearColor(1, 1, 1, 1);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-		
-		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
-		sprite.draw(batch);
-		batch.end();
+		this.states.peek().render();
 	}
 
 	@Override
@@ -62,5 +36,17 @@ public class Game implements ApplicationListener {
 
 	@Override
 	public void resume() {
+	}
+
+	@Override
+	public void pushState(State state) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public State popState(State state) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
