@@ -1,4 +1,4 @@
-package com.abstrakti.shooter;
+package com.abstrakti.shooter.managers;
 
 import com.abstrakti.shooter.states.State;
 

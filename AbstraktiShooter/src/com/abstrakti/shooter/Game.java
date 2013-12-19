@@ -2,6 +2,7 @@ package com.abstrakti.shooter;
 
 import java.util.Stack;
 
+import com.abstrakti.shooter.managers.StateManager;
 import com.abstrakti.shooter.states.State;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

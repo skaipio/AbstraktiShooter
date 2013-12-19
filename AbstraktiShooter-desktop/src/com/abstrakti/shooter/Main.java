@@ -10,6 +10,9 @@ public class Main {
 		Settings settings = new Settings();
 		settings.maxHeight = 512;
 		settings.maxWidth = 512;
+		settings.paddingX = 0;
+		settings.paddingY = 0;
+		settings.duplicatePadding = true;
 		
 		TexturePacker2.process(settings, "textures", "../AbstraktiShooter-android/assets", "textureAtlas");
 		

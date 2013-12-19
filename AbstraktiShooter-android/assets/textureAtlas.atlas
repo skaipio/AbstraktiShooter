@@ -3,9 +3,21 @@ textureAtlas.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-test_tile-01
+entities/testPlayer-01
   rotate: false
-  xy: 2, 2
+  xy: 0, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+
+textureAtlas2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+tiles/testTile-01
+  rotate: false
+  xy: 0, 0
   size: 32, 32
   orig: 32, 32
   offset: 0, 0

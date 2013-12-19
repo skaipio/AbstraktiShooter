@@ -1,6 +1,6 @@
 package com.abstrakti.shooter.states;
 
-import com.abstrakti.shooter.StateManager;
+import com.abstrakti.shooter.managers.StateManager;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
