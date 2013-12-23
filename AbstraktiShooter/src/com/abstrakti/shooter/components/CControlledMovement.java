@@ -22,14 +22,16 @@ public class CControlledMovement extends Component {
 		if (speed != 0f){
 			Vector2 movement = new Vector2();
 			if (Gdx.input.isKeyPressed(Keys.A)) {	
-				movement = new Vector2(-1, 0);
-			} else if (Gdx.input.isKeyPressed(Keys.D)) {
-				movement = new Vector2(1, 0);
+				movement.add(-1, 0);
+			}
+			if (Gdx.input.isKeyPressed(Keys.D)) {
+				movement.add(1, 0);
 			}
 			if (Gdx.input.isKeyPressed(Keys.W)) {
-				movement = new Vector2(0, 1);
-			} else if (Gdx.input.isKeyPressed(Keys.S)) {
-				movement = new Vector2(0, -1);
+				movement.add(0, 1);
+			}
+			if (Gdx.input.isKeyPressed(Keys.S)) {
+				movement.add(0, -1);
 			}
 			movement.scl(deltaTime*speed);
 			this.mapPlace.getPlace().add(movement);

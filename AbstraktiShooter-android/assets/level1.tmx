@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="40" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="textureAtlas2" tilewidth="32" tileheight="32">
+  <image source="textureAtlas2.png" width="64" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="collision" value="false"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="collision" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Level1" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztlsEOwCAIQ53//9HLbh50gKWICU04Km8FHL211hVxSl/uR4jiW6v4MHnxsWbKk4/hefHhfLMY81hidgblk/yTvGXOfgSfJaL5rHdJfH/5PFl2+bL7F91/GfhW0vKxA+E7qSx8SP9F8Wl693Y+5ozsvn+a70TfGU//0H/ArXwe88uqr/aMlU9bl1N82f1j883uKD5ufce5j9i9tLvYysPayWwqPkzFh2ln5pl6AZ5OBEk=
+  </data>
+ </layer>
+</map>

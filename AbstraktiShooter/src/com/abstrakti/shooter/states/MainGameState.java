@@ -24,7 +24,7 @@ class MainGameState extends State {
 	@Override
 	public void create() {
 		AssetManager.getInstance().loadSpriteSheet();
-		this.currentLevel = new Level("testlevel.tmx");
+		this.currentLevel = new Level("level1.tmx");
 		
 		this.player = new Player();
 		GameScreen.getInstance().lockCameraOn(this.player);

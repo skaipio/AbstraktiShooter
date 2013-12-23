@@ -15,9 +15,16 @@ textureAtlas2.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-tiles/testTile-01
+tiles/floor_concrete1
   rotate: false
   xy: 0, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+tiles/wall_concrete1
+  rotate: false
+  xy: 32, 0
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
