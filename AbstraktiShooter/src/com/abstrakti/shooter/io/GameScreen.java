@@ -18,9 +18,8 @@ public class GameScreen implements Screen {
 	private OrthographicCamera camera;
 	private OrthogonalTiledMapRenderer renderer;
 	private GameObject objToFollow;
-	private Sprite sprite; 
 
-	public GameScreen() {		
+	private GameScreen() {		
 		this.batch = new SpriteBatch();
 		
 		float w = Gdx.graphics.getWidth();

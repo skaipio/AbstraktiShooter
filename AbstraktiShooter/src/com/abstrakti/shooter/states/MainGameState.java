@@ -4,17 +4,11 @@ import com.abstrakti.shooter.Level;
 import com.abstrakti.shooter.io.GameScreen;
 import com.abstrakti.shooter.managers.AssetManager;
 import com.abstrakti.shooter.managers.StateManager;
-import com.abstrakti.shooter.objects.Player;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 class MainGameState extends State {
 	private GameScreen gameScreen;
-	private Player player;
 	private Level currentLevel;
 
 	public MainGameState(StateManager manager, SpriteBatch batch) {
@@ -25,10 +19,6 @@ class MainGameState extends State {
 	public void create() {
 		AssetManager.getInstance().loadSpriteSheet();
 		this.currentLevel = new Level("level1.tmx");
-		
-		this.player = new Player();
-		GameScreen.getInstance().lockCameraOn(this.player);
-		//TiledMapTileLayer layer = (TiledMapTileLayer)this.map.getLayers().get(0);
 	}
 
 	@Override
@@ -43,7 +33,7 @@ class MainGameState extends State {
 	}
 
 	private void update() {
-		this.player.update(Gdx.graphics.getDeltaTime());
+		this.currentLevel.update();
 	}
 
 	@Override
