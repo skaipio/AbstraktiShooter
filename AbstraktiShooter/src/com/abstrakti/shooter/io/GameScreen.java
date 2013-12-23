@@ -1,9 +1,7 @@
 package com.abstrakti.shooter.io;
 
 import com.abstrakti.shooter.components.CMapPlace;
-import com.abstrakti.shooter.components.CSprite;
 import com.abstrakti.shooter.components.Component;
-import com.abstrakti.shooter.managers.AssetManager;
 import com.abstrakti.shooter.objects.GameObject;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -15,14 +13,15 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 public class GameScreen implements Screen {
+	private static GameScreen screen;
 	private SpriteBatch batch;
 	private OrthographicCamera camera;
 	private OrthogonalTiledMapRenderer renderer;
 	private GameObject objToFollow;
 	private Sprite sprite; 
 
-	public GameScreen(SpriteBatch batch) {		
-		this.batch = batch;
+	public GameScreen() {		
+		this.batch = new SpriteBatch();
 		
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
@@ -80,6 +79,13 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void dispose() {
+	}
+	
+	public static GameScreen getInstance(){
+		if (screen == null){
+			screen = new GameScreen();
+		}
+		return screen;
 	}
 	
 	public void setMap(TiledMap map){

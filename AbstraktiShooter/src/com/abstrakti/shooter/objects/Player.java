@@ -19,4 +19,8 @@ public class Player extends GameObject {
 		sprite.setTextureRegion("entities/testPlayer-01");
 		this.addComponent(sprite);
 	}
+	
+	public void handleInput(){
+		// jos Hiiren vasen nappi painettu, niin luo Luoti-entiteetti
+	}
 }

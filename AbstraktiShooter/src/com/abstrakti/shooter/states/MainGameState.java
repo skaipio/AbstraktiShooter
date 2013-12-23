@@ -1,5 +1,6 @@
 package com.abstrakti.shooter.states;
 
+import com.abstrakti.shooter.Level;
 import com.abstrakti.shooter.io.GameScreen;
 import com.abstrakti.shooter.managers.AssetManager;
 import com.abstrakti.shooter.managers.StateManager;
@@ -13,9 +14,8 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 class MainGameState extends State {
 	private GameScreen gameScreen;
-	private TiledMap map;
-	private TmxMapLoader loader;
 	private Player player;
+	private Level currentLevel;
 
 	public MainGameState(StateManager manager, SpriteBatch batch) {
 		super(manager);
@@ -24,26 +24,22 @@ class MainGameState extends State {
 	@Override
 	public void create() {
 		AssetManager.getInstance().loadSpriteSheet();
-		this.gameScreen = new GameScreen(new SpriteBatch()); 
-		this.loader = new TmxMapLoader();
-		this.map = loader.load("testlevel.tmx");
-		this.gameScreen.setMap(map);
+		this.currentLevel = new Level("testlevel.tmx");
+		
 		this.player = new Player();
-		this.gameScreen.lockCameraOn(this.player);
+		GameScreen.getInstance().lockCameraOn(this.player);
 		//TiledMapTileLayer layer = (TiledMapTileLayer)this.map.getLayers().get(0);
 	}
 
 	@Override
 	public void dispose() {
 		this.gameScreen.dispose();
-		this.map.dispose();
-		this.loader = null;
 	}
 
 	@Override
 	public void render() {
 		this.update();
-		this.gameScreen.render(Gdx.graphics.getDeltaTime());
+		GameScreen.getInstance().render(Gdx.graphics.getDeltaTime());
 	}
 
 	private void update() {
