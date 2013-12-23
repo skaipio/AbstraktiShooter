@@ -19,6 +19,7 @@ class MainGameState extends State {
 	public void create() {
 		AssetManager.getInstance().loadSpriteSheet();
 		this.currentLevel = new Level("level1.tmx");
+		this.currentLevel.init();
 	}
 
 	@Override
