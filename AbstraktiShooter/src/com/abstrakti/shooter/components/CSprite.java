@@ -2,7 +2,7 @@ package com.abstrakti.shooter.components;
 
 import com.abstrakti.shooter.managers.AssetManager;
 import com.abstrakti.shooter.objects.GameObject;
-import com.abstrakti.shooter.objects.MapObject;
+import com.abstrakti.shooter.objects.DynamicObject;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -21,11 +21,12 @@ public class CSprite extends Component {
 		TextureRegion region = AssetManager.getInstance().getTextureRegion(name);
 		sprite.setRegion(region);
 		sprite.setBounds(0, 0, region.getRegionWidth(), region.getRegionHeight());
+		sprite.setOrigin(region.getRegionWidth()/2, region.getRegionHeight()/2);
 	}
 	
 	@Override
 	public void update(float deltaTime){	
-		MapObject physObj = (MapObject)this.object;
+		DynamicObject physObj = (DynamicObject)this.object;
 		if (physObj != null){
 			this.sprite.setPosition(physObj.getPosition().x, physObj.getPosition().y);
 		}

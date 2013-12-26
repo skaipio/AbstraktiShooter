@@ -6,7 +6,7 @@ import com.abstrakti.shooter.components.CSprite;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class Player extends MapObject {
+public class Player extends DynamicObject {
 	private static Player player;
 	private float speed = 32*7f; //per second
 	
@@ -37,7 +37,6 @@ public class Player extends MapObject {
 	}
 	
 	public void update(float deltaTime){
-		super.update(deltaTime);
-		
+		super.update(deltaTime);		
 	}
 }

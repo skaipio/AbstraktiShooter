@@ -1,6 +1,6 @@
 package com.abstrakti.shooter.io;
 
-import com.abstrakti.shooter.objects.MapObject;
+import com.abstrakti.shooter.objects.DynamicObject;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
@@ -15,7 +15,7 @@ public class GameScreen implements Screen {
 	private SpriteBatch batch;
 	private OrthographicCamera camera;
 	private OrthogonalTiledMapRenderer renderer;
-	private MapObject objToFollow;
+	private DynamicObject objToFollow;
 
 	private GameScreen() {		
 		this.batch = new SpriteBatch();
@@ -91,7 +91,7 @@ public class GameScreen implements Screen {
 	}
 
 	
-	public void lockCameraOn(MapObject obj){
+	public void lockCameraOn(DynamicObject obj){
 		this.objToFollow = obj;
 	}
 	
