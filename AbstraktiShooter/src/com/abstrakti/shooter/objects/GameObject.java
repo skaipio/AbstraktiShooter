@@ -4,19 +4,20 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import com.abstrakti.shooter.components.Component;
+import com.abstrakti.shooter.components.ComponentType;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Body;
 
 public abstract class GameObject {
-	protected Body body;
 	
-	private SortedMap<Component.Type, Component> components = new TreeMap<Component.Type, Component>();
 	
-	public <C extends Component> boolean hasComponent(Component.Type ofType){
+	private SortedMap<ComponentType, Component> components = new TreeMap<ComponentType, Component>();
+	
+	public boolean hasComponent(ComponentType ofType){
 		return this.components.containsKey(ofType);
 	}
 	
-	public <C extends Component> Component getComponent(Component.Type ofType){
+	public Component getComponent(ComponentType ofType){
 		return this.components.get(ofType);
 	}
 	
@@ -24,9 +25,7 @@ public abstract class GameObject {
 		this.components.put(component.TYPE, component);
 	}
 	
-	public Body getBody() {
-		return body;
-	}
+	
 	
 	
 	/**

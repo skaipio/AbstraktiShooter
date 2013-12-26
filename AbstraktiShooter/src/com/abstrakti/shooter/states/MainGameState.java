@@ -28,13 +28,13 @@ class MainGameState extends State {
 	}
 
 	@Override
-	public void render() {
+	public void render() {				
 		this.update();
 		GameScreen.getInstance().render(Gdx.graphics.getDeltaTime());
 	}
 
 	private void update() {
-		this.currentLevel.update();
+		this.currentLevel.update(Gdx.graphics.getDeltaTime());
 	}
 
 	@Override

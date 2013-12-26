@@ -2,22 +2,19 @@ package com.abstrakti.shooter.components;
 
 import com.abstrakti.shooter.managers.AssetManager;
 import com.abstrakti.shooter.objects.GameObject;
-import com.badlogic.gdx.Gdx;
+import com.abstrakti.shooter.objects.MapObject;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.physics.box2d.Body;
 
 public class CSprite extends Component {
 	private Sprite sprite;
-	private CMapPlace place;
 	private GameObject object;
 
-	public CSprite(CMapPlace place, GameObject object) {
-		super(Component.Type.Sprite);
-		this.place = place;
+	public CSprite(GameObject parent) {
+		super(ComponentType.Sprite);
 		this.sprite = new Sprite();
-		this.object = object;
+		this.object = parent;
 	}
 	
 	public void setTextureRegion(String name){
@@ -27,14 +24,16 @@ public class CSprite extends Component {
 	}
 	
 	@Override
-	public void update(float deltaTime){
-		//this.sprite.setPosition(place.getX(), place.getY());
-		this.sprite.setPosition(object.getBody().getPosition().x*100, object.getBody().getPosition().y*100);
+	public void update(float deltaTime){	
+		MapObject physObj = (MapObject)this.object;
+		if (physObj != null){
+			this.sprite.setPosition(physObj.getPosition().x, physObj.getPosition().y);
+		}
 	}
 	
 	@Override
 	public void draw(SpriteBatch batch){
-		// TODO: Sprite bounds need to be set before drawing
+		// Sprite bounds need to be set before drawing
 		this.sprite.draw(batch);
 	}
 

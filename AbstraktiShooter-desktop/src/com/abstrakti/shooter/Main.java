@@ -20,8 +20,8 @@ public class Main {
 		cfg.title = "AbstraktiShooter";
 		cfg.useGL20 = false;
 
-		cfg.width = 800;
-		cfg.height = 600;
+		cfg.width = 1024;
+		cfg.height = 768;
 		
 		new LwjglApplication(new Game(), cfg);
 	}

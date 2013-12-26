@@ -1,6 +1,8 @@
 package com.abstrakti.shooter.managers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -22,6 +24,9 @@ public final class AssetManager {
 	public void loadSpriteSheet(){
 		//this.textureSheet = new Texture(Gdx.files.internal("../AbstraktiShooter-android/assets/textureAtlas.png"));
 		this.atlas = new TextureAtlas(Gdx.files.internal("../AbstraktiShooter-android/assets/textureAtlas.atlas"));
+		for (Texture texture : this.atlas.getTextures()) {
+			texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		}
 	}
 	
 	/**
