@@ -105,6 +105,10 @@ public class Level {
 		this.physicsWorld.step(deltaTime, 6, 2);
 	}
 	
+	public World getWorld() {
+		return physicsWorld;
+	}
+	
 	public void addEntity(GameObject o){
 		// this.physicsWorld.createBody()
 	}
