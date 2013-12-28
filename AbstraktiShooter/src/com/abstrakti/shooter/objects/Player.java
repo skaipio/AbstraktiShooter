@@ -14,6 +14,7 @@ public class Player extends DynamicObject {
 		CircleShape dynamicCircle = new CircleShape();  
 	    dynamicCircle.setRadius(15f*Config.WORLD_TO_BOX);
 	    this.createBody(world, dynamicCircle);
+	    
 	    dynamicCircle.dispose();
 	       
 		CSprite sprite = new CSprite(this);

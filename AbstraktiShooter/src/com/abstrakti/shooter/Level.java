@@ -1,8 +1,11 @@
 package com.abstrakti.shooter;
 
 import com.abstrakti.shooter.io.GameScreen;
+import com.abstrakti.shooter.objects.Enemy;
 import com.abstrakti.shooter.objects.GameObject;
 import com.abstrakti.shooter.objects.Player;
+import com.abstrakti.shooter.objects.Wall;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
@@ -14,6 +17,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 
 public class Level {
 
@@ -28,6 +32,7 @@ public class Level {
 		this.player = Player.getInstance(physicsWorld);
 		this.player.setPosition(190, 90);
 				
+		Enemy.getInstance(physicsWorld).setPosition(191,91);
 		
 		TmxMapLoader loader = new TmxMapLoader();
 		
@@ -67,7 +72,7 @@ public class Level {
 	                boxFixtureDef2.shape = boxShape;
 	                boxFixtureDef2.density = 1;
 	                body2.createFixture(boxFixtureDef2);
-	                body2.setUserData(this);					
+	                body2.setUserData(new Wall());					
 					
 				}
 				
@@ -77,6 +82,25 @@ public class Level {
 	
 	public void update(float deltaTime){
 		this.player.update(deltaTime);
+		
+		Array<Body> bodies = new Array<Body>();
+		this.physicsWorld.getBodies(bodies);
+		
+		for (Body body: bodies) {
+			GameObject obj = (GameObject) body.getUserData();
+			if (obj!=null) {
+				if (Wall.class.isInstance(obj)) {
+					continue;
+				}
+				if (Player.class.isInstance(obj)) {
+					continue;
+				}
+				
+				obj.update(deltaTime);
+			}
+		}
+			
+
 		//this.physicsWorld.step(1/60f, 6, 2);
 		this.physicsWorld.step(deltaTime, 6, 2);
 	}
