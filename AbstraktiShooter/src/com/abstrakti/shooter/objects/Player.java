@@ -42,6 +42,9 @@ public class Player extends DynamicObject {
 			this.status = playerState.DEAD; 
 		}
 	}
+	public playerState getStatus(){
+		return this.status;
+	}
 	public void handleInput(){
 		// jos Hiiren vasen nappi painettu, niin luo Luoti-entiteetti
 	}
