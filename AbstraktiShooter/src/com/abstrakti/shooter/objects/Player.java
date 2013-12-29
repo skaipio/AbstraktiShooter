@@ -25,7 +25,6 @@ public class Player extends DynamicObject {
 		this.addComponent(sprite);
 	    
 	    CPlayerControlled movement = new CPlayerControlled(this);
-		movement.setSpeed(speed);
 		this.addComponent(movement);
 		this.status = playerState.IDLE;
 	}
@@ -49,6 +48,9 @@ public class Player extends DynamicObject {
 	
 	public void update(float deltaTime){
 		super.update(deltaTime);		
+	}
+	public float getSpeed() {
+		return this.speed;
 	}
 	
 	public void moveForward(Vector2 movementVector) {

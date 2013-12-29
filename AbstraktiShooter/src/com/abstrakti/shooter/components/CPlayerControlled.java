@@ -15,11 +15,10 @@ public class CPlayerControlled extends Component {
 	public CPlayerControlled(Player player) {
 		super(ComponentType.PlayerControlled);
 		this.player = player;
+		this.speed = player.getSpeed();
 	}
 	
-	public void setSpeed(float speed){
-		this.speed = speed;
-	}
+
 
 	@Override
 	public void update(float deltaTime){
