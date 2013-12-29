@@ -1,7 +1,6 @@
 package com.abstrakti.shooter;
 
 import com.abstrakti.shooter.io.GameScreen;
-import com.abstrakti.shooter.objects.Enemy;
 import com.abstrakti.shooter.objects.GameObject;
 import com.abstrakti.shooter.objects.Player;
 import com.abstrakti.shooter.objects.Wall;
@@ -32,7 +31,6 @@ public class Level {
 		this.player = Player.getInstance(physicsWorld);
 		this.player.setPosition(190, 90);
 				
-		Enemy.getInstance(physicsWorld).setPosition(191,91);
 		
 		TmxMapLoader loader = new TmxMapLoader();
 		
