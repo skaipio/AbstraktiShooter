@@ -29,7 +29,12 @@ public class CPlayerControlled extends Component {
 			if (Gdx.input.isKeyPressed(Keys.W)) {
 				this.player.moveForward(movementVector);
 			}
-			
+			if (Gdx.input.isKeyPressed(Keys.A)) {
+				this.player.strafeRight(movementVector);
+			}
+			if (Gdx.input.isKeyPressed(Keys.D)) {
+				this.player.strafeLeft(movementVector);
+			}
 			else if(Gdx.input.isKeyPressed(Keys.S)) {
 				this.player.moveBackward(movementVector);
 			}

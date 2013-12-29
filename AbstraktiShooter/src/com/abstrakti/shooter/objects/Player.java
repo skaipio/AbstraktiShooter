@@ -59,9 +59,12 @@ public class Player extends DynamicObject {
 		movementVector.x = -(float) Math.cos(this.getAngle());
 		movementVector.y = (float) Math.sin(this.getAngle());
 	}
-	public void strafeLeft() {
-		
+	public void strafeLeft(Vector2 movementVector) {
+		movementVector.x = (float) Math.cos(this.getAngle()+Math.toRadians(90));
+		movementVector.y = -(float) Math.sin(this.getAngle()+Math.toRadians(90));
 	}
-	public void strafeRight() {
+	public void strafeRight(Vector2 movementVector) {
+		movementVector.x = -(float) Math.cos(this.getAngle()+Math.toRadians(90));
+		movementVector.y = (float) Math.sin(this.getAngle()+Math.toRadians(90));
 	}
 }
