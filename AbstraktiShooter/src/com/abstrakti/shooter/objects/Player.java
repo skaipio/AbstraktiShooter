@@ -20,7 +20,7 @@ public class Player extends DynamicObject {
 	    dynamicCircle.dispose();
 	       
 		CSprite sprite = new CSprite(this);
-		sprite.setTextureRegion("entities/testPlayer-01");
+		sprite.setTextureRegion("entities/player_pistol");
 		this.addComponent(sprite);
 	    
 	    CPlayerControlled movement = new CPlayerControlled(this);
