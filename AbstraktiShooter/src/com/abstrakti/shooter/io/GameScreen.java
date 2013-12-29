@@ -33,7 +33,7 @@ public class GameScreen implements Screen {
 		camera = new OrthographicCamera();
 		//camera.setToOrtho(false, w / 32, h / 32);	
 		camera.setToOrtho(false, w, h);	
-		camera.zoom = 1.0f;
+		camera.zoom = 1.00f;
 	}
 
 	@Override

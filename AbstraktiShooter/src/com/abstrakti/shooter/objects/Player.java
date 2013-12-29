@@ -1,7 +1,7 @@
 package com.abstrakti.shooter.objects;
 
 import com.abstrakti.shooter.Config;
-import com.abstrakti.shooter.components.CControlledMovement;
+import com.abstrakti.shooter.components.CPlayerControlled;
 import com.abstrakti.shooter.components.CSprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -21,10 +21,10 @@ public class Player extends DynamicObject {
 	    dynamicCircle.dispose();
 	       
 		CSprite sprite = new CSprite(this);
-		sprite.setTextureRegion("entities/testPlayer-01");
+		sprite.setTextureRegion("entities/player_pistol");
 		this.addComponent(sprite);
 	    
-	    CControlledMovement movement = new CControlledMovement(this);
+	    CPlayerControlled movement = new CPlayerControlled(this);
 		movement.setSpeed(speed);
 		this.addComponent(movement);
 		this.status = playerState.IDLE;
@@ -45,9 +45,6 @@ public class Player extends DynamicObject {
 	}
 	public playerState getStatus(){
 		return this.status;
-	}
-	public void handleInput(){
-		// jos Hiiren vasen nappi painettu, niin luo Luoti-entiteetti
 	}
 	
 	public void update(float deltaTime){
