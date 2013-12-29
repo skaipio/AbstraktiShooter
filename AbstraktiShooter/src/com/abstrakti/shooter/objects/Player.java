@@ -3,6 +3,7 @@ package com.abstrakti.shooter.objects;
 import com.abstrakti.shooter.Config;
 import com.abstrakti.shooter.components.CControlledMovement;
 import com.abstrakti.shooter.components.CSprite;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -51,5 +52,19 @@ public class Player extends DynamicObject {
 	
 	public void update(float deltaTime){
 		super.update(deltaTime);		
+	}
+	
+	public void moveForward(Vector2 movementVector) {
+		movementVector.x = (float) Math.cos(this.getAngle());
+		movementVector.y = -(float) Math.sin(this.getAngle());
+	}
+	public void moveBackward(Vector2 movementVector) {
+		movementVector.x = -(float) Math.cos(this.getAngle());
+		movementVector.y = (float) Math.sin(this.getAngle());
+	}
+	public void strafeLeft() {
+		
+	}
+	public void strafeRight() {
 	}
 }

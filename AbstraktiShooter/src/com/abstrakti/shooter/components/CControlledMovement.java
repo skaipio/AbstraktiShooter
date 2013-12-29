@@ -33,13 +33,11 @@ public class CControlledMovement extends Component {
 			}
 				
 			if (Gdx.input.isKeyPressed(Keys.W)) {
-				this.movementVector.x = (float) Math.cos(this.player.getAngle());
-				this.movementVector.y = -(float) Math.sin(this.player.getAngle());
+					player.moveForward(this.movementVector);
 			}
 			
 			else if(Gdx.input.isKeyPressed(Keys.S)) {
-				this.movementVector.x = -(float) Math.cos(this.player.getAngle());
-				this.movementVector.y = (float) Math.sin(this.player.getAngle());
+				player.moveBackward(this.movementVector);
 			}else{
 				this.movementVector.y = 0;
 			}
