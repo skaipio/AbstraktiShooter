@@ -41,6 +41,7 @@ public class CSprite extends Component {
 		if (previousPlayerState != owner.getStatus()){
 			this.runAnimation.reset();
 		}
+		this.runAnimation.update(deltaTime);
 		previousPlayerState = owner.getStatus();
 	}
 	
