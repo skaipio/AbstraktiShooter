@@ -8,21 +8,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 public class CPlayerControlled extends Component {
-	private float speed;
 	private Player player;
 	public final Vector2 movementVector = Vector2.Zero;
 
 	public CPlayerControlled(Player player) {
 		super(ComponentType.PlayerControlled);
 		this.player = player;
-		this.speed = player.getSpeed();
 	}
 	
 
 
 	@Override
 	public void update(float deltaTime){
-		if (speed != 0f){
+		if (player.getSpeed() != 0f){
 			this.movementVector.x = 0;
 			this.movementVector.y = 0;				
 			if (Gdx.input.isKeyPressed(Keys.W)) {
@@ -38,7 +36,7 @@ public class CPlayerControlled extends Component {
 				this.player.moveBackward(movementVector);
 			}
 			this.movementVector.nor();
-			this.movementVector.scl(deltaTime*speed);
+			this.movementVector.scl(deltaTime*player.getSpeed());
 			this.player.setVelocity(this.movementVector);
 		}
 		
