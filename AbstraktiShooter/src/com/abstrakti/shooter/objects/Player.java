@@ -9,6 +9,8 @@ import com.badlogic.gdx.physics.box2d.World;
 public class Player extends DynamicObject {
 	private static Player player;
 	private float speed = 32*7f; //per second
+	private playerState status; 
+	private int health;
 	
 	private Player(World world){	    
 		CircleShape dynamicCircle = new CircleShape();  
@@ -24,6 +26,7 @@ public class Player extends DynamicObject {
 	    CControlledMovement movement = new CControlledMovement(this);
 		movement.setSpeed(speed);
 		this.addComponent(movement);
+		this.status = playerState.IDLE;
 	}
 	
 	public static Player getInstance(World world){
@@ -33,6 +36,12 @@ public class Player extends DynamicObject {
 		return player;
 	}
 	
+	public void hurt(int amount){
+		this.health -= amount;
+		if (this.health <=0) {
+			this.status = playerState.DEAD; 
+		}
+	}
 	public void handleInput(){
 		// jos Hiiren vasen nappi painettu, niin luo Luoti-entiteetti
 	}

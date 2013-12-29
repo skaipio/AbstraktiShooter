@@ -32,7 +32,6 @@ public class DynamicObject extends GameObject{
 		this.body.setLinearVelocity(velocity);
 	}
 	public void setRotation(float angle){
-		
 		this.body.setTransform(this.body.getPosition(), angle);
 	}
 	public float getAngle(){
