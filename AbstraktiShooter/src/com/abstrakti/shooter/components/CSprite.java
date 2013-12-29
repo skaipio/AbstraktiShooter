@@ -6,6 +6,7 @@ import com.abstrakti.shooter.objects.DynamicObject;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 
 public class CSprite extends Component {
 	private Sprite sprite;
@@ -29,6 +30,7 @@ public class CSprite extends Component {
 		DynamicObject physObj = (DynamicObject)this.object;
 		if (physObj != null){
 			this.sprite.setPosition(physObj.getPosition().x, physObj.getPosition().y);
+			this.sprite.setRotation(-(physObj.getAngle()* MathUtils.radiansToDegrees));
 		}
 	}
 	
