@@ -27,13 +27,11 @@ public class CPlayerControlled extends Component {
 			this.movementVector.x = 0;
 			this.movementVector.y = 0;				
 			if (Gdx.input.isKeyPressed(Keys.W)) {
-				this.movementVector.x = (float) Math.cos(this.player.getAngle());
-				this.movementVector.y = -(float) Math.sin(this.player.getAngle());
+				this.player.moveForward(movementVector);
 			}
 			
 			else if(Gdx.input.isKeyPressed(Keys.S)) {
-				this.movementVector.x = -(float) Math.cos(this.player.getAngle());
-				this.movementVector.y = (float) Math.sin(this.player.getAngle());
+				this.player.moveBackward(movementVector);
 			}
 			this.movementVector.nor();
 			this.movementVector.scl(deltaTime*speed);
