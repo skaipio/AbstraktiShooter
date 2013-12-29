@@ -2,6 +2,7 @@ package com.abstrakti.shooter.components;
 
 import com.abstrakti.shooter.Config;
 import com.abstrakti.shooter.objects.Player;
+import com.abstrakti.shooter.objects.PlayerState;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -20,20 +21,23 @@ public class CPlayerControlled extends Component {
 
 	@Override
 	public void update(float deltaTime){
+		this.player.setStatus(PlayerState.IDLE);
 		if (player.getSpeed() != 0f){
 			this.movementVector.x = 0;
-			this.movementVector.y = 0;				
+			this.movementVector.y = 0;					
 			if (Gdx.input.isKeyPressed(Keys.W)) {
 				this.player.moveForward(movementVector);
+				this.player.setStatus(PlayerState.WALKING);
+			}			
+			else if(Gdx.input.isKeyPressed(Keys.S)) {
+				this.player.moveBackward(movementVector);
+				this.player.setStatus(PlayerState.WALKING);
 			}
 			if (Gdx.input.isKeyPressed(Keys.A)) {
 				this.player.strafeRight(movementVector);
 			}
-			if (Gdx.input.isKeyPressed(Keys.D)) {
+			else if (Gdx.input.isKeyPressed(Keys.D)) {
 				this.player.strafeLeft(movementVector);
-			}
-			else if(Gdx.input.isKeyPressed(Keys.S)) {
-				this.player.moveBackward(movementVector);
 			}
 			this.movementVector.nor();
 			this.movementVector.scl(deltaTime*player.getSpeed());

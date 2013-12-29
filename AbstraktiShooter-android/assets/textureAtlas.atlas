@@ -10,9 +10,30 @@ entities/player_pistol
   orig: 40, 40
   offset: 0, 0
   index: -1
+entities/player_pistol_leftstep
+  rotate: false
+  xy: 40, 0
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+entities/player_pistol_rightstep
+  rotate: false
+  xy: 80, 0
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+entities/player_pistol_standing
+  rotate: false
+  xy: 120, 0
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
 entities/testPlayer-01
   rotate: false
-  xy: 40, 8
+  xy: 160, 8
   size: 32, 32
   orig: 32, 32
   offset: 0, 0

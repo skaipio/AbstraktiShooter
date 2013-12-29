@@ -10,7 +10,7 @@ import com.badlogic.gdx.physics.box2d.World;
 public class Player extends DynamicObject {
 	private static Player player;
 	private float speed = 32*7f; //per second
-	private playerState status; 
+	private PlayerState status; 
 	private int health;
 	
 	private Player(World world){	    
@@ -21,12 +21,12 @@ public class Player extends DynamicObject {
 	    dynamicCircle.dispose();
 	       
 		CSprite sprite = new CSprite(this);
-		sprite.setTextureRegion("entities/player_pistol");
+		sprite.setTextureRegion("entities/player_pistol_standing");
 		this.addComponent(sprite);
 	    
 	    CPlayerControlled movement = new CPlayerControlled(this);
 		this.addComponent(movement);
-		this.status = playerState.IDLE;
+		this.status = PlayerState.IDLE;
 	}
 	
 	public static Player getInstance(World world){
@@ -39,11 +39,14 @@ public class Player extends DynamicObject {
 	public void hurt(int amount){
 		this.health -= amount;
 		if (this.health <=0) {
-			this.status = playerState.DEAD; 
+			this.status = PlayerState.DEAD; 
 		}
 	}
-	public playerState getStatus(){
+	public PlayerState getStatus(){
 		return this.status;
+	}
+	public void setStatus(PlayerState state){
+		this.status = state;
 	}
 	
 	public void update(float deltaTime){

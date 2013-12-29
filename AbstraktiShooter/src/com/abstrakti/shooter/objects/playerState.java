@@ -1,5 +1,5 @@
 package com.abstrakti.shooter.objects;
 
-public enum playerState {
+public enum PlayerState {
 	DEAD, IDLE, WALKING;
 }
