@@ -22,7 +22,7 @@ public class Level {
 
 	
 	private final World physicsWorld;
-	private final Player player;
+	private Player player;
 	private TiledMap map;
 	
 	public Level(String levelname){
@@ -105,6 +105,10 @@ public class Level {
 	
 	public World getWorld() {
 		return physicsWorld;
+	}
+	
+	public Player getPlayer() {
+		return this.player;
 	}
 	
 	public void addEntity(GameObject o){

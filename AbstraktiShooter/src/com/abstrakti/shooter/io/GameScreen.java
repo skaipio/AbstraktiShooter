@@ -1,5 +1,6 @@
 package com.abstrakti.shooter.io;
 
+import com.abstrakti.shooter.Config;
 import com.abstrakti.shooter.Level;
 import com.abstrakti.shooter.objects.DynamicObject;
 import com.abstrakti.shooter.objects.GameObject;
@@ -7,6 +8,7 @@ import com.abstrakti.shooter.objects.Player;
 import com.abstrakti.shooter.objects.Wall;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -23,8 +25,10 @@ public class GameScreen implements Screen {
 	private OrthogonalTiledMapRenderer renderer;
 	private DynamicObject objToFollow;
 	private Level currentLevel;
+	private PlayerInputProcessor input = new PlayerInputProcessor();
 
-	private GameScreen() {		
+	private GameScreen() {
+		Gdx.input.setInputProcessor(input);
 		this.batch = new SpriteBatch();
 		
 		float w = Gdx.graphics.getWidth();
@@ -66,9 +70,44 @@ public class GameScreen implements Screen {
 		}
 		
 		batch.end();
+		
+		this.handlePlayerInput(delta);
+	}
+
+	private void handlePlayerInput(float delta) {
+		Player p = currentLevel.getPlayer();
+		boolean[] KEYS = new boolean[603]; 
+		KEYS = input.getKeys();
+		Vector2 movementVector = Vector2.Zero;
+		movementVector.x = 0;
+		movementVector.y = 0;
+		
+		if (KEYS[Keys.W] == true) {
+			p.moveForward(movementVector);
+		}
+		if (KEYS[Keys.S] == true) {
+			p.moveBackward(movementVector);
+		}
+		if (KEYS[Keys.A] == true) {
+			p.strafeLeft(movementVector);
+		}
+		if (KEYS[Keys.D] == true) {
+			p.strafeRight(movementVector);
+			
+		}
+		
+		p.setRotation(calculatePlayerAngle(Gdx.input.getX(), Gdx.input.getY(), Config.SCREEN_WIDTH/2, Config.SCREEN_HEIGHT/2));
+		
+		movementVector.nor();
+		movementVector.scl(delta*p.getSpeed());
+		p.setVelocity(movementVector);
 	}
 
 
+	private float calculatePlayerAngle(int mouseX, int mouseY, float playerX, float playerY) {
+		//System.out.println(Math.toDegrees((float)Math.atan2((float)mouseY-playerY, (float)mouseX-playerX)));
+		return ((float)Math.atan2((float)mouseY-playerY, (float)mouseX-playerX));
+	}
 
 	@Override
 	public void resize(int width, int height) {

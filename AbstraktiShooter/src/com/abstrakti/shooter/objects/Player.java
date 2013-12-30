@@ -1,7 +1,6 @@
 package com.abstrakti.shooter.objects;
 
 import com.abstrakti.shooter.Config;
-import com.abstrakti.shooter.components.CPlayerControlled;
 import com.abstrakti.shooter.components.CSprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -23,9 +22,6 @@ public class Player extends DynamicObject {
 		CSprite sprite = new CSprite(this);
 		sprite.setTextureRegion("entities/player_pistol");
 		this.addComponent(sprite);
-	    
-	    CPlayerControlled movement = new CPlayerControlled(this);
-		this.addComponent(movement);
 		this.status = playerState.IDLE;
 	}
 	
@@ -62,11 +58,11 @@ public class Player extends DynamicObject {
 		movementVector.y = (float) Math.sin(this.getAngle());
 	}
 	public void strafeLeft(Vector2 movementVector) {
-		movementVector.x = (float) Math.cos(this.getAngle()+Math.toRadians(90));
-		movementVector.y = -(float) Math.sin(this.getAngle()+Math.toRadians(90));
-	}
-	public void strafeRight(Vector2 movementVector) {
 		movementVector.x = -(float) Math.cos(this.getAngle()+Math.toRadians(90));
 		movementVector.y = (float) Math.sin(this.getAngle()+Math.toRadians(90));
+	}
+	public void strafeRight(Vector2 movementVector) {
+		movementVector.x = (float) Math.cos(this.getAngle()+Math.toRadians(90));
+		movementVector.y = -(float) Math.sin(this.getAngle()+Math.toRadians(90));
 	}
 }
