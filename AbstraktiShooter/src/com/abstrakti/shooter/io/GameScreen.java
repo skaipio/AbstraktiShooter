@@ -7,6 +7,7 @@ import com.abstrakti.shooter.objects.GameObject;
 import com.abstrakti.shooter.objects.Player;
 import com.abstrakti.shooter.objects.Wall;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
@@ -78,6 +79,7 @@ public class GameScreen implements Screen {
 		Player p = currentLevel.getPlayer();
 		boolean[] KEYS = new boolean[603]; 
 		KEYS = input.getKeys();
+		boolean[] MOUSEBUTTONS = input.getMouseButtons();
 		Vector2 movementVector = Vector2.Zero;
 		movementVector.x = 0;
 		movementVector.y = 0;
@@ -92,8 +94,10 @@ public class GameScreen implements Screen {
 			p.strafeLeft(movementVector);
 		}
 		if (KEYS[Keys.D] == true) {
-			p.strafeRight(movementVector);
-			
+			p.strafeRight(movementVector);	
+		}
+		if (MOUSEBUTTONS[Buttons.LEFT] == true) {
+			p.shoot();
 		}
 		
 		p.setRotation(calculatePlayerAngle(Gdx.input.getX(), Gdx.input.getY(), Config.SCREEN_WIDTH/2, Config.SCREEN_HEIGHT/2));

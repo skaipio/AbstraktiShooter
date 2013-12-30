@@ -4,13 +4,13 @@ import com.badlogic.gdx.InputProcessor;
 
 public class PlayerInputProcessor implements InputProcessor {
 	private boolean[] KEYS = new boolean[603];
+	private boolean[] MOUSEBUTTONS = new boolean[3];
 
 	@Override
 	public boolean keyDown (int keycode) {
 		KEYS[keycode] = true;
 		return true;
 	}
-
 	@Override
 	public boolean keyUp (int keycode) {
 		KEYS[keycode] = false;
@@ -18,6 +18,9 @@ public class PlayerInputProcessor implements InputProcessor {
 	}
 	public boolean[] getKeys() {
 		return this.KEYS;
+	}
+	public boolean[] getMouseButtons() {
+		return this.MOUSEBUTTONS;
 	}
 
 	@Override
@@ -34,14 +37,14 @@ public class PlayerInputProcessor implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
-		return false;
+		MOUSEBUTTONS[button] = true;
+		return true;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
-		return false;
+		MOUSEBUTTONS[button] = false;
+		return true;
 	}
 
 	@Override
