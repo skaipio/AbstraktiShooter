@@ -1,8 +1,11 @@
 package com.abstrakti.shooter.components;
 
+import com.abstrakti.shooter.animations.PlayerRunAnimation;
 import com.abstrakti.shooter.managers.AssetManager;
 import com.abstrakti.shooter.objects.GameObject;
 import com.abstrakti.shooter.objects.DynamicObject;
+import com.abstrakti.shooter.objects.Player;
+import com.abstrakti.shooter.objects.PlayerState;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -10,12 +13,15 @@ import com.badlogic.gdx.math.MathUtils;
 
 public class CSprite extends Component {
 	private Sprite sprite;
-	private GameObject object;
+	private Player owner;
+	private PlayerRunAnimation runAnimation;
+	private PlayerState previousPlayerState;
 
-	public CSprite(GameObject parent) {
+	public CSprite(Player owner) {
 		super(ComponentType.Sprite);
 		this.sprite = new Sprite();
-		this.object = parent;
+		this.owner = owner;
+		this.runAnimation = new PlayerRunAnimation(owner);
 	}
 	
 	public void setTextureRegion(String name){
@@ -27,17 +33,27 @@ public class CSprite extends Component {
 	
 	@Override
 	public void update(float deltaTime){	
-		DynamicObject physObj = (DynamicObject)this.object;
+		DynamicObject physObj = (DynamicObject)this.owner;
 		if (physObj != null){
 			this.sprite.setPosition(physObj.getPosition().x, physObj.getPosition().y);
 			this.sprite.setRotation(-(physObj.getAngle()* MathUtils.radiansToDegrees));
 		}
+		if (previousPlayerState != owner.getStatus()){
+			this.runAnimation.reset();
+		}
+		this.runAnimation.update(deltaTime);
+		previousPlayerState = owner.getStatus();
 	}
 	
 	@Override
 	public void draw(SpriteBatch batch){
 		// Sprite bounds need to be set before drawing
-		this.sprite.draw(batch);
+		if (this.owner.getStatus() == PlayerState.WALKING){
+			this.runAnimation.draw(batch);
+		}else{
+			this.sprite.draw(batch);
+		}
+		
 	}
 
 }
