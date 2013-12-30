@@ -23,6 +23,7 @@ public class Player extends DynamicObject {
 		sprite.setTextureRegion("entities/player_pistol");
 		this.addComponent(sprite);
 		this.status = playerState.IDLE;
+		this.health = 1;
 	}
 	
 	public static Player getInstance(World world){
