@@ -5,6 +5,7 @@ import com.abstrakti.shooter.Level;
 import com.abstrakti.shooter.objects.DynamicObject;
 import com.abstrakti.shooter.objects.GameObject;
 import com.abstrakti.shooter.objects.Player;
+import com.abstrakti.shooter.objects.PlayerState;
 import com.abstrakti.shooter.objects.Wall;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
@@ -104,6 +105,11 @@ public class GameScreen implements Screen {
 		
 		movementVector.nor();
 		movementVector.scl(delta*p.getSpeed());
+		if (movementVector.x != 0 || movementVector.y != 0){
+			p.setStatus(PlayerState.WALKING);
+		}else{
+			p.setStatus(PlayerState.IDLE);
+		}
 		p.setVelocity(movementVector);
 	}
 

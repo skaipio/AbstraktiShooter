@@ -22,7 +22,7 @@ public class Player extends DynamicObject {
 		CSprite sprite = new CSprite(this);
 		sprite.setTextureRegion("entities/player_pistol_standing");
 		this.addComponent(sprite);
-		this.status = playerState.IDLE;
+		this.status = PlayerState.IDLE;
 		this.health = 1;
 	}
 	

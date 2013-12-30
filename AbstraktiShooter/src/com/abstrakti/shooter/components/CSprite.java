@@ -28,15 +28,15 @@ public class CSprite extends Component {
 		TextureRegion region = AssetManager.getInstance().getTextureRegion(name);
 		sprite.setRegion(region);
 		sprite.setBounds(0, 0, region.getRegionWidth(), region.getRegionHeight());
-		sprite.setOrigin(region.getRegionWidth()/2, region.getRegionHeight()/2);
+		//sprite.setOrigin(region.getRegionWidth()/2, region.getRegionHeight()/2);
+		sprite.setOrigin(7, region.getRegionHeight()/2);
 	}
 	
 	@Override
 	public void update(float deltaTime){	
-		DynamicObject physObj = (DynamicObject)this.owner;
-		if (physObj != null){
-			this.sprite.setPosition(physObj.getPosition().x, physObj.getPosition().y);
-			this.sprite.setRotation(-(physObj.getAngle()* MathUtils.radiansToDegrees));
+		if (this.owner != null){
+			this.sprite.setPosition(this.owner.getPosition().x, this.owner.getPosition().y);
+			this.sprite.setRotation(-(this.owner.getAngle()* MathUtils.radiansToDegrees));
 		}
 		if (previousPlayerState != owner.getStatus()){
 			this.runAnimation.reset();
