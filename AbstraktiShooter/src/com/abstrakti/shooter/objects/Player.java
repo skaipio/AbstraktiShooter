@@ -50,19 +50,19 @@ public class Player extends DynamicObject {
 	}
 	
 	public void moveForward(Vector2 movementVector) {
-		movementVector.x = (float) Math.cos(this.getAngle());
-		movementVector.y = -(float) Math.sin(this.getAngle());
+		movementVector.x += (float) Math.cos(this.getAngle());
+		movementVector.y += -(float) Math.sin(this.getAngle());
 	}
 	public void moveBackward(Vector2 movementVector) {
-		movementVector.x = -(float) Math.cos(this.getAngle());
-		movementVector.y = (float) Math.sin(this.getAngle());
+		movementVector.x += -(float) Math.cos(this.getAngle());
+		movementVector.y += (float) Math.sin(this.getAngle());
 	}
 	public void strafeLeft(Vector2 movementVector) {
-		movementVector.x = -(float) Math.cos(this.getAngle()+Math.toRadians(90));
-		movementVector.y = (float) Math.sin(this.getAngle()+Math.toRadians(90));
+		movementVector.x += -(float) Math.cos(this.getAngle()+Math.toRadians(90));
+		movementVector.y += (float) Math.sin(this.getAngle()+Math.toRadians(90));
 	}
 	public void strafeRight(Vector2 movementVector) {
-		movementVector.x = (float) Math.cos(this.getAngle()+Math.toRadians(90));
-		movementVector.y = -(float) Math.sin(this.getAngle()+Math.toRadians(90));
+		movementVector.x += (float) Math.cos(this.getAngle()+Math.toRadians(90));
+		movementVector.y += -(float) Math.sin(this.getAngle()+Math.toRadians(90));
 	}
 }
