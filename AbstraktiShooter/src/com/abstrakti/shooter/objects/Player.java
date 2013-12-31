@@ -9,6 +9,7 @@ public class Player extends DynamicObject {
 	private float speed = 32*7f; //per second
 	private PlayerState status; 
 	private int health;
+	private Weapon gun;
 	
 	Player(){	    
 		super(PlayerState.values().length);
