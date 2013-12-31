@@ -99,6 +99,8 @@ public class GameScreen implements Screen {
 		}
 		if (MOUSEBUTTONS[Buttons.LEFT] == true) {
 			p.shoot();
+		} else {
+			p.releaseTrigger();
 		}
 		
 		p.setRotation(calculatePlayerAngle(Gdx.input.getX(), Gdx.input.getY(), Config.SCREEN_WIDTH/2, Config.SCREEN_HEIGHT/2));

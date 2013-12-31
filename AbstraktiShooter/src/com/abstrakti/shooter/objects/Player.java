@@ -9,7 +9,7 @@ public class Player extends DynamicObject {
 	private float speed = 32*7f; //per second
 	private PlayerState status; 
 	private int health;
-	private Weapon gun;
+	private Weapon handGun;
 	
 	Player(){	    
 		super(PlayerState.values().length);
@@ -18,6 +18,8 @@ public class Player extends DynamicObject {
 		this.addComponent(sprite);
 		this.status = PlayerState.IDLE;
 		this.health = 1;
+		this.handGun = new Weapon(WeaponFiremode.SINGLE);
+		this.handGun.addAmmo(100);
 	}
 	
 	public void hurt(int amount){
@@ -74,6 +76,9 @@ public class Player extends DynamicObject {
 		movementVector.y += -(float) Math.sin(this.getAngle()+Math.toRadians(90));
 	}
 	public void shoot() {
-		System.out.println("Bang");
+		this.handGun.fireGun();
+	}
+	public void releaseTrigger() {
+		this.handGun.releaseTrigger();
 	}
 }

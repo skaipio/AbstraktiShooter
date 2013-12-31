@@ -4,7 +4,7 @@ public class Weapon {
 	private WeaponFiremode firemode;
 	private boolean triggerStatus;
 	private int ammo;
-	private int MAXAMMO;
+	private int MAXAMMO = 100;
 	
 	public Weapon(WeaponFiremode firemode) {
 		this.triggerStatus = false;
@@ -33,6 +33,7 @@ public class Weapon {
 		} else {
 			this.triggerStatus = true;
 			this.ammo--;
+			System.out.println("BANG, ammo" + " " + ammo);
 			return true;
 		}
 	}
