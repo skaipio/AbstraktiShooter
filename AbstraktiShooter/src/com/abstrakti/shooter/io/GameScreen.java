@@ -13,6 +13,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -40,6 +41,18 @@ public class GameScreen implements Screen {
 		//camera.setToOrtho(false, w / 32, h / 32);	
 		camera.setToOrtho(false, w, h);	
 		camera.zoom = 1.00f;
+		
+
+		//Mouse cursor
+		
+		/*
+		Pixmap pm = new Pixmap(Gdx.files.internal("crosshair.png"));
+		int xHotSpot = pm.getWidth() / 2;
+		int yHotSpot = pm.getHeight() / 2;
+
+		Gdx.input.setCursorImage(pm, xHotSpot, yHotSpot);
+		pm.dispose();
+		*/
 	}
 
 	@Override
