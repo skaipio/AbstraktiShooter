@@ -1,6 +1,6 @@
 package com.abstrakti.shooter.components;
 
-import com.abstrakti.shooter.animations.PlayerRunAnimation;
+import com.abstrakti.shooter.animations.PlayerWalkAnimation;
 import com.abstrakti.shooter.managers.AssetManager;
 import com.abstrakti.shooter.objects.GameObject;
 import com.abstrakti.shooter.objects.DynamicObject;
@@ -14,14 +14,14 @@ import com.badlogic.gdx.math.MathUtils;
 public class CSprite extends Component {
 	private Sprite sprite;
 	private Player owner;
-	private PlayerRunAnimation runAnimation;
+	private PlayerWalkAnimation runAnimation;
 	private PlayerState previousPlayerState;
 
 	public CSprite(Player owner) {
 		super(ComponentType.Sprite);
 		this.sprite = new Sprite();
 		this.owner = owner;
-		this.runAnimation = new PlayerRunAnimation(owner);
+		this.runAnimation = new PlayerWalkAnimation(owner);
 	}
 	
 	public void setTextureRegion(String name){

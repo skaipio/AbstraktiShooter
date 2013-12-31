@@ -4,10 +4,10 @@ import com.abstrakti.shooter.managers.AssetManager;
 import com.abstrakti.shooter.objects.Player;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
-public class PlayerRunAnimation extends SpriteAnimation{
+public class PlayerWalkAnimation extends SpriteAnimation{
 	private Player owner;
 
-	public PlayerRunAnimation(Player owner){
+	public PlayerWalkAnimation(Player owner){
 		super(4, 0.15f);
 		this.owner = owner;
 		AssetManager assets = AssetManager.getInstance();
@@ -26,8 +26,7 @@ public class PlayerRunAnimation extends SpriteAnimation{
 	@Override
 	public void update(float deltaTime){
 		super.update(deltaTime);
-		this.position = this.owner.getPosition();
-		
+		this.position = this.owner.getPosition();		
 		this.rotation = (float) -Math.toDegrees(this.owner.getAngle());
 	}	
 }

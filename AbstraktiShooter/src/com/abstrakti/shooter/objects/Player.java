@@ -1,36 +1,22 @@
 package com.abstrakti.shooter.objects;
 
-import com.abstrakti.shooter.Config;
+import com.abstrakti.shooter.animations.SpriteAnimation;
 import com.abstrakti.shooter.components.CSprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.World;
 
 public class Player extends DynamicObject {
-	private static Player player;
 	private float speed = 32*7f; //per second
 	private PlayerState status; 
 	private int health;
 	
-	private Player(World world){	    
-		CircleShape dynamicCircle = new CircleShape();  
-	    dynamicCircle.setRadius(15f*Config.WORLD_TO_BOX);
-	    this.createBody(world, dynamicCircle);
-	    
-	    dynamicCircle.dispose();
-	       
+	Player(){	    
+		super(PlayerState.values().length);
 		CSprite sprite = new CSprite(this);
 		sprite.setTextureRegion("entities/player_pistol_standing");
 		this.addComponent(sprite);
 		this.status = PlayerState.IDLE;
 		this.health = 1;
-	}
-	
-	public static Player getInstance(World world){
-		if (player == null){
-			player = new Player(world);
-		}
-		return player;
 	}
 	
 	public void hurt(int amount){
@@ -44,11 +30,28 @@ public class Player extends DynamicObject {
 	}
 	public void setStatus(PlayerState state){
 		this.status = state;
+//		SpriteAnimation currentAnim = this.getAnimationAt(this.status.ordinal());
+//		if (currentAnim != null)
+//			currentAnim.reset();
 	}
 	
+	@Override
 	public void update(float deltaTime){
-		super.update(deltaTime);		
+		super.update(deltaTime);	
+		SpriteAnimation currentAnim = this.getAnimationAt(this.status.ordinal());
+		if (currentAnim != null)
+			currentAnim.update(deltaTime);
 	}
+	
+	@Override
+	public void draw(SpriteBatch batch){
+//		super.draw(batch);
+		SpriteAnimation currentAnim = this.getAnimationAt(this.status.ordinal());
+		if (currentAnim != null){
+			currentAnim.draw(batch);
+		}
+	}
+	
 	public float getSpeed() {
 		return this.speed;
 	}

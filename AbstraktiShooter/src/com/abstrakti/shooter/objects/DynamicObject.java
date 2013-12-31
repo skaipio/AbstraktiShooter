@@ -1,6 +1,7 @@
 package com.abstrakti.shooter.objects;
 
 import com.abstrakti.shooter.Config;
+import com.abstrakti.shooter.animations.SpriteAnimation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -9,10 +10,13 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class DynamicObject extends GameObject{
+public abstract class DynamicObject extends GameObject{
 	protected Body body;
-
-	public DynamicObject() {}
+	private SpriteAnimation[] animations;
+	
+	public DynamicObject(int numOfStates){
+		this.animations = new SpriteAnimation[numOfStates];
+	}
 
 	public Vector2 getPosition() {
 		return this.body.getPosition().scl(Config.BOX_TO_WORLD);
@@ -38,19 +42,15 @@ public class DynamicObject extends GameObject{
 		return this.body.getAngle();
 	}
 	
-	protected void createBody(World world, Shape shape){
-		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = BodyType.DynamicBody;
-		
-		this.body = world.createBody(bodyDef);
-		this.body.setUserData(this);
-	    
-	    FixtureDef fixtureDef = new FixtureDef();
-		fixtureDef.shape = shape;
-		fixtureDef.density = 1.0f;
-
-		fixtureDef.friction = 0.0f;
-		fixtureDef.restitution = 0;
-		this.body.createFixture(fixtureDef);
+	protected SpriteAnimation getAnimationAt(int index){
+		return this.animations[index];
+	}
+	
+	void addAnimation(SpriteAnimation animation, int indexToAddAt){
+		this.animations[indexToAddAt] = animation;
+	}
+	
+	void setBody(Body body){
+		this.body = body;
 	}
 }

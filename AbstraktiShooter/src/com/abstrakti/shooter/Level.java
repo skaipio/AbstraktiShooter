@@ -1,6 +1,7 @@
 package com.abstrakti.shooter;
 
 import com.abstrakti.shooter.io.GameScreen;
+import com.abstrakti.shooter.objects.DynamicObjectFactory;
 import com.abstrakti.shooter.objects.GameObject;
 import com.abstrakti.shooter.objects.Player;
 import com.abstrakti.shooter.objects.Wall;
@@ -28,7 +29,7 @@ public class Level {
 	public Level(String levelname){
 		this.physicsWorld = new World(Vector2.Zero, true);	
 		
-		this.player = Player.getInstance(physicsWorld);
+		this.player = DynamicObjectFactory.createPlayer(physicsWorld);
 		this.player.setPosition(190, 90);
 				
 		
