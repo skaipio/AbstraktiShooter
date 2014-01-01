@@ -6,7 +6,6 @@ import java.util.TreeMap;
 import com.abstrakti.shooter.components.Component;
 import com.abstrakti.shooter.components.ComponentType;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.physics.box2d.Body;
 
 public abstract class GameObject {
 	

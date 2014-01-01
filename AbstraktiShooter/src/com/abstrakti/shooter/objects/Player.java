@@ -1,7 +1,6 @@
 package com.abstrakti.shooter.objects;
 
 import com.abstrakti.shooter.animations.SpriteAnimation;
-import com.abstrakti.shooter.components.CSprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
@@ -13,9 +12,6 @@ public class Player extends DynamicObject {
 	
 	Player(){	    
 		super(PlayerState.values().length);
-		CSprite sprite = new CSprite(this);
-		sprite.setTextureRegion("entities/player_pistol_standing");
-		this.addComponent(sprite);
 		this.status = PlayerState.IDLE;
 		this.health = 1;
 		this.handGun = new Weapon(WeaponFiremode.SINGLE);
@@ -33,9 +29,6 @@ public class Player extends DynamicObject {
 	}
 	public void setStatus(PlayerState state){
 		this.status = state;
-//		SpriteAnimation currentAnim = this.getAnimationAt(this.status.ordinal());
-//		if (currentAnim != null)
-//			currentAnim.reset();
 	}
 	
 	@Override
@@ -48,7 +41,6 @@ public class Player extends DynamicObject {
 	
 	@Override
 	public void draw(SpriteBatch batch){
-//		super.draw(batch);
 		SpriteAnimation currentAnim = this.getAnimationAt(this.status.ordinal());
 		if (currentAnim != null){
 			currentAnim.draw(batch);
