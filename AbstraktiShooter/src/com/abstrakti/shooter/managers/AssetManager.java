@@ -22,11 +22,7 @@ public final class AssetManager {
 	}
 	
 	public void loadSpriteSheet(){
-		//this.textureSheet = new Texture(Gdx.files.internal("../AbstraktiShooter-android/assets/textureAtlas.png"));
 		this.atlas = new TextureAtlas(Gdx.files.internal("../AbstraktiShooter-android/assets/textureAtlas.atlas"));
-		for (Texture texture : this.atlas.getTextures()) {
-			texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		}
 	}
 	
 	/**
