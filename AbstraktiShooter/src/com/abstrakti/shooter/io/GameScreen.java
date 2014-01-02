@@ -19,6 +19,10 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
 public class GameScreen implements Screen {
@@ -88,7 +92,44 @@ public class GameScreen implements Screen {
 		
 		this.handlePlayerInput(delta);
 	}
+	/* Collision listener
+	private void createCollisionListener() {
+		World world = currentLevel.getWorld();
+		
+		world.setContactListener(new ContactListener() {
 
+            @Override
+            public void beginContact(Contact contact) {
+                Fixture fixtureA = contact.getFixtureA();
+                Fixture fixtureB = contact.getFixtureB();
+                Gdx.app.log("beginContact", "between " + fixtureA.toString() + " and " + fixtureB.toString());
+            }
+
+            @Override
+            public void endContact(Contact contact) {
+                Fixture fixtureA = contact.getFixtureA();
+                Fixture fixtureB = contact.getFixtureB();
+                Gdx.app.log("endContact", "between " + fixtureA.toString() + " and " + fixtureB.toString());
+            }
+
+        });
+	}
+	
+	private void detectContacts() {
+		World world = currentLevel.getWorld();
+		   int numContacts = world.getContactCount();
+	        if (numContacts > 0) {
+	            Gdx.app.log("contact", "start of contact list");
+	            for (Contact contact : world.getContactList()) {
+	                Fixture fixtureA = contact.getFixtureA();
+	                Fixture fixtureB = contact.getFixtureB();
+	                Gdx.app.log("contact", "between " + fixtureA.toString() + " and " + fixtureB.toString());
+	            }
+	            Gdx.app.log("contact", "end of contact list");
+	        }
+		
+	}
+*/
 	private void handlePlayerInput(float delta) {
 		Player p = currentLevel.getPlayer();
 		boolean[] KEYS = new boolean[603]; 
