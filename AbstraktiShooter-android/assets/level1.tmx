@@ -20,5 +20,20 @@
  </layer>
  <objectgroup name="Spawns" width="50" height="50">
   <object name="playerSpawn" type="spawn" x="144" y="435"/>
+  <object type="guardSpawn" x="1347" y="1169"/>
+  <object type="guardSpawn" x="1291" y="1242"/>
+  <object type="guardSpawn" x="1358" y="1267"/>
+  <object type="guardSpawn" x="1446" y="1258"/>
+  <object type="guardSpawn" x="828" y="1313"/>
+  <object type="guardSpawn" x="219" y="1284"/>
+  <object type="guardSpawn" x="162" y="789"/>
+  <object type="guardSpawn" x="374" y="795"/>
+  <object type="guardSpawn" x="343" y="1002"/>
+  <object type="guardSpawn" x="672" y="809"/>
+  <object type="guardSpawn" x="718" y="856"/>
+  <object type="guardSpawn" x="1053" y="970"/>
+  <object type="guardSpawn" x="905" y="694"/>
+  <object type="guardSpawn" x="1027" y="270"/>
+  <object type="guardSpawn" x="968" y="309"/>
  </objectgroup>
 </map>

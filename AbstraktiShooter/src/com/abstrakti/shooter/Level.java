@@ -64,12 +64,12 @@ public class Level {
 		}
 		
 		this.setPlayerIntoLevel();
+		this.spawnEnemies();
 	}
 	
 	private void setPlayerIntoLevel(){
-		System.out.println(map.getLayers().getCount());
-		MapLayer triggerLayer = map.getLayers().get("Spawns");
-		MapObjects mapObjects = triggerLayer.getObjects();		
+		MapLayer spawnLayer = map.getLayers().get("Spawns");
+		MapObjects mapObjects = spawnLayer.getObjects();		
 		MapObject mapObject = mapObjects.get("playerSpawn");
 		MapProperties properties = mapObject.getProperties();
 		int x = (Integer)properties.get("x");
@@ -81,9 +81,22 @@ public class Level {
 		GameScreen.getInstance().lockCameraOn(this.player);
 	}
 	
+	private void spawnEnemies(){
+		MapLayer spawnLayer = map.getLayers().get("Spawns");
+		MapObjects mapObjects = spawnLayer.getObjects();		
+		for (MapObject mapObj : mapObjects) {
+			MapProperties properties = mapObj.getProperties();
+			String type = (String)properties.get("type");
+			if (type.equals("guardSpawn")){
+				int x = (Integer)properties.get("x");
+				int y = (Integer)properties.get("y");
+				Player guard = GameObjectFactory.createPlayer(physicsWorld);
+				guard.setPosition(x, y);
+			}
+		}
+	}
+	
 	public void update(float deltaTime){
-		this.player.update(deltaTime);
-		
 		Array<Body> bodies = new Array<Body>();
 		this.physicsWorld.getBodies(bodies);
 		
@@ -93,16 +106,10 @@ public class Level {
 				if (Wall.class.isInstance(obj)) {
 					continue;
 				}
-				if (Player.class.isInstance(obj)) {
-					continue;
-				}
 				
 				obj.update(deltaTime);
 			}
 		}
-			
-
-		//this.physicsWorld.step(1/60f, 6, 2);
 		this.physicsWorld.step(deltaTime, 6, 2);
 	}
 	
@@ -112,9 +119,5 @@ public class Level {
 	
 	public Player getPlayer() {
 		return this.player;
-	}
-	
-	public void addEntity(GameObject o){
-		// this.physicsWorld.createBody()
 	}
 }

@@ -69,7 +69,6 @@ public class GameScreen implements Screen {
 
 		//batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		objToFollow.draw(batch);
 		
 		Array<Body> bodies = new Array<Body>();
 		this.currentLevel.getWorld().getBodies(bodies);
@@ -78,9 +77,6 @@ public class GameScreen implements Screen {
 			GameObject obj = (GameObject) body.getUserData();
 			if (obj!=null) {
 				if (Wall.class.isInstance(obj)) {
-					continue;
-				}
-				if (Player.class.isInstance(obj)) {
 					continue;
 				}
 				
