@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="40" height="40" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="textureAtlas2" tilewidth="32" tileheight="32">
   <image source="textureAtlas2.png" width="64" height="32"/>
   <tile id="0">
@@ -13,9 +13,12 @@
    </properties>
   </tile>
  </tileset>
- <layer name="Level1" width="40" height="40">
+ <layer name="Tiles" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJztlsEOwCAIQ53//9HLbh50gKWICU04Km8FHL211hVxSl/uR4jiW6v4MHnxsWbKk4/hefHhfLMY81hidgblk/yTvGXOfgSfJaL5rHdJfH/5PFl2+bL7F91/GfhW0vKxA+E7qSx8SP9F8Wl693Y+5ozsvn+a70TfGU//0H/ArXwe88uqr/aMlU9bl1N82f1j883uKD5ufce5j9i9tLvYysPayWwqPkzFh2ln5pl6AZ5OBEk=
+   eJztlskOwyAMRNP+/0dXPTWKDB4vmKUz0hwSYcODxOa6KIqiztLbYU/8aH3neN2MPPfiJZMDP+sdOJDcJ3Dc/XynPSNGYjI4tH3Mim2Nz+BYwTyPuv+jkkMaZ61XyNxRjor+MZoDVRWHt+5WcFj+j9Gy9rYnB1KfKjgiqubw7LmnvlZwoD0MrTVaHRrNYfW/cPT6/y4clm/zZA5rb4xwZLjHgY4lR813NYrD0j9mcLTqY5UzOKSYGXc37X7jqVmzOCJ1QcpBjl8+tH+11rAKhzUfOWLzWtZEjjhH1Fn5pBzRvVjB5FjLGsdOpihK1wdIMwaw
   </data>
  </layer>
+ <objectgroup name="Spawns" width="50" height="50">
+  <object name="playerSpawn" type="spawn" x="144" y="435"/>
+ </objectgroup>
 </map>
