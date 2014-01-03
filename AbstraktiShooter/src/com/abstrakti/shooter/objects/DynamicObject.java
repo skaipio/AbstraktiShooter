@@ -21,6 +21,12 @@ public abstract class DynamicObject extends GameObject{
 	public Vector2 getPosition() {
 		return this.body.getPosition().scl(Config.BOX_TO_WORLD);
 	}
+	public float getX() {
+		return getPosition().x;
+	}
+	public float getY() {
+		return getPosition().y;
+	}
 	
 	public void setPosition(Vector2 vector){
 		this.setPosition(vector.x, vector.y);

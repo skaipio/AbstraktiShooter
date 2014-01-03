@@ -67,6 +67,13 @@ public class Player extends DynamicObject {
 		movementVector.x += (float) Math.cos(this.getAngle()+Math.toRadians(90));
 		movementVector.y += -(float) Math.sin(this.getAngle()+Math.toRadians(90));
 	}
+	public void turnLeft() {
+	
+	}
+	public void turnRight() {
+		
+
+	}
 	public void shoot() {
 		this.handGun.fireGun();
 	}

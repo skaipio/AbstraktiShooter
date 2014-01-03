@@ -1,5 +1,6 @@
 package com.abstrakti.shooter.objects;
 
 public enum EnemyAiState {
-	IDLE,HUNTING,GUARDING,FLEEING
+	IDLE,ATACKKING
+	/*,GUARDING,FLEEING*/
 }
