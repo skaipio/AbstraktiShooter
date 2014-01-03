@@ -21,7 +21,7 @@ public class AiController {
 			switch (this.currentState) {
 			case IDLE:
 				idle();
-			case ATACKKING:
+			case ATTACKING:
 				attack();
 			}
 		}
@@ -33,7 +33,7 @@ public class AiController {
 	
 	private void idle() {
 		if ( isHumanPlayerClose() == true) {
-			this.currentState = EnemyAiState.ATACKKING;
+			this.currentState = EnemyAiState.ATTACKING;
 		}
 	}
 	
