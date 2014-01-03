@@ -7,7 +7,7 @@ import com.abstrakti.shooter.objects.PlayerState;
 public class AiController {
 	private Player puppet, humanPlayer;
 	private EnemyAiState currentState;
-	private float observationRadius;
+	private double observationRadius;
 
 	public AiController(Player puppet, Player humanPlayer) {
 		this.puppet = puppet;
@@ -38,7 +38,7 @@ public class AiController {
 	}
 	
 	private boolean isHumanPlayerClose() {
-		double playerDistance = 10;
+		double playerDistance = calculateDistance(humanPlayer.getX(), humanPlayer.getY(), puppet.getX(),puppet.getY());
 		if (playerDistance < this.observationRadius) {
 			return true;
 		} else { 
@@ -49,6 +49,10 @@ public class AiController {
 	private void attack() {
 		turnToPlayer();
 		puppet.shoot();
+	}
+	
+	private double calculateDistance(float x1, float y1, float x2, float y2) {
+		return Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
 	}
 	
 	private void turnToPlayer() {
