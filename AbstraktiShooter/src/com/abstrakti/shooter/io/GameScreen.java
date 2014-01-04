@@ -16,6 +16,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -87,9 +88,22 @@ public class GameScreen implements Screen {
 		}
 		
 		batch.end();
-		
+		this.drawUI();
 		this.handlePlayerInput(delta);
 		this.moveAi(delta);
+	}
+	
+	private void drawUI() {
+		SpriteBatch spriteBatch;
+		BitmapFont font;
+		CharSequence str = "Ammo: " + currentLevel.getPlayer().getAmmo();
+		spriteBatch = new SpriteBatch();
+		font = new BitmapFont(Gdx.files.internal("../AbstraktiShooter-desktop/textures/fonts/arial.fnt"),
+				Gdx.files.internal("../AbstraktiShooter-desktop/textures/fonts/arial.png"), false);
+		spriteBatch.begin();
+		 font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+		 font.draw(spriteBatch, str, 25, 50);
+		 spriteBatch.end();
 	}
 	
 	void moveAi(float delta) {
