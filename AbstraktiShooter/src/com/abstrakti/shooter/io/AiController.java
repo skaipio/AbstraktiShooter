@@ -42,6 +42,8 @@ public class AiController {
 	private void idle() {
 		if ( isHumanPlayerClose() == true) {
 			this.currentState = EnemyAiState.ATTACKING;
+		} else {
+			this.puppet.stopMovement();
 		}
 	}
 
