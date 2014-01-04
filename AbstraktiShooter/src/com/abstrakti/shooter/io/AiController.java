@@ -12,7 +12,7 @@ public class AiController {
 	public AiController(Player puppet) {
 		this.puppet = puppet;
 		this.currentState = EnemyAiState.IDLE;
-		this.observationRadius = 100;
+		this.observationRadius = 200;
 	}
 
 	public void act() {
@@ -48,7 +48,6 @@ public class AiController {
 	private boolean isHumanPlayerClose() {
 		double playerDistance = calculateDistance(humanPlayer.getX(), humanPlayer.getY(), puppet.getX(),puppet.getY());
 		if (playerDistance < this.observationRadius) {
-			System.out.println("Sees player, distance: " + playerDistance);
 			return true;
 		} else { 
 			return false;
@@ -66,11 +65,11 @@ public class AiController {
 	}
 
 	private void turnToPlayer() {
-		puppet.setRotation(calculatePlayerAngle(humanPlayer.getX(), humanPlayer.getY(), puppet.getX(),puppet.getY()));
+		this.puppet.setRotation(-calculatePlayerAngle(humanPlayer.getX(), humanPlayer.getY(), this.puppet.getX(), this.puppet.getY()));
 	}
 
 	private float calculatePlayerAngle(float mouseX, float mouseY, float playerX, float playerY) {
-		return ((float)Math.atan2((float)mouseY-playerY, (float)mouseX-playerX));
+		return ((float)Math.atan2(mouseY-playerY, mouseX-playerX));
 	}
 
 	public PlayerState getPuppetState() {
