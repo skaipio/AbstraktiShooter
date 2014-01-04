@@ -1,5 +1,7 @@
 package com.abstrakti.shooter.io;
 
+import java.util.ArrayList;
+
 import com.abstrakti.shooter.Config;
 import com.abstrakti.shooter.Level;
 import com.abstrakti.shooter.objects.DynamicObject;
@@ -87,7 +89,20 @@ public class GameScreen implements Screen {
 		batch.end();
 		
 		this.handlePlayerInput(delta);
+		this.moveAi(delta);
 	}
+	
+	void moveAi(float delta) {
+		ArrayList<AiController> enemies = currentLevel.getEnemies();
+		
+		for (AiController ai : enemies) {
+			//System.out.println(ai.getPuppetState());
+			ai.act();
+		}
+		
+	}
+	
+	
 	/* Collision listener
 	private void createCollisionListener() {
 		World world = currentLevel.getWorld();

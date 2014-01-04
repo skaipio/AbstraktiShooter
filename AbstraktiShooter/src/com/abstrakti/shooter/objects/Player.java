@@ -10,7 +10,7 @@ public class Player extends DynamicObject {
 	private int health;
 	private Weapon handGun;
 	
-	Player(){	    
+	public Player(){	    
 		super(PlayerState.values().length);
 		this.status = PlayerState.IDLE;
 		this.health = 1;

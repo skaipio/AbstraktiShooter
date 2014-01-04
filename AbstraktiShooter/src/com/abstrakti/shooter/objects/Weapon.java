@@ -33,7 +33,7 @@ public class Weapon {
 		} else {
 			this.triggerStatus = true;
 			this.ammo--;
-			System.out.println("BANG, ammo" + " " + ammo);
+		//	System.out.println("BANG, ammo" + " " + ammo);
 			return true;
 		}
 	}

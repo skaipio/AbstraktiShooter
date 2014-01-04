@@ -1,7 +1,11 @@
 package com.abstrakti.shooter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.rmi.CORBA.Tie;
 
+import com.abstrakti.shooter.io.AiController;
 import com.abstrakti.shooter.io.GameScreen;
 import com.abstrakti.shooter.objects.GameObjectFactory;
 import com.abstrakti.shooter.objects.GameObject;
@@ -31,6 +35,7 @@ public class Level {
 	private final World physicsWorld;
 	private Player player;
 	private TiledMap map;
+	private ArrayList<AiController> enemies;
 	
 	public Level(String levelname){
 		this.physicsWorld = new World(Vector2.Zero, true);	
@@ -38,7 +43,8 @@ public class Level {
 		
 		this.map = loader.load(levelname);
 		
-		GameScreen.getInstance().setMap(map);		
+		GameScreen.getInstance().setMap(map);
+		this.enemies = new ArrayList<AiController>();
 	}
 	
 	public void init(){
@@ -62,9 +68,9 @@ public class Level {
 				
 			}
 		}
-		
+		//enemies need to be spawned first
+		this.spawnEnemies(); 
 		this.setPlayerIntoLevel();
-		this.spawnEnemies();
 	}
 	
 	private void setPlayerIntoLevel(){
@@ -79,6 +85,9 @@ public class Level {
 		this.player.setPosition(x, y);
 		
 		GameScreen.getInstance().lockCameraOn(this.player);
+		for (AiController ai : enemies) {
+			ai.setPlayer(this.player);
+		}
 	}
 	
 	private void spawnEnemies(){
@@ -92,8 +101,14 @@ public class Level {
 				int y = (Integer)properties.get("y");
 				Player guard = GameObjectFactory.createPlayer(physicsWorld);
 				guard.setPosition(x, y);
+				AiController ai = new AiController(guard);
+				enemies.add(ai);
 			}
 		}
+	}
+	
+	public ArrayList<AiController> getEnemies() {
+		return this.enemies;
 	}
 	
 	public void update(float deltaTime){
