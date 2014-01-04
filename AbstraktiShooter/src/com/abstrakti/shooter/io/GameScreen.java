@@ -146,21 +146,20 @@ public class GameScreen implements Screen {
 		boolean[] KEYS = new boolean[603]; 
 		KEYS = input.getKeys();
 		boolean[] MOUSEBUTTONS = input.getMouseButtons();
-		Vector2 movementVector = Vector2.Zero;
-		movementVector.x = 0;
-		movementVector.y = 0;
 		
 		if (KEYS[Keys.W] == true) {
-			p.moveForward(movementVector);
+			p.moveForward(delta);
+		} else {
+			p.stopMovement();
 		}
 		if (KEYS[Keys.S] == true) {
-			p.moveBackward(movementVector);
+			p.moveBackward(delta);
 		}
 		if (KEYS[Keys.A] == true) {
-			p.strafeLeft(movementVector);
+			p.strafeLeft(delta);
 		}
 		if (KEYS[Keys.D] == true) {
-			p.strafeRight(movementVector);	
+			p.strafeRight(delta);	
 		}
 		if (MOUSEBUTTONS[Buttons.LEFT] == true) {
 			p.shoot();
@@ -170,14 +169,6 @@ public class GameScreen implements Screen {
 		
 		p.setRotation(calculatePlayerAngle(Gdx.input.getX(), Gdx.input.getY(), Config.SCREEN_WIDTH/2, Config.SCREEN_HEIGHT/2));
 		
-		movementVector.nor();
-		movementVector.scl(delta*p.getSpeed());
-		if (movementVector.x != 0 || movementVector.y != 0){
-			p.setStatus(PlayerState.WALKING);
-		}else{
-			p.setStatus(PlayerState.IDLE);
-		}
-		p.setVelocity(movementVector);
 	}
 
 

@@ -57,6 +57,7 @@ public class AiController {
 	private void attack() {
 		turnToPlayer();
 		puppet.shoot();
+		puppet.moveForward(1);
 		this.currentState = EnemyAiState.IDLE;
 	}
 
