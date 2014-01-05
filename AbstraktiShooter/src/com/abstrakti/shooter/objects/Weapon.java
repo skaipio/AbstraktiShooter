@@ -1,5 +1,6 @@
 package com.abstrakti.shooter.objects;
 
+import com.abstrakti.shooter.managers.AssetManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 
@@ -13,7 +14,7 @@ public class Weapon {
 	public Weapon(WeaponFiremode firemode) {
 		this.triggerStatus = false;
 		this.firemode = firemode;
-		sound = Gdx.audio.newSound(Gdx.files.internal("barreta_m9-Dion_Stapper-1010051237.wav"));
+		this.sound = AssetManager.getInstance().getPistolSound();
 	}
 	
 	public int getAmmo() {

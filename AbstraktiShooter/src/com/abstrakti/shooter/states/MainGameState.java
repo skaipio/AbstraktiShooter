@@ -12,13 +12,12 @@ class MainGameState extends State {
 	private Level currentLevel;
 
 	public MainGameState(StateManager manager, SpriteBatch batch) {
-		super(manager);
-		
+		super(manager);		
 	}
 
 	@Override
 	public void create() {
-		AssetManager.getInstance().loadSpriteSheet();
+		
 		this.currentLevel = new Level("level1.tmx");
 		this.currentLevel.init();
 		GameScreen.getInstance().setLevel(currentLevel);
