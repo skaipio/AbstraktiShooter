@@ -16,6 +16,7 @@ public class Main {
 		
 		TexturePacker2.process(settings, "textures/tiles", "../AbstraktiShooter-android/assets", "tileAtlas");
 		TexturePacker2.process(settings, "textures/entities", "../AbstraktiShooter-android/assets", "entityAtlas");
+		TexturePacker2.process(settings, "textures/tileset", "../AbstraktiShooter-android/assets", "tileset");
 		
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "AbstraktiShooter";
