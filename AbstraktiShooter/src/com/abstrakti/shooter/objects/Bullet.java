@@ -32,7 +32,6 @@ public class Bullet extends DynamicObject {
 		if (this.health <=0) {
 			this.status = PlayerState.DEAD; 
 		}
-		System.out.println("hurt");
 	}
 	public void moveForward(float delta) {
 		this.movementVector.x += (float) Math.cos(this.getAngle());
@@ -45,14 +44,16 @@ public class Bullet extends DynamicObject {
 		this.updateMovementVector(delta);
 	}
 	private void updateMovementVector(float delta) {
-		this.movementVector.nor();
-		this.movementVector.scl(delta*this.getSpeed());
-		if (this.movementVector.x != 0 || this.movementVector.y != 0){
-			this.setStatus(PlayerState.WALKING);
-		}else{
-			this.setStatus(PlayerState.IDLE);
+		if (this.status != PlayerState.DEAD) {
+			this.movementVector.nor();
+			this.movementVector.scl(delta*this.getSpeed());
+			if (this.movementVector.x != 0 || this.movementVector.y != 0){
+				this.setStatus(PlayerState.WALKING);
+			}else{
+				this.setStatus(PlayerState.IDLE);
+			}
+			this.setVelocity(this.movementVector);
 		}
-		this.setVelocity(this.movementVector);
 	}
 	@Override
 	public void draw(SpriteBatch batch){

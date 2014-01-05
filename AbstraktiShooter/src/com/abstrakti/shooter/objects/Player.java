@@ -54,14 +54,16 @@ public class Player extends DynamicObject {
 	}
 	
 	private void updateMovementVector(float delta) {
-		this.movementVector.nor();
-		this.movementVector.scl(delta*this.getSpeed());
-		if (this.movementVector.x != 0 || this.movementVector.y != 0){
-			this.setStatus(PlayerState.WALKING);
-		}else{
-			this.setStatus(PlayerState.IDLE);
+		if (this.status != PlayerState.DEAD) {
+			this.movementVector.nor();
+			this.movementVector.scl(delta*this.getSpeed());
+			if (this.movementVector.x != 0 || this.movementVector.y != 0){
+				this.setStatus(PlayerState.WALKING);
+			}else{
+				this.setStatus(PlayerState.IDLE);
+			}
+			this.setVelocity(this.movementVector);
 		}
-		this.setVelocity(this.movementVector);
 	}
 	public void stopMovement() {
 		this.movementVector.x = 0;

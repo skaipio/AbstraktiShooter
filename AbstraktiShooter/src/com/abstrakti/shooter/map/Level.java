@@ -9,6 +9,7 @@ import com.abstrakti.shooter.objects.Bullet;
 import com.abstrakti.shooter.objects.GameObject;
 import com.abstrakti.shooter.objects.GameObjectFactory;
 import com.abstrakti.shooter.objects.Player;
+import com.abstrakti.shooter.objects.PlayerState;
 import com.abstrakti.shooter.objects.Wall;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
@@ -121,14 +122,20 @@ public class Level {
 				if (Wall.class.isInstance(obj)) {
 					continue;
 				}
-				
 				obj.update(deltaTime);
 			}
-			/*
-			if (obj.getPlayerStatus() == PlayerStatus.DEAD) {
-				obj.dispose();
+			if ( body.getUserData() instanceof Bullet) {
+				Bullet b = (Bullet)body.getUserData();
+				if ( b.getStatus()  == PlayerState.DEAD) {	
+					physicsWorld.destroyBody(body);
+				}
 			}
-			*/
+			if ( body.getUserData() instanceof Player) {
+				Player p = (Player)body.getUserData();
+				if ( p.getStatus()  == PlayerState.DEAD) {	
+					physicsWorld.destroyBody(body);
+				}
+			}
 		}
 		this.physicsWorld.step(deltaTime, 6, 2);
 	}

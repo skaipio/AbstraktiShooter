@@ -65,8 +65,20 @@ class MainGameState extends State {
                 if ((fixtureA.getBody().getUserData() instanceof Player) && (fixtureB.getBody().getUserData() instanceof Bullet)) {
                 	System.out.println("player and bullet");
                 }
-                if ((fixtureA.getBody().getUserData() instanceof Bullet) && (fixtureB.getBody().getUserData() instanceof Player)) {
+                if (((fixtureA.getBody().getUserData() instanceof Bullet) && (fixtureB.getBody().getUserData() instanceof Player))) {
                 	System.out.println("bullet and player");
+                	Bullet b = (Bullet)fixtureA.getBody().getUserData();
+                	b.hurt(1);
+                	Player p = (Player)fixtureB.getBody().getUserData();
+                	p.hurt(1);
+                }
+                if (((fixtureA.getBody().getUserData() instanceof Player) && (fixtureB.getBody().getUserData() instanceof Bullet))) {
+                	System.out.println("Player and bullet");
+
+                	Bullet b = (Bullet)fixtureB.getBody().getUserData();
+                	b.hurt(1);
+                	Player p = (Player)fixtureA.getBody().getUserData();
+                	p.hurt(1);
                 }
                 if ((fixtureA.getBody().getUserData() instanceof Bullet) && (fixtureB.getBody().getUserData() instanceof Wall)) {
                 	System.out.println("bullet and wall");
