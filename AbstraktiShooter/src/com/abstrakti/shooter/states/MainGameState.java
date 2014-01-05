@@ -1,9 +1,9 @@
 package com.abstrakti.shooter.states;
 
-import com.abstrakti.shooter.Level;
 import com.abstrakti.shooter.io.GameScreen;
 import com.abstrakti.shooter.managers.AssetManager;
 import com.abstrakti.shooter.managers.StateManager;
+import com.abstrakti.shooter.map.Level;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 

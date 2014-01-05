@@ -1,7 +1,8 @@
-package com.abstrakti.shooter;
+package com.abstrakti.shooter.map;
 
 import java.util.ArrayList;
 
+import com.abstrakti.shooter.Config;
 import com.abstrakti.shooter.io.AiController;
 import com.abstrakti.shooter.io.GameScreen;
 import com.abstrakti.shooter.objects.GameObject;

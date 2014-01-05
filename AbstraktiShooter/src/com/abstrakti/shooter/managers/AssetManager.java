@@ -1,14 +1,13 @@
 package com.abstrakti.shooter.managers;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public final class AssetManager {
 	private static AssetManager manager;
 	private TextureAtlas entityAtlas;
+	private TextureAtlas tileAtlas;
 	//private Texture textureSheet;
 	
 	private AssetManager(){}
@@ -23,6 +22,7 @@ public final class AssetManager {
 	
 	public void loadSpriteSheet(){
 		this.entityAtlas = new TextureAtlas(Gdx.files.internal("../AbstraktiShooter-android/assets/entityAtlas.atlas"));
+		this.tileAtlas = new TextureAtlas(Gdx.files.internal("../AbstraktiShooter-android/assets/tileAtlas.atlas"));
 	}
 	
 	/**

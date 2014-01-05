@@ -10,16 +10,23 @@ floor_concrete1
   orig: 32, 32
   offset: 0, 0
   index: -1
-wall_concrete1
+floor_concrete2
   rotate: false
   xy: 32, 0
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-ww
+wall_concrete1
   rotate: false
   xy: 64, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+ww
+  rotate: false
+  xy: 96, 0
   size: 32, 32
   orig: 32, 32
   offset: 0, 0

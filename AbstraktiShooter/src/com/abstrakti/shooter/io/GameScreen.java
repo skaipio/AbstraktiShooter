@@ -3,7 +3,7 @@ package com.abstrakti.shooter.io;
 import java.util.ArrayList;
 
 import com.abstrakti.shooter.Config;
-import com.abstrakti.shooter.Level;
+import com.abstrakti.shooter.map.Level;
 import com.abstrakti.shooter.objects.DynamicObject;
 import com.abstrakti.shooter.objects.GameObject;
 import com.abstrakti.shooter.objects.Player;
