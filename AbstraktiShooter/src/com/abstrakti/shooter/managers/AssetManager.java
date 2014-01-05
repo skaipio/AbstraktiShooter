@@ -1,6 +1,7 @@
 package com.abstrakti.shooter.managers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -8,6 +9,7 @@ public final class AssetManager {
 	private static AssetManager manager;
 	private TextureAtlas entityAtlas;
 	private TextureAtlas tileAtlas;
+	private Sound pistolSound;
 	//private Texture textureSheet;
 	
 	private AssetManager(){}
@@ -25,6 +27,10 @@ public final class AssetManager {
 		this.tileAtlas = new TextureAtlas(Gdx.files.internal("../AbstraktiShooter-android/assets/tileAtlas.atlas"));
 	}
 	
+	public void loadSounds(){
+		pistolSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/bullet_launch.wav"));
+	}
+	
 	/**
 	 * Note: Remember to load the sprite sheet before using this method.
 	 */
@@ -35,5 +41,9 @@ public final class AssetManager {
 	public TextureRegion getTileTexture(String name){
 		// TODO: Add default "not-found" region
 		return this.tileAtlas.findRegion(name);	
+	}
+	
+	public Sound getPistolSound(){
+		return this.pistolSound;
 	}
 }

@@ -2,6 +2,7 @@ package com.abstrakti.shooter;
 
 import java.util.Stack;
 
+import com.abstrakti.shooter.managers.AssetManager;
 import com.abstrakti.shooter.managers.StateManager;
 import com.abstrakti.shooter.states.State;
 import com.badlogic.gdx.ApplicationListener;
@@ -14,7 +15,12 @@ public class Game implements ApplicationListener, StateManager {
 	@Override
 	public void create() {
 		this.batch = new SpriteBatch();	
+		
+		AssetManager.getInstance().loadSpriteSheet();
+		AssetManager.getInstance().loadSounds();
+		
 		this.states.push(State.createMainGameState(this, batch));
+		
 	}
 
 	@Override

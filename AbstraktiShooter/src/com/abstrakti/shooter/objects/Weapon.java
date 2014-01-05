@@ -1,14 +1,20 @@
 package com.abstrakti.shooter.objects;
 
+import com.abstrakti.shooter.managers.AssetManager;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
+
 public class Weapon {
 	private WeaponFiremode firemode;
 	private boolean triggerStatus;
 	private int ammo;
 	private int MAXAMMO = 100;
+	private Sound sound;
 	
 	public Weapon(WeaponFiremode firemode) {
 		this.triggerStatus = false;
 		this.firemode = firemode;
+		this.sound = AssetManager.getInstance().getPistolSound();
 	}
 	
 	public int getAmmo() {
@@ -34,6 +40,7 @@ public class Weapon {
 			this.triggerStatus = true;
 			this.ammo--;
 			System.out.println("BANG, ammo" + " " + ammo);
+			sound.play(1.0f);
 			return true;
 		}
 	}
