@@ -4,6 +4,10 @@ import com.abstrakti.shooter.io.GameScreen;
 import com.abstrakti.shooter.managers.AssetManager;
 import com.abstrakti.shooter.managers.StateManager;
 import com.abstrakti.shooter.map.Level;
+import com.abstrakti.shooter.map.Tile;
+import com.abstrakti.shooter.objects.Bullet;
+import com.abstrakti.shooter.objects.Player;
+import com.abstrakti.shooter.objects.Wall;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -37,13 +41,42 @@ class MainGameState extends State {
             public void beginContact(Contact contact) {
                 Fixture fixtureA = contact.getFixtureA();
                 Fixture fixtureB = contact.getFixtureB();
-                Gdx.app.log("beginContact", "between " + fixtureA.toString() + " and " + fixtureB.toString());
+              //  Gdx.app.log("beginContact", "between " + fixtureA.toString() + " and " + fixtureB.toString());
+                /*
+                if if (obj!=null) {
+    				if (Wall.class.isInstance(obj)) {
+    					continue;
+    				}
+    				*/
+              //  System.out.println(fixtureA.getBody().getUserData());
+              //  System.out.println(fixtureB.getBody().getUserData());
+                if ((fixtureA.getBody().getUserData() instanceof Wall) && (fixtureB.getBody().getUserData() instanceof Bullet)) {
+                	System.out.println("wall and bullet ");
+                	Bullet b = (Bullet)fixtureB.getBody().getUserData();
+                	b.hurt(1);
+                	
+                }
+                if ((fixtureA.getBody().getUserData() instanceof Wall) && (fixtureB.getBody().getUserData() instanceof Player)) {
+                	System.out.println("wall and player ");
+                }
+                if ((fixtureA.getBody().getUserData() instanceof Player) && (fixtureB.getBody().getUserData() instanceof Wall)) {
+                	System.out.println("player and wall");
+                }
+                if ((fixtureA.getBody().getUserData() instanceof Player) && (fixtureB.getBody().getUserData() instanceof Bullet)) {
+                	System.out.println("player and bullet");
+                }
+                if ((fixtureA.getBody().getUserData() instanceof Bullet) && (fixtureB.getBody().getUserData() instanceof Player)) {
+                	System.out.println("bullet and player");
+                }
+                if ((fixtureA.getBody().getUserData() instanceof Bullet) && (fixtureB.getBody().getUserData() instanceof Wall)) {
+                	System.out.println("bullet and wall");
+                }        
             }
 
             public void endContact(Contact contact) {
                 Fixture fixtureA = contact.getFixtureA();
                 Fixture fixtureB = contact.getFixtureB();
-                Gdx.app.log("endContact", "between " + fixtureA.toString() + " and " + fixtureB.toString());
+               // Gdx.app.log("endContact", "between " + fixtureA.toString() + " and " + fixtureB.toString());
             }
 
 			@Override
@@ -75,6 +108,14 @@ class MainGameState extends State {
 	        }
 	}
 
+	private void wallContact() {
+		
+		
+	}
+	
+	private void playerContact() {
+		
+	}
 	@Override
 	public void dispose() {
 		this.gameScreen.dispose();

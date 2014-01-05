@@ -124,6 +124,11 @@ public class Level {
 				
 				obj.update(deltaTime);
 			}
+			/*
+			if (obj.getPlayerStatus() == PlayerStatus.DEAD) {
+				obj.dispose();
+			}
+			*/
 		}
 		this.physicsWorld.step(deltaTime, 6, 2);
 	}

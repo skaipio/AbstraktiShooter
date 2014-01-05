@@ -32,6 +32,7 @@ public class Bullet extends DynamicObject {
 		if (this.health <=0) {
 			this.status = PlayerState.DEAD; 
 		}
+		System.out.println("hurt");
 	}
 	public void moveForward(float delta) {
 		this.movementVector.x += (float) Math.cos(this.getAngle());
@@ -60,6 +61,9 @@ public class Bullet extends DynamicObject {
 	}
 	public float getSpeed() {
 		return this.speed;
+	}
+	public String toString() {
+		return "bullet";
 	}
 
 }
