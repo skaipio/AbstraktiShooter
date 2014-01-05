@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public final class AssetManager {
 	private static AssetManager manager;
-	private TextureAtlas atlas;
+	private TextureAtlas entityAtlas;
 	//private Texture textureSheet;
 	
 	private AssetManager(){}
@@ -22,7 +22,7 @@ public final class AssetManager {
 	}
 	
 	public void loadSpriteSheet(){
-		this.atlas = new TextureAtlas(Gdx.files.internal("../AbstraktiShooter-android/assets/textureAtlas.atlas"));
+		this.entityAtlas = new TextureAtlas(Gdx.files.internal("../AbstraktiShooter-android/assets/entityAtlas.atlas"));
 	}
 	
 	/**
@@ -30,6 +30,6 @@ public final class AssetManager {
 	 */
 	public TextureRegion getTextureRegion(String name){
 		// TODO: Add default "not-found" region
-		return this.atlas.findRegion(name);	
+		return this.entityAtlas.findRegion(name);	
 	}
 }

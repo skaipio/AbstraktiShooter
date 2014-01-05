@@ -11,7 +11,7 @@ public class PlayerIdleAnimation extends SpriteAnimation {
 		super(1, 1f);
 		this.owner = owner;
 		AssetManager assets = AssetManager.getInstance();
-		Sprite playerStanding = new Sprite(assets.getTextureRegion("entities/player_pistol_standing"));
+		Sprite playerStanding = new Sprite(assets.getTextureRegion("player_pistol_standing"));
 		playerStanding.setOrigin(7, playerStanding.getRegionHeight()/2);
 		super.addFrameAt(0, playerStanding);
 	}

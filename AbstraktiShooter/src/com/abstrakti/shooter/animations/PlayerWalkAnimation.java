@@ -11,11 +11,11 @@ public class PlayerWalkAnimation extends SpriteAnimation{
 		super(4, 0.15f);
 		this.owner = owner;
 		AssetManager assets = AssetManager.getInstance();
-		Sprite playerStanding = new Sprite(assets.getTextureRegion("entities/player_pistol_standing"));
+		Sprite playerStanding = new Sprite(assets.getTextureRegion("player_pistol_standing"));
 		playerStanding.setOrigin(7, playerStanding.getRegionHeight()/2);
-		Sprite playerLeftstep = new Sprite(assets.getTextureRegion("entities/player_pistol_leftstep"));
+		Sprite playerLeftstep = new Sprite(assets.getTextureRegion("player_pistol_leftstep"));
 		playerLeftstep.setOrigin(7, playerLeftstep.getRegionHeight()/2);
-		Sprite playerRightstep = new Sprite(assets.getTextureRegion("entities/player_pistol_rightstep"));
+		Sprite playerRightstep = new Sprite(assets.getTextureRegion("player_pistol_rightstep"));
 		playerRightstep.setOrigin(7, playerRightstep.getRegionHeight()/2);
 		super.addFrameAt(0, playerLeftstep);
 		super.addFrameAt(1, playerStanding);

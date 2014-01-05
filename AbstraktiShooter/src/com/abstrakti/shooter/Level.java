@@ -1,17 +1,13 @@
 package com.abstrakti.shooter;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.rmi.CORBA.Tie;
 
 import com.abstrakti.shooter.io.AiController;
 import com.abstrakti.shooter.io.GameScreen;
-import com.abstrakti.shooter.objects.GameObjectFactory;
 import com.abstrakti.shooter.objects.GameObject;
+import com.abstrakti.shooter.objects.GameObjectFactory;
 import com.abstrakti.shooter.objects.Player;
 import com.abstrakti.shooter.objects.Wall;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
@@ -22,10 +18,6 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 

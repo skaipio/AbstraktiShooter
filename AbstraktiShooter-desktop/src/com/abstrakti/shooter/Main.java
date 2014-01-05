@@ -14,7 +14,8 @@ public class Main {
 		settings.paddingY = 0;
 		settings.duplicatePadding = true;
 		
-		TexturePacker2.process(settings, "textures", "../AbstraktiShooter-android/assets", "textureAtlas");
+		TexturePacker2.process(settings, "textures/tiles", "../AbstraktiShooter-android/assets", "tileAtlas");
+		TexturePacker2.process(settings, "textures/entities", "../AbstraktiShooter-android/assets", "entityAtlas");
 		
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "AbstraktiShooter";
