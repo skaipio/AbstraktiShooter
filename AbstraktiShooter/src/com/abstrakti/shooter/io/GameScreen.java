@@ -37,6 +37,7 @@ public class GameScreen implements Screen {
 	private Level currentLevel;
 	private PlayerInputProcessor input = new PlayerInputProcessor();
 	BitmapFont font;
+	SpriteBatch fontSpriteBatch;
 
 	private GameScreen() {
 		Gdx.input.setInputProcessor(input);
@@ -57,6 +58,8 @@ public class GameScreen implements Screen {
 	private void loadFonts() {
 		this.font = new BitmapFont(Gdx.files.internal("../AbstraktiShooter-desktop/textures/fonts/arial.fnt"),
 				Gdx.files.internal("../AbstraktiShooter-desktop/textures/fonts/arial.png"), false);
+		this.font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+		fontSpriteBatch = new SpriteBatch();
 	}
 
 	private void setCursorImage() {
@@ -99,15 +102,13 @@ public class GameScreen implements Screen {
 	}
 	
 	private void drawUI() {
-		SpriteBatch spriteBatch = new SpriteBatch();
 
 		CharSequence str = "Ammo: " + currentLevel.getPlayer().getAmmo();
 		CharSequence str2 = "Health: " + currentLevel.getPlayer().getHealth();
-		spriteBatch.begin();
-		this.font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		this.font.draw(spriteBatch, str, 825, 50);
-		this.font.draw(spriteBatch, str2, 25, 50);
-		spriteBatch.end();
+		fontSpriteBatch.begin();
+		this.font.draw(fontSpriteBatch, str, 825, 50);
+		this.font.draw(fontSpriteBatch, str2, 25, 50);
+		fontSpriteBatch.end();
 	}
 
 	void moveAi(float delta) {
