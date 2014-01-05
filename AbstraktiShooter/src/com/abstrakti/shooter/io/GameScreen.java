@@ -36,6 +36,7 @@ public class GameScreen implements Screen {
 	private DynamicObject objToFollow;
 	private Level currentLevel;
 	private PlayerInputProcessor input = new PlayerInputProcessor();
+	BitmapFont font;
 
 	private GameScreen() {
 		Gdx.input.setInputProcessor(input);
@@ -50,7 +51,12 @@ public class GameScreen implements Screen {
 		camera.zoom = 1.00f;
 		
 		setCursorImage();
+		loadFonts(); 
 
+	}
+	private void loadFonts() {
+		this.font = new BitmapFont(Gdx.files.internal("../AbstraktiShooter-desktop/textures/fonts/arial.fnt"),
+				Gdx.files.internal("../AbstraktiShooter-desktop/textures/fonts/arial.png"), false);
 	}
 
 	private void setCursorImage() {
@@ -93,20 +99,17 @@ public class GameScreen implements Screen {
 	}
 	
 	private void drawUI() {
-		SpriteBatch spriteBatch;
-		BitmapFont font;
+		SpriteBatch spriteBatch = new SpriteBatch();
+
 		CharSequence str = "Ammo: " + currentLevel.getPlayer().getAmmo();
 		CharSequence str2 = "Health: " + currentLevel.getPlayer().getHealth();
-		spriteBatch = new SpriteBatch();
-		font = new BitmapFont(Gdx.files.internal("../AbstraktiShooter-desktop/textures/fonts/arial.fnt"),
-				Gdx.files.internal("../AbstraktiShooter-desktop/textures/fonts/arial.png"), false);
 		spriteBatch.begin();
-		 font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		 font.draw(spriteBatch, str, 825, 50);
-		 font.draw(spriteBatch, str2, 25, 50);
-		 spriteBatch.end();
+		this.font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+		this.font.draw(spriteBatch, str, 825, 50);
+		this.font.draw(spriteBatch, str2, 25, 50);
+		spriteBatch.end();
 	}
-	
+
 	void moveAi(float delta) {
 		ArrayList<AiController> enemies = currentLevel.getEnemies();
 		
