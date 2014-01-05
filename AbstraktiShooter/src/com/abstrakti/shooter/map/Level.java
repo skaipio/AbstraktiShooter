@@ -58,7 +58,9 @@ public class Level {
 					Vector2 position = new Vector2(tileSize*i*Config.WORLD_TO_BOX, tileSize*j*Config.WORLD_TO_BOX);
 					GameObjectFactory.createWall(physicsWorld, position);
 				}
-				
+				if (cell.getTile().getProperties().get("tag").equals("concrete_floor") ) {								
+					cell.setTile(TileFactory.createConcreteFloorTile());
+				}
 			}
 		}
 		//enemies need to be spawned first

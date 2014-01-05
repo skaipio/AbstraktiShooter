@@ -28,8 +28,12 @@ public final class AssetManager {
 	/**
 	 * Note: Remember to load the sprite sheet before using this method.
 	 */
-	public TextureRegion getTextureRegion(String name){
+	public TextureRegion getEntityTexture(String name){
 		// TODO: Add default "not-found" region
 		return this.entityAtlas.findRegion(name);	
+	}
+	public TextureRegion getTileTexture(String name){
+		// TODO: Add default "not-found" region
+		return this.tileAtlas.findRegion(name);	
 	}
 }

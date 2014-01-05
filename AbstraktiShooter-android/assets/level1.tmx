@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="textureAtlas2" tilewidth="32" tileheight="32">
-  <image source="tileAtlas.png" width="64" height="32"/>
+  <image source="tileAtlas.png" width="128" height="32"/>
   <tile id="0">
    <properties>
     <property name="collision" value="false"/>
+    <property name="tag" value="concrete_floor"/>
    </properties>
   </tile>
   <tile id="1">
@@ -12,10 +13,16 @@
     <property name="collision" value="true"/>
    </properties>
   </tile>
+  <tile id="2">
+   <properties>
+    <property name="collision" value="true"/>
+    <property name="tag" value="concrete_wall"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="Tiles" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJztlskOwyAMRNP+/0dXPTWKDB4vmKUz0hwSYcODxOa6KIqiztLbYU/8aH3neN2MPPfiJZMDP+sdOJDcJ3Dc/XynPSNGYjI4tH3Mim2Nz+BYwTyPuv+jkkMaZ61XyNxRjor+MZoDVRWHt+5WcFj+j9Gy9rYnB1KfKjgiqubw7LmnvlZwoD0MrTVaHRrNYfW/cPT6/y4clm/zZA5rb4xwZLjHgY4lR813NYrD0j9mcLTqY5UzOKSYGXc37X7jqVmzOCJ1QcpBjl8+tH+11rAKhzUfOWLzWtZEjjhH1Fn5pBzRvVjB5FjLGsdOpihK1wdIMwaw
+   eJztltsOwyAMQzvt//952tOqKhDnQrjMlvzQqoQeWhyui6Io6iy9HfaMH63vHK+bkeveeMnkwL/1DhxI7RM47n7e064RI2MyOLR1zHJrrgyOFczvUbc/Kjmk56x5hcwd5ajoH6M5UFVxeHO3gsOyP0bL2tueHEg+VXBEVM3hWXNPvlZwaNmB7g80h0ZzWP0vHL3+vwuH5d88mcPaGyMcGe5xoM+So+a/GsVh6R8zOFr5WOUMDmnMjLObdr7xZNYsjkguSDXI8auH9q/WO6zCYa1Hjti8lnciR5wj6qx6Uo3oWqxgcqxljWMnUxSl6wPgzwhr
   </data>
  </layer>
  <objectgroup name="Spawns" width="50" height="50">

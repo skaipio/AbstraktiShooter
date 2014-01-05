@@ -9,7 +9,6 @@ public class Tile implements TiledMapTile {
 	private TextureRegion texture;
 	
 	Tile(TextureRegion texture){
-		this.id = id;
 		this.texture = texture;
 	}
 
