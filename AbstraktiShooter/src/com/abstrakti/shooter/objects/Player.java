@@ -38,7 +38,9 @@ public class Player extends DynamicObject {
 	public int getAmmo() {
 		return this.handGun.getAmmo();
 	}
-
+	public int getHealth() {
+		return this.health;
+	}
 	@Override
 	public void update(float delta){
 		super.update(delta);

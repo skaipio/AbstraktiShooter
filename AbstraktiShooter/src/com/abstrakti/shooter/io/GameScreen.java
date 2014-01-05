@@ -96,12 +96,14 @@ public class GameScreen implements Screen {
 		SpriteBatch spriteBatch;
 		BitmapFont font;
 		CharSequence str = "Ammo: " + currentLevel.getPlayer().getAmmo();
+		CharSequence str2 = "Health: " + currentLevel.getPlayer().getHealth();
 		spriteBatch = new SpriteBatch();
 		font = new BitmapFont(Gdx.files.internal("../AbstraktiShooter-desktop/textures/fonts/arial.fnt"),
 				Gdx.files.internal("../AbstraktiShooter-desktop/textures/fonts/arial.png"), false);
 		spriteBatch.begin();
 		 font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		 font.draw(spriteBatch, str, 25, 200);
+		 font.draw(spriteBatch, str, 825, 50);
+		 font.draw(spriteBatch, str2, 25, 50);
 		 spriteBatch.end();
 	}
 	
