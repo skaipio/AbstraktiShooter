@@ -4,6 +4,8 @@ import com.abstrakti.shooter.Config;
 import com.abstrakti.shooter.animations.PlayerIdleAnimation;
 import com.abstrakti.shooter.animations.PlayerWalkAnimation;
 import com.abstrakti.shooter.animations.SpriteAnimation;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -45,6 +47,36 @@ public final class GameObjectFactory {
 		return player;
 	}
 	
+	public static Bullet createBullet(World world) {
+		Bullet b = new Bullet();
+		//System.out.println(position);
+	//	b.setPosition(100,100);
+		
+		CircleShape shape = new CircleShape();  
+		shape.setRadius(1f*Config.WORLD_TO_BOX); 
+		
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyType.DynamicBody;
+		//bodyDef.position.set(100,100); //set the starting position
+		
+		Body body = world.createBody(bodyDef);
+		body.setUserData(b);
+	    
+	    FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		fixtureDef.density = 1.0f;
+
+		fixtureDef.friction = 0.0f;
+		fixtureDef.restitution = 0;
+		body.createFixture(fixtureDef);
+		
+		b.setBody(body);
+		
+		shape.dispose();
+		
+		return b;
+		
+	}
 	public static void createWall(World world, Vector2 position){
 		int tileSize = Config.TILE_SIZE;
 		float tileSizeHalved = tileSize / 2f;
@@ -68,4 +100,5 @@ public final class GameObjectFactory {
         
         boxShape.dispose();
 	}
+
 }

@@ -3,6 +3,13 @@ entityAtlas.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+bullet
+  rotate: false
+  xy: 152, 24
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
 player_pistol_leftstep
   rotate: false
   xy: 0, 7

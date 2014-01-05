@@ -3,6 +3,8 @@ package com.abstrakti.shooter.objects;
 import com.abstrakti.shooter.managers.AssetManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 
 public class Weapon {
 	private WeaponFiremode firemode;
@@ -31,7 +33,7 @@ public class Weapon {
 	
 	/* Checks the firemode before firing, the trigger needs to be released later if the firemode is single.
 	 */
-	public boolean fireGun() {
+	public boolean fireGun(World physiscsWorld, Vector2 position, float angle) {
 		if (this.ammo == 0) {
 			return false;
 		} else if (this.firemode == WeaponFiremode.SINGLE && this.triggerStatus == true) {
@@ -39,10 +41,17 @@ public class Weapon {
 		} else {
 			this.triggerStatus = true;
 			this.ammo--;
+			this.shootBullet(physiscsWorld, position,angle); 
 			System.out.println("BANG, ammo" + " " + ammo);
 			sound.play(1.0f);
 			return true;
 		}
+	}
+	private void shootBullet(World physiscsWorld, Vector2 position, float angle) {
+		Bullet b = GameObjectFactory.createBullet(physiscsWorld);
+		//bullets.add(b);
+		b.setPosition(position);
+		b.setRotation(angle);
 	}
 	public void releaseTrigger() {
 		this.triggerStatus = false;

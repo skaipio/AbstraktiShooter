@@ -3,6 +3,7 @@ package com.abstrakti.shooter.objects;
 import com.abstrakti.shooter.animations.SpriteAnimation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 
 public class Player extends DynamicObject {
 	private float speed = 32*7f; //per second
@@ -104,8 +105,8 @@ public class Player extends DynamicObject {
 
 
 	}
-	public void shoot() {
-		this.handGun.fireGun();
+	public void shoot(World physiscsWorld) {
+		this.handGun.fireGun(physiscsWorld, this.getPosition(), this.getAngle());
 	}
 	public void releaseTrigger() {
 		this.handGun.releaseTrigger();

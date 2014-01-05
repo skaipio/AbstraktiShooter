@@ -3,9 +3,12 @@ package com.abstrakti.shooter.io;
 import java.util.ArrayList;
 
 import com.abstrakti.shooter.Config;
+import com.abstrakti.shooter.managers.AssetManager;
 import com.abstrakti.shooter.map.Level;
+import com.abstrakti.shooter.objects.Bullet;
 import com.abstrakti.shooter.objects.DynamicObject;
 import com.abstrakti.shooter.objects.GameObject;
+import com.abstrakti.shooter.objects.GameObjectFactory;
 import com.abstrakti.shooter.objects.Player;
 import com.abstrakti.shooter.objects.Wall;
 import com.badlogic.gdx.Gdx;
@@ -15,7 +18,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -39,6 +44,7 @@ public class GameScreen implements Screen {
 	private PlayerInputProcessor input = new PlayerInputProcessor();
 	BitmapFont font;
 	SpriteBatch fontSpriteBatch;
+	ArrayList<Bullet> bullets;
 
 	private GameScreen() {
 		Gdx.input.setInputProcessor(input);
@@ -81,7 +87,6 @@ public class GameScreen implements Screen {
 
 		//batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		
 		Array<Body> bodies = new Array<Body>();
 		this.currentLevel.getWorld().getBodies(bodies);
 		
@@ -91,19 +96,17 @@ public class GameScreen implements Screen {
 				if (Wall.class.isInstance(obj)) {
 					continue;
 				}
-				
 				obj.draw(batch);
 			}
 		}
-		
 		batch.end();
 		this.drawUI();
 		this.handlePlayerInput(delta);
 		this.moveAi(delta);
 	}
+
 	
 	private void drawUI() {
-
 		CharSequence str = "Ammo: " + currentLevel.getPlayer().getAmmo();
 		CharSequence str2 = "Health: " + currentLevel.getPlayer().getHealth();
 		fontSpriteBatch.begin();
@@ -122,8 +125,6 @@ public class GameScreen implements Screen {
 		
 	}
 	
-	
-
 	
 
 	private void handlePlayerInput(float delta) {
@@ -147,7 +148,7 @@ public class GameScreen implements Screen {
 			p.strafeRight(delta);	
 		}
 		if (MOUSEBUTTONS[Buttons.LEFT] == true) {
-			p.shoot();
+			p.shoot(this.currentLevel.getWorld());
 		} else {
 			p.releaseTrigger();
 		}
@@ -155,6 +156,7 @@ public class GameScreen implements Screen {
 		p.setRotation(calculatePlayerAngle(Gdx.input.getX(), Gdx.input.getY(), Config.SCREEN_WIDTH/2, Config.SCREEN_HEIGHT/2));
 		
 	}
+	
 
 	private float calculatePlayerAngle(int mouseX, int mouseY, float playerX, float playerY) {
 		//System.out.println(Math.toDegrees((float)Math.atan2((float)mouseY-playerY, (float)mouseX-playerX)));
