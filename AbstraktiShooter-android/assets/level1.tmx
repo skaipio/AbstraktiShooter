@@ -11,19 +11,19 @@
   <tile id="1">
    <properties>
     <property name="collision" value="true"/>
-    <property name="tag" value="concrete_wall"/>
+    <property name="tag" value="concrete_wall_corner"/>
    </properties>
   </tile>
   <tile id="2">
    <properties>
     <property name="collision" value="true"/>
-    <property name="tag" value="concrete_wall_vertical"/>
+    <property name="tag" value="concrete_wall_upper"/>
    </properties>
   </tile>
   <tile id="3">
    <properties>
     <property name="collision" value="true"/>
-    <property name="tag" value="wall_concrete_corner"/>
+    <property name="tag" value="wall_concrete_vertical"/>
    </properties>
   </tile>
  </tileset>

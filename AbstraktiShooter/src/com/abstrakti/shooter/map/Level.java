@@ -53,13 +53,17 @@ public class Level {
 				if (cell==null) {
 					continue;
 				}
+				MapProperties cellProperties = cell.getTile().getProperties();
 				
-				if (cell.getTile().getProperties().get("collision").equals("true") ) {								
+				if (cellProperties.get("collision").equals("true") ) {								
 					Vector2 position = new Vector2(tileSize*i*Config.WORLD_TO_BOX, tileSize*j*Config.WORLD_TO_BOX);
 					GameObjectFactory.createWall(physicsWorld, position);
 				}
-				if (cell.getTile().getProperties().get("tag").equals("concrete_floor") ) {								
+				if (cellProperties.get("tag").equals("concrete_floor") ) {								
 					cell.setTile(TileFactory.createConcreteFloorTile());
+				}
+				if (cellProperties.get("tag").equals("concrete_wall_upper") ) {								
+					cell.setTile(TileFactory.createConcreteUpperWallTile());
 				}
 			}
 		}

@@ -17,3 +17,17 @@ floor_concrete2
   orig: 32, 32
   offset: 0, 0
   index: -1
+wall_concrete_upper1
+  rotate: false
+  xy: 64, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+wall_concrete_upper2
+  rotate: false
+  xy: 96, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
