@@ -128,7 +128,7 @@ public class Level {
 	}
 	
 	public World getWorld() {
-		return physicsWorld;
+		return this.physicsWorld;
 	}
 	
 	public Player getPlayer() {
