@@ -49,19 +49,18 @@ public class GameScreen implements Screen {
 		camera.setToOrtho(false, w, h);	
 		camera.zoom = 1.00f;
 		
+		setCursorImage();
 
-		//Mouse cursor
-		
-		/*
-		Pixmap pm = new Pixmap(Gdx.files.internal("crosshair.png"));
+	}
+
+	private void setCursorImage() {
+		Pixmap pm = new Pixmap(Gdx.files.internal("../AbstraktiShooter-desktop/textures/mousecursor/cursor.png"));
 		int xHotSpot = pm.getWidth() / 2;
 		int yHotSpot = pm.getHeight() / 2;
 
 		Gdx.input.setCursorImage(pm, xHotSpot, yHotSpot);
 		pm.dispose();
-		*/
 	}
-
 	@Override
 	public void render(float delta) {
 		this.update();
@@ -102,7 +101,7 @@ public class GameScreen implements Screen {
 				Gdx.files.internal("../AbstraktiShooter-desktop/textures/fonts/arial.png"), false);
 		spriteBatch.begin();
 		 font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		 font.draw(spriteBatch, str, 25, 50);
+		 font.draw(spriteBatch, str, 25, 200);
 		 spriteBatch.end();
 	}
 	
