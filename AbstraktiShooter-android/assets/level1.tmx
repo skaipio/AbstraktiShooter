@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="textureAtlas2" tilewidth="32" tileheight="32">
-  <image source="tileset.png" width="256" height="32"/>
+  <image source="tileset.png" width="512" height="32"/>
   <tile id="0">
    <properties>
     <property name="collision" value="false"/>
@@ -17,22 +17,70 @@
   <tile id="2">
    <properties>
     <property name="collision" value="true"/>
-    <property name="tag" value="concrete_wall_upper"/>
+    <property name="tag" value="concrete_wall_corner"/>
    </properties>
   </tile>
   <tile id="3">
    <properties>
     <property name="collision" value="true"/>
-    <property name="tag" value="wall_concrete_vertical"/>
+    <property name="tag" value="wall_concrete_end"/>
    </properties>
   </tile>
   <tile id="4">
    <properties>
-    <property name="collision" value="false"/>
-    <property name="tag" value="stairs_down"/>
+    <property name="collision" value="true"/>
+    <property name="tag" value="wall_concrete_end"/>
    </properties>
   </tile>
   <tile id="5">
+   <properties>
+    <property name="collision" value="true"/>
+    <property name="tag" value="wall_concrete_end"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="collision" value="true"/>
+    <property name="tag" value="wall_concrete_fourway"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="collision" value="true"/>
+    <property name="tag" value="wall_concrete_t_junction"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="collision" value="true"/>
+    <property name="tag" value="wall_concrete_t_junction"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="collision" value="true"/>
+    <property name="tag" value="wall_concrete_t_junction"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="collision" value="true"/>
+    <property name="tag" value="wall_concrete_upper"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="collision" value="true"/>
+    <property name="tag" value="wall_concrete_vertical"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="collision" value="true"/>
+    <property name="tag" value="stairs_down"/>
+   </properties>
+  </tile>
+  <tile id="13">
    <properties>
     <property name="collision" value="false"/>
     <property name="tag" value="stairs_down"/>
@@ -41,7 +89,7 @@
  </tileset>
  <layer name="Tiles" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJztmO0OwiAMRaeiz71HF0NIkABt7Qcwe5P+mALbaQsUjsPlcrmupXu0B8Fi+5Pav+6joRDtVhjmedS/ZXUfDa3OAcU7x3p1Dmj80Gm3G0cdn/o36BljuU/o/I+Z/5h4QH6Ust67MHGy/E4OH5fjKvHQnB+fvLfikFqvMO/mcGD8tgMHVlYcI1/O5ujVDL+wc0Xd20ofjvLFmoMjaw7qGYNae1hxlONS98dRe+t4cPbuf+CA9v9dOCi5eWWO1vozOpPMruF7HPm7nslOKHarc7ySqXJo5lVrbCkOyv5hzcG9L5AwCY5Wnxm126g+Kv1LWbNmcGBzlDJHnCOpzhGJO7UZHBLnXedwDonxNDikz7QS45T3LVxfrGDOsZZBHDPqQ8m60uVyfesNE4cOFw==
+   eJztmItuwyAMRbNl3fravjmfXqoUybWM7QQbWOsrWRVNTDgYzGOaQqFQ6LX0mewC7CyU0/sL508Z9vHQNdkHME2Z86cM+3hodA4p3jnWo3NI9V8L7/03juO0xuWU7PD4L/0umjKMKy5ngz4/hXc081/i+BKeW1rpW5o4aeLd2yw4vhu2t/QtC448P+7rHBzLmrJm3cPt9eKwyleab9dwzBPfZ7PR+uHNoVULjjyGS33Zm6O0ZzgS88NbePxJ6xzsQ268tOaoUWsOGH8pb0rnD278eHPAeqX9CH7O5e/W8ajZo7wDR84RcL33zFdeHFqfETj27O+pOUaJWn+4M0nvPXyJI7frd7VFit3oHH+ruXLsOadgH4lDO5e2cFBt2NP/Hhz3/Kg9D2nvETjj9mQ1HJRPj70bzk+ZF9/HbMlZPTi0Y3TLHAmOVXiMWNyp9eCwOO8GR3BY1OfBId1vSTajM4amPmpNPYA64Pmlti9GsJH3vMHxrNr50NIs70tDoVfWDY9TJKI=
   </data>
  </layer>
  <objectgroup name="Spawns" width="50" height="50">
@@ -61,6 +109,14 @@
   <object type="guardSpawn" x="905" y="694"/>
   <object type="guardSpawn" x="1027" y="270"/>
   <object type="guardSpawn" x="968" y="309"/>
+  <object type="guardSpawn" x="801" y="981"/>
+  <object type="guardSpawn" x="670" y="942"/>
+  <object type="guardSpawn" x="865" y="744"/>
+  <object type="guardSpawn" x="1080" y="752"/>
+  <object type="guardSpawn" x="298" y="894"/>
+  <object type="guardSpawn" x="199" y="888"/>
+  <object type="guardSpawn" x="191" y="1335"/>
+  <object type="guardSpawn" x="713" y="408"/>
  </objectgroup>
  <objectgroup name="Triggers" width="50" height="50">
   <object name="end_of_level" x="1376" y="895" width="63" height="53">
