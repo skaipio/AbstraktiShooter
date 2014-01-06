@@ -42,27 +42,33 @@ class MainGameState extends State {
             public void beginContact(Contact contact) {
                 Fixture fixtureA = contact.getFixtureA();
                 Fixture fixtureB = contact.getFixtureB();
-              //  Gdx.app.log("beginContact", "between " + fixtureA.toString() + " and " + fixtureB.toString());
-                /*
-                if if (obj!=null) {
-    				if (Wall.class.isInstance(obj)) {
-    					continue;
-    				}
-    				*/
-              //  System.out.println(fixtureA.getBody().getUserData());
-              //  System.out.println(fixtureB.getBody().getUserData());
-                if ((fixtureA.getBody().getUserData() instanceof Wall) && (fixtureB.getBody().getUserData() instanceof Bullet)) {
-                	System.out.println("wall and bullet ");
-                	Bullet b = (Bullet)fixtureB.getBody().getUserData();
-                	b.hurt(1);
-                	
+
+                checkCollisionBulletAndWall(fixtureA, fixtureB);
+                checkCollisionBulletAndPlayer(fixtureA, fixtureB);
+                checkCollisionPlayerTrigger(fixtureA, fixtureB);
                 }
-                if ((fixtureA.getBody().getUserData() instanceof Wall) && (fixtureB.getBody().getUserData() instanceof Player)) {
-                	System.out.println("wall and player ");
+            
+            private void checkCollisionBulletAndWall(Fixture fixtureA, Fixture fixtureB) {
+            	 if ((fixtureA.getBody().getUserData() instanceof Wall) && (fixtureB.getBody().getUserData() instanceof Bullet)) {
+                 	System.out.println("wall and bullet ");
+                 	Bullet b = (Bullet)fixtureB.getBody().getUserData();
+                 	b.hurt(1);
+                 	
+                 }
+            	 /*
+                 if ((fixtureA.getBody().getUserData() instanceof Bullet) && (fixtureB.getBody().getUserData() instanceof Wall)) {
+                 	System.out.println("bullet and wall");
+                 }  */
+            }
+            public void checkCollisionPlayerTrigger(Fixture fixtureA, Fixture fixtureB) {
+                if ((fixtureA.getBody().getUserData() instanceof Trigger && (fixtureB.getBody().getUserData() instanceof Player))){
+                	Trigger trigger = (Trigger)fixtureA.getBody().getUserData();
+                	Player player = (Player)fixtureB.getBody().getUserData();
+                	trigger.execute(player);
                 }
-                if ((fixtureA.getBody().getUserData() instanceof Player) && (fixtureB.getBody().getUserData() instanceof Wall)) {
-                	System.out.println("player and wall");
-                }
+            }
+            
+            public void checkCollisionBulletAndPlayer(Fixture fixtureA, Fixture fixtureB) {  	
                 if (((fixtureA.getBody().getUserData() instanceof Bullet) && (fixtureB.getBody().getUserData() instanceof Player))) {
                 	System.out.println("bullet and player");
                 	Bullet b = (Bullet)fixtureA.getBody().getUserData();
@@ -72,19 +78,10 @@ class MainGameState extends State {
                 }
                 if (((fixtureA.getBody().getUserData() instanceof Player) && (fixtureB.getBody().getUserData() instanceof Bullet))) {
                 	System.out.println("player and bullet");
-
                 	Bullet b = (Bullet)fixtureB.getBody().getUserData();
                 	b.hurt(1);
                 	Player p = (Player)fixtureA.getBody().getUserData();
                 	p.hurt(1);
-                }
-                if ((fixtureA.getBody().getUserData() instanceof Bullet) && (fixtureB.getBody().getUserData() instanceof Wall)) {
-                	System.out.println("bullet and wall");
-                }   
-                if ((fixtureA.getBody().getUserData() instanceof Trigger && (fixtureB.getBody().getUserData() instanceof Player))){
-                	Trigger trigger = (Trigger)fixtureA.getBody().getUserData();
-                	Player player = (Player)fixtureB.getBody().getUserData();
-                	trigger.execute(player);
                 }
             }
 
