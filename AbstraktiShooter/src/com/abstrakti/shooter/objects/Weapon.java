@@ -42,7 +42,7 @@ public class Weapon {
 			this.triggerStatus = true;
 			this.ammo--;
 			this.shootBullet(physiscsWorld, position,angle); 
-			System.out.println("BANG, ammo" + " " + ammo);
+//			System.out.println("BANG, ammo" + " " + ammo);
 			sound.play(1.0f);
 			return true;
 		}

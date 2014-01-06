@@ -10,6 +10,8 @@ public final class AssetManager {
 	private TextureAtlas entityAtlas;
 	private TextureAtlas tileAtlas;
 	private Sound pistolSound;
+	private Sound bulletWallSound;
+	private Sound bulletFleshSound;
 	//private Texture textureSheet;
 	
 	private AssetManager(){}
@@ -29,6 +31,8 @@ public final class AssetManager {
 	
 	public void loadSounds(){
 		pistolSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/bullet_launch.wav"));
+		bulletWallSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/bullet_hit_wall.wav"));
+		bulletFleshSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/bullet_hit_flesh.wav"));
 	}
 	
 	/**
@@ -45,5 +49,12 @@ public final class AssetManager {
 	
 	public Sound getPistolSound(){
 		return this.pistolSound;
+	}
+	
+	public Sound getbulletWallSound(){
+		return this.bulletWallSound;
+	}
+	public Sound getbulletFleshSound() {
+		return this.bulletFleshSound;
 	}
 }

@@ -10,6 +10,7 @@ import com.abstrakti.shooter.objects.Player;
 import com.abstrakti.shooter.objects.Wall;
 import com.abstrakti.shooter.triggers.Trigger;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -21,9 +22,14 @@ import com.badlogic.gdx.physics.box2d.World;
 class MainGameState extends State {
 	private GameScreen gameScreen;
 	private Level currentLevel;
+	private Sound bulletFleshSound;
+	private Sound bulletWallSound;
+	
 
 	public MainGameState(StateManager manager, SpriteBatch batch) {
-		super(manager);		
+		super(manager);	
+		this.bulletFleshSound = AssetManager.getInstance().getbulletFleshSound();
+		this.bulletWallSound = AssetManager.getInstance().getbulletWallSound();
 	}
 
 	@Override
@@ -37,53 +43,56 @@ class MainGameState extends State {
 	
 	private void createCollisionListener() {
 		World world = currentLevel.getWorld();
-		
-		world.setContactListener(new ContactListener() {
-            public void beginContact(Contact contact) {
-                Fixture fixtureA = contact.getFixtureA();
-                Fixture fixtureB = contact.getFixtureB();
 
-                checkCollisionBulletAndWall(fixtureA, fixtureB);
-                checkCollisionBulletAndPlayer(fixtureA, fixtureB);
-                checkCollisionPlayerTrigger(fixtureA, fixtureB);
-                }
-            
-            private void checkCollisionBulletAndWall(Fixture fixtureA, Fixture fixtureB) {
-            	 if ((fixtureA.getBody().getUserData() instanceof Wall) && (fixtureB.getBody().getUserData() instanceof Bullet)) {
-                 	System.out.println("wall and bullet ");
-                 	Bullet b = (Bullet)fixtureB.getBody().getUserData();
-                 	b.hurt(1);
-                 	
-                 }
-            	 /*
+		world.setContactListener(new ContactListener() {
+			public void beginContact(Contact contact) {
+				Fixture fixtureA = contact.getFixtureA();
+				Fixture fixtureB = contact.getFixtureB();
+
+				checkCollisionBulletAndWall(fixtureA, fixtureB);
+				checkCollisionBulletAndPlayer(fixtureA, fixtureB);
+				checkCollisionPlayerTrigger(fixtureA, fixtureB);
+			}
+
+			private void checkCollisionBulletAndWall(Fixture fixtureA, Fixture fixtureB) {
+				if ((fixtureA.getBody().getUserData() instanceof Wall) && (fixtureB.getBody().getUserData() instanceof Bullet)) {
+					System.out.println("wall and bullet ");
+					Bullet b = (Bullet)fixtureB.getBody().getUserData();
+					b.hurt(1);
+					//bulletWallSound.play(1.0f);
+				}
+				/*
                  if ((fixtureA.getBody().getUserData() instanceof Bullet) && (fixtureB.getBody().getUserData() instanceof Wall)) {
                  	System.out.println("bullet and wall");
                  }  */
-            }
-            public void checkCollisionPlayerTrigger(Fixture fixtureA, Fixture fixtureB) {
-                if ((fixtureA.getBody().getUserData() instanceof Trigger && (fixtureB.getBody().getUserData() instanceof Player))){
-                	Trigger trigger = (Trigger)fixtureA.getBody().getUserData();
-                	Player player = (Player)fixtureB.getBody().getUserData();
-                	trigger.execute(player);
-                }
-            }
-            
-            public void checkCollisionBulletAndPlayer(Fixture fixtureA, Fixture fixtureB) {  	
-                if (((fixtureA.getBody().getUserData() instanceof Bullet) && (fixtureB.getBody().getUserData() instanceof Player))) {
-                	System.out.println("bullet and player");
-                	Bullet b = (Bullet)fixtureA.getBody().getUserData();
-                	b.hurt(1);
-                	Player p = (Player)fixtureB.getBody().getUserData();
-                	p.hurt(1);
-                }
-                if (((fixtureA.getBody().getUserData() instanceof Player) && (fixtureB.getBody().getUserData() instanceof Bullet))) {
-                	System.out.println("player and bullet");
-                	Bullet b = (Bullet)fixtureB.getBody().getUserData();
-                	b.hurt(1);
-                	Player p = (Player)fixtureA.getBody().getUserData();
-                	p.hurt(1);
-                }
-            }
+			}
+			public void checkCollisionPlayerTrigger(Fixture fixtureA, Fixture fixtureB) {
+				if ((fixtureA.getBody().getUserData() instanceof Trigger && (fixtureB.getBody().getUserData() instanceof Player))){
+					Trigger trigger = (Trigger)fixtureA.getBody().getUserData();
+					Player player = (Player)fixtureB.getBody().getUserData();
+					trigger.execute(player);
+				}
+			}
+
+			public void checkCollisionBulletAndPlayer(Fixture fixtureA, Fixture fixtureB) {  	
+				Object sound;
+				if (((fixtureA.getBody().getUserData() instanceof Bullet) && (fixtureB.getBody().getUserData() instanceof Player))) {
+					System.out.println("bullet and player");
+					Bullet b = (Bullet)fixtureA.getBody().getUserData();
+					b.hurt(1);
+					Player p = (Player)fixtureB.getBody().getUserData();
+					p.hurt(1);
+					bulletFleshSound.play(1.0f);
+				}
+				if (((fixtureA.getBody().getUserData() instanceof Player) && (fixtureB.getBody().getUserData() instanceof Bullet))) {
+					System.out.println("player and bullet");
+					Bullet b = (Bullet)fixtureB.getBody().getUserData();
+					b.hurt(1);
+					Player p = (Player)fixtureA.getBody().getUserData();
+					p.hurt(1);
+					bulletFleshSound.play(1.0f);
+				}
+			}
 
             public void endContact(Contact contact) {
                 Fixture fixtureA = contact.getFixtureA();
