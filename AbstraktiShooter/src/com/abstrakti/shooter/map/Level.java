@@ -84,6 +84,7 @@ public class Level {
 		
 		this.player = GameObjectFactory.createPlayer(physicsWorld);
 		this.player.setPosition(x, y);
+		this.player.setHealth(20);
 		
 		GameScreen.getInstance().lockCameraOn(this.player);
 		for (AiController ai : enemies) {
@@ -102,7 +103,7 @@ public class Level {
 				int y = (Integer)properties.get("y");
 				Player guard = GameObjectFactory.createPlayer(physicsWorld);
 				guard.setPosition(x, y);
-				AiController ai = new AiController(guard);
+				AiController ai = new AiController(guard, physicsWorld);
 				enemies.add(ai);
 			}
 		}

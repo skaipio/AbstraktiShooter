@@ -120,7 +120,7 @@ public class GameScreen implements Screen {
 		
 		for (AiController ai : enemies) {
 			//System.out.println(ai.getPuppetState());
-			ai.act();
+			ai.act(delta);
 		}
 		
 	}

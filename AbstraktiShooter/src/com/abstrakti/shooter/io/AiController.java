@@ -3,26 +3,32 @@ package com.abstrakti.shooter.io;
 import com.abstrakti.shooter.objects.EnemyAiState;
 import com.abstrakti.shooter.objects.Player;
 import com.abstrakti.shooter.objects.PlayerState;
+import com.badlogic.gdx.physics.box2d.World;
 
 public class AiController {
 	private Player puppet, humanPlayer;
 	private EnemyAiState currentState;
 	private double observationRadius;
+	private World physicsWorld;
+	
+	private static float defaultBulletDelay = 1;
+	private static float time = 0;
 
-	public AiController(Player puppet) {
+	public AiController(Player puppet, World physicsWorld) {
 		this.puppet = puppet;
+		this.physicsWorld = physicsWorld;
 		this.currentState = EnemyAiState.IDLE;
 		this.observationRadius = 200;
 	}
 
-	public void act() {
+	public void act(float delta) {
 		if (puppet.getStatus() != PlayerState.DEAD) {	
 			switch (this.currentState) {
 			case IDLE:
 				idle();
 				break;
 			case ATTACKING:
-				attack();
+				attack(delta);
 				break;
 			default:
 				idle();
@@ -56,10 +62,15 @@ public class AiController {
 		}
 	}
 
-	private void attack() {
+	private void attack(float delta) {
 		turnToPlayer();
 		puppet.stopMovement();
-		//puppet.shoot();
+		time -= delta;
+		if (time <= 0) {
+				puppet.shoot(physicsWorld);
+				time = defaultBulletDelay;
+				puppet.releaseTrigger();
+		}
 		puppet.moveForward(5);
 		this.currentState = EnemyAiState.IDLE;
 	}

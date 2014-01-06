@@ -42,6 +42,9 @@ public class Player extends DynamicObject {
 	public int getHealth() {
 		return this.health;
 	}
+	public void setHealth(int amount) {
+		this.health += amount;
+	}
 	@Override
 	public void update(float delta){
 		super.update(delta);
