@@ -8,6 +8,7 @@ import com.abstrakti.shooter.map.Tile;
 import com.abstrakti.shooter.objects.Bullet;
 import com.abstrakti.shooter.objects.Player;
 import com.abstrakti.shooter.objects.Wall;
+import com.abstrakti.shooter.triggers.Trigger;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -79,7 +80,12 @@ class MainGameState extends State {
                 }
                 if ((fixtureA.getBody().getUserData() instanceof Bullet) && (fixtureB.getBody().getUserData() instanceof Wall)) {
                 	System.out.println("bullet and wall");
-                }        
+                }   
+                if ((fixtureA.getBody().getUserData() instanceof Trigger && (fixtureB.getBody().getUserData() instanceof Player))){
+                	Trigger trigger = (Trigger)fixtureA.getBody().getUserData();
+                	Player player = (Player)fixtureB.getBody().getUserData();
+                	trigger.execute(player);
+                }
             }
 
             public void endContact(Contact contact) {

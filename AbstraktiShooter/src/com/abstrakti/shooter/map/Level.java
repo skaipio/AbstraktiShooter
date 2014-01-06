@@ -1,6 +1,7 @@
 package com.abstrakti.shooter.map;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.abstrakti.shooter.Config;
 import com.abstrakti.shooter.io.AiController;
@@ -11,6 +12,7 @@ import com.abstrakti.shooter.objects.GameObjectFactory;
 import com.abstrakti.shooter.objects.Player;
 import com.abstrakti.shooter.objects.PlayerState;
 import com.abstrakti.shooter.objects.Wall;
+import com.abstrakti.shooter.triggers.Trigger;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
@@ -19,6 +21,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
@@ -72,6 +75,7 @@ public class Level {
 		//enemies need to be spawned first
 		this.spawnEnemies(); 
 		this.setPlayerIntoLevel();
+		this.registerEndOfLevel();
 	}
 	
 	private void setPlayerIntoLevel(){
@@ -107,6 +111,25 @@ public class Level {
 				enemies.add(ai);
 			}
 		}
+	}
+	
+	private void registerEndOfLevel(){
+		MapLayer triggerLayer = map.getLayers().get("Triggers");
+		MapObjects triggers = triggerLayer.getObjects();	
+		MapObject endZone = triggers.get("end_of_level");
+		MapProperties properties = endZone.getProperties();
+		Iterator<String> keys = properties.getKeys();
+		while(keys.hasNext()){
+			String key = keys.next();
+			System.out.println(key);
+		}
+
+		int x = (Integer)properties.get("x");
+		int y = (Integer)properties.get("y");
+		float width = Float.parseFloat((String) properties.get("width"));
+		float height = Float.parseFloat((String)properties.get("height"));
+		Rectangle triggerZone = new Rectangle(x, y, width, height);
+		GameObjectFactory.createEndOfLevelTrigger(this.physicsWorld, triggerZone);
 	}
 	
 	public ArrayList<AiController> getEnemies() {

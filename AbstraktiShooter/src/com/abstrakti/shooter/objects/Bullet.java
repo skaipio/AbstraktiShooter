@@ -1,7 +1,5 @@
 package com.abstrakti.shooter.objects;
 
-import com.abstrakti.shooter.animations.SpriteAnimation;
-import com.abstrakti.shooter.managers.AssetManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

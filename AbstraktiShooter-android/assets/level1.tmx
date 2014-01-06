@@ -63,6 +63,11 @@
   <object type="guardSpawn" x="968" y="309"/>
  </objectgroup>
  <objectgroup name="Triggers" width="50" height="50">
-  <object type="end_of_level" x="1376" y="895" width="63" height="53"/>
+  <object name="end_of_level" x="1376" y="895" width="63" height="53">
+   <properties>
+    <property name="height" value="1.656"/>
+    <property name="width" value="1.969"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

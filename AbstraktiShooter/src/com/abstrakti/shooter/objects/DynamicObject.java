@@ -43,6 +43,10 @@ public abstract class DynamicObject extends GameObject{
 		return this.body.getAngle();
 	}
 	
+	public Body getBody(){
+		return this.body;
+	}
+	
 	protected SpriteAnimation getAnimationAt(int index){
 		return this.animations[index];
 	}

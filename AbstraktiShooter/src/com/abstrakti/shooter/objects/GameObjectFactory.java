@@ -4,8 +4,11 @@ import com.abstrakti.shooter.Config;
 import com.abstrakti.shooter.animations.PlayerIdleAnimation;
 import com.abstrakti.shooter.animations.PlayerWalkAnimation;
 import com.abstrakti.shooter.animations.SpriteAnimation;
+import com.abstrakti.shooter.triggers.EndOfLevelTrigger;
+import com.abstrakti.shooter.triggers.Trigger;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -99,6 +102,22 @@ public final class GameObjectFactory {
         body2.setUserData(new Wall());				
         
         boxShape.dispose();
+	}
+	
+	public static void createEndOfLevelTrigger(World world, Rectangle collisionZone){
+		PolygonShape boxShape = new PolygonShape();
+        boxShape.setAsBox(collisionZone.width*Config.WORLD_TO_BOX,collisionZone.height*Config.WORLD_TO_BOX);
+        
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.position.set(collisionZone.x*Config.WORLD_TO_BOX, collisionZone.y*Config.WORLD_TO_BOX);
+        
+        FixtureDef sensor = new FixtureDef();
+        sensor.shape = boxShape;
+        sensor.isSensor = true;
+        
+        Body body = world.createBody(bodyDef);
+        body.createFixture(sensor);
+        body.setUserData(new EndOfLevelTrigger());
 	}
 
 }
