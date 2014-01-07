@@ -51,7 +51,7 @@ public class GameScreen implements Screen {
 	private GameScreen() {
 		Gdx.input.setInputProcessor(input);
 		this.batch = new SpriteBatch();
-		
+
 		this.gameState = GameState.RUNNING;
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
@@ -60,7 +60,7 @@ public class GameScreen implements Screen {
 		//camera.setToOrtho(false, w / 32, h / 32);	
 		camera.setToOrtho(false, w, h);	
 		camera.zoom = 1.00f;
-		
+
 		setCursorImage();
 		loadFonts(); 
 
@@ -85,9 +85,9 @@ public class GameScreen implements Screen {
 		this.update();
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-		
+
 		this.renderer.render();
-		
+
 		checkPlayerState();
 		if (this.gameState == GameState.RUNNING) {
 			batch.begin();
@@ -111,14 +111,14 @@ public class GameScreen implements Screen {
 			displayGameOver();
 		}
 	}
-	
+
 	private void checkPlayerState() {
 		if (currentLevel.getPlayer().getStatus() == PlayerState.DEAD) {
 			this.gameState = gameState.GAME_OVER;
 		}
 	}
-	
-	
+
+
 	private void displayGameOver() {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
@@ -131,11 +131,11 @@ public class GameScreen implements Screen {
 		if (MOUSEBUTTONS[Buttons.LEFT] == true) {
 			this.gameState = GameState.RESET;
 		}
-		*/
+		 */
 	}
-	
 
-	
+
+
 	private void drawUI() {
 		CharSequence str = "Ammo: " + currentLevel.getPlayer().getAmmo();
 		CharSequence str2 = "Health: " + currentLevel.getPlayer().getHealth();
@@ -147,23 +147,20 @@ public class GameScreen implements Screen {
 
 	void moveAi(float delta) {
 		ArrayList<AiController> enemies = currentLevel.getEnemies();
-		
+
 		for (AiController ai : enemies) {
 			//System.out.println(ai.getPuppetState());
 			ai.act(delta);
 		}
-		
-		
-		
 	}
-	
+
 
 	private void handlePlayerInput(float delta) {
 		Player p = currentLevel.getPlayer();
 		boolean[] KEYS = new boolean[603]; 
 		KEYS = input.getKeys();
 		boolean[] MOUSEBUTTONS = input.getMouseButtons();
-		
+
 		if (KEYS[Keys.W] == true) {
 			p.moveForward(delta);
 		} else {
@@ -183,11 +180,11 @@ public class GameScreen implements Screen {
 		} else {
 			p.releaseTrigger();
 		}
-		
+
 		p.setRotation(calculatePlayerAngle(Gdx.input.getX(), Gdx.input.getY(), Config.SCREEN_WIDTH/2, Config.SCREEN_HEIGHT/2));
-		
+
 	}
-	
+
 
 	private float calculatePlayerAngle(int mouseX, int mouseY, float playerX, float playerY) {
 		//System.out.println(Math.toDegrees((float)Math.atan2((float)mouseY-playerY, (float)mouseX-playerX)));
@@ -227,28 +224,28 @@ public class GameScreen implements Screen {
 	@Override
 	public void dispose() {
 	}
-	
+
 	public static GameScreen getInstance(){
 		if (screen == null){
 			screen = new GameScreen();
 		}
 		return screen;
 	}
-	
+
 	public void setMap(TiledMap map){
 		this.renderer = new OrthogonalTiledMapRenderer(map, batch);
 	}
 
-	
+
 	public void setLevel(Level currentLevel) {
 		this.currentLevel = currentLevel;
-		
+
 	}
-	
+
 	public void lockCameraOn(DynamicObject obj){
 		this.objToFollow = obj;
 	}
-	
+
 	private void update() {
 		if (this.objToFollow != null){
 			Vector2 position = this.objToFollow.getPosition();
