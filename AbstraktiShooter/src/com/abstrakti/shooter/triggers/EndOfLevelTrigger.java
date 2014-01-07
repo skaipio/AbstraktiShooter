@@ -7,6 +7,7 @@ public class EndOfLevelTrigger extends Trigger {
 	@Override
 	public void execute(Player collisionWith) {
 		System.out.println("You got to the end alive! Go you!");
+		
 	}
 
 

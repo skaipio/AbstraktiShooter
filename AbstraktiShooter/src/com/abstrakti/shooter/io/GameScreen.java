@@ -45,11 +45,13 @@ public class GameScreen implements Screen {
 	BitmapFont font;
 	SpriteBatch fontSpriteBatch;
 	ArrayList<Bullet> bullets;
+	public GameState gameState;
 
 	private GameScreen() {
 		Gdx.input.setInputProcessor(input);
 		this.batch = new SpriteBatch();
 		
+		this.gameState = GameState.RUNNING;
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
 
@@ -85,25 +87,46 @@ public class GameScreen implements Screen {
 		
 		this.renderer.render();
 
-		//batch.setProjectionMatrix(camera.combined);
-		batch.begin();
-		Array<Body> bodies = new Array<Body>();
-		this.currentLevel.getWorld().getBodies(bodies);
-		
-		for (Body body: bodies) {
-			GameObject obj = (GameObject) body.getUserData();
-			if (obj!=null) {
-				if (Wall.class.isInstance(obj)) {
-					continue;
+		if (this.gameState == GameState.RUNNING) {
+			batch.begin();
+			Array<Body> bodies = new Array<Body>();
+			this.currentLevel.getWorld().getBodies(bodies);
+
+			for (Body body: bodies) {
+				GameObject obj = (GameObject) body.getUserData();
+				if (obj!=null) {
+					if (Wall.class.isInstance(obj)) {
+						continue;
+					}
+					obj.draw(batch);
 				}
-				obj.draw(batch);
 			}
+			batch.end();
+			this.drawUI();
+			this.handlePlayerInput(delta);
+			this.moveAi(delta);
+		} else {
+			displayGameOver();
 		}
-		batch.end();
-		this.drawUI();
-		this.handlePlayerInput(delta);
-		this.moveAi(delta);
 	}
+	
+	
+	private void displayGameOver() {
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		CharSequence str = "GAME OVER";
+		fontSpriteBatch.begin();
+		this.font.draw(fontSpriteBatch, str, 400, 400);
+		fontSpriteBatch.end();
+		/*
+		boolean[] MOUSEBUTTONS = input.getMouseButtons();
+		if (MOUSEBUTTONS[Buttons.LEFT] == true) {
+			this.gameState = GameState.RESET;
+			System.out.println("joo");
+		}
+		*/
+	}
+	
 
 	
 	private void drawUI() {
@@ -123,8 +146,9 @@ public class GameScreen implements Screen {
 			ai.act(delta);
 		}
 		
+		
+		
 	}
-	
 	
 
 	private void handlePlayerInput(float delta) {
