@@ -18,7 +18,7 @@ public class SpriteAnimation {
 		this.frameTime = frameTime;
 	}
 	
-	protected void addFrameAt(int index, Sprite frame){
+	public void addFrameAt(int index, Sprite frame){
 		this.sprites[index] = frame;
 	}
 	

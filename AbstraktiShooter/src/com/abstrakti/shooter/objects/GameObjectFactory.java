@@ -4,10 +4,12 @@ import com.abstrakti.shooter.Config;
 import com.abstrakti.shooter.animations.PlayerIdleAnimation;
 import com.abstrakti.shooter.animations.PlayerWalkAnimation;
 import com.abstrakti.shooter.animations.SpriteAnimation;
+import com.abstrakti.shooter.managers.AssetManager;
 import com.abstrakti.shooter.triggers.EndOfLevelTrigger;
 import com.abstrakti.shooter.triggers.Trigger;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -118,6 +120,19 @@ public final class GameObjectFactory {
         Body body = world.createBody(bodyDef);
         body.createFixture(sensor);
         body.setUserData(new EndOfLevelTrigger());
+	}
+	
+	public static Ammunition createAmmunition(World world){
+		Sprite ammoSprite = new Sprite();
+		ammoSprite.setRegion(AssetManager.getInstance().getEntityTexture("pistol_ammo"));
+		SpriteAnimation spriteAnimation = new SpriteAnimation(1, 0);
+		spriteAnimation.addFrameAt(0, ammoSprite);
+		Ammunition ammo = new Ammunition();
+		ammo.addAnimation(spriteAnimation, 0);
+		
+		// muita juttuja?
+		
+		return ammo;
 	}
 
 }
