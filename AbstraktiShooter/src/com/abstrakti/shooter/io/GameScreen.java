@@ -172,7 +172,7 @@ public class GameScreen implements Screen {
 		ShapeRenderer shapeRenderer = new ShapeRenderer();
 		 shapeRenderer.begin(ShapeType.Filled);
 		 shapeRenderer.setColor(0, 0, 1,  0.6f);
-		 shapeRenderer.rect(1024-120, 0, width, 30);
+		 shapeRenderer.rect(Config.SCREEN_WIDTH-120, 0, width, 30);
 		 shapeRenderer.end();
 	}
 
