@@ -5,9 +5,16 @@ filter: Nearest,Nearest
 repeat: none
 bullet
   rotate: false
-  xy: 120, 17
+  xy: 140, 17
   size: 8, 8
   orig: 8, 8
+  offset: 0, 0
+  index: -1
+pistol_ammo
+  rotate: false
+  xy: 120, 5
+  size: 20, 20
+  orig: 20, 20
   offset: 0, 0
   index: -1
 player_pistol_leftstep
