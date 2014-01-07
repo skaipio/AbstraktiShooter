@@ -10,6 +10,7 @@ import com.abstrakti.shooter.objects.DynamicObject;
 import com.abstrakti.shooter.objects.GameObject;
 import com.abstrakti.shooter.objects.GameObjectFactory;
 import com.abstrakti.shooter.objects.Player;
+import com.abstrakti.shooter.objects.PlayerState;
 import com.abstrakti.shooter.objects.Wall;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
@@ -86,7 +87,8 @@ public class GameScreen implements Screen {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		this.renderer.render();
-
+		
+		checkPlayerState();
 		if (this.gameState == GameState.RUNNING) {
 			batch.begin();
 			Array<Body> bodies = new Array<Body>();
@@ -110,6 +112,12 @@ public class GameScreen implements Screen {
 		}
 	}
 	
+	private void checkPlayerState() {
+		if (currentLevel.getPlayer().getStatus() == PlayerState.DEAD) {
+			this.gameState = gameState.GAME_OVER;
+		}
+	}
+	
 	
 	private void displayGameOver() {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -122,7 +130,6 @@ public class GameScreen implements Screen {
 		boolean[] MOUSEBUTTONS = input.getMouseButtons();
 		if (MOUSEBUTTONS[Buttons.LEFT] == true) {
 			this.gameState = GameState.RESET;
-			System.out.println("joo");
 		}
 		*/
 	}
