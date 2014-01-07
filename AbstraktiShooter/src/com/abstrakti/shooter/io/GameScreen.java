@@ -145,6 +145,7 @@ public class GameScreen implements Screen {
 		CharSequence str2 = "Health: " + currentLevel.getPlayer().getHealth();
 		
 		drawHealth();
+		drawAmmo();
 		fontSpriteBatch.begin();
 		this.fontSpriteBatch.draw(ui_Texture,0,0);
 		//this.font.draw(fontSpriteBatch, str, 825, 50);
@@ -160,7 +161,15 @@ public class GameScreen implements Screen {
 		 shapeRenderer.setColor(1, 0, 0, 0);
 		 shapeRenderer.rect(0, 0, width, 30);
 		 shapeRenderer.end();
-		 
+		
+	}
+	private void drawAmmo() {
+		float width = (currentLevel.getPlayer().getAmmo()/100F) *120;
+		ShapeRenderer shapeRenderer = new ShapeRenderer();
+		 shapeRenderer.begin(ShapeType.Filled);
+		 shapeRenderer.setColor(0, 0, 1, 0);
+		 shapeRenderer.rect(1024-120, 0, width, 30);
+		 shapeRenderer.end();
 	}
 
 	void moveAi(float delta) {
