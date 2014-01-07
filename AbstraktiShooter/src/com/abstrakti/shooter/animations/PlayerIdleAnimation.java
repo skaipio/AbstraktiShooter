@@ -2,6 +2,7 @@ package com.abstrakti.shooter.animations;
 
 import com.abstrakti.shooter.managers.AssetManager;
 import com.abstrakti.shooter.objects.Player;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class PlayerIdleAnimation extends SpriteAnimation {

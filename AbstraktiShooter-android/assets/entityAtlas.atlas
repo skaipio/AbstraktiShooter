@@ -38,3 +38,29 @@ player_pistol_standing
   orig: 40, 25
   offset: 0, 0
   index: -1
+
+entityAtlas2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+original/player_pistol_leftstep - Copy
+  rotate: false
+  xy: 0, 0
+  size: 40, 25
+  orig: 40, 25
+  offset: 0, 0
+  index: -1
+original/player_pistol_rightstep - Copy
+  rotate: false
+  xy: 40, 0
+  size: 40, 25
+  orig: 40, 25
+  offset: 0, 0
+  index: -1
+original/player_pistol_standing - Copy
+  rotate: false
+  xy: 80, 0
+  size: 40, 25
+  orig: 40, 25
+  offset: 0, 0
+  index: -1

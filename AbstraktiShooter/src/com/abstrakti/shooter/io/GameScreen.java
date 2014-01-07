@@ -163,6 +163,7 @@ public class GameScreen implements Screen {
 		 shapeRenderer.setColor(1, 0, 0, 0.6f);
 		 shapeRenderer.rect(0, 0, width, 30);
 		 shapeRenderer.end();
+		 Gdx.gl.glDisable(GL10.GL_BLEND);
 		
 	}
 	private void drawAmmo() {
@@ -174,6 +175,7 @@ public class GameScreen implements Screen {
 		 shapeRenderer.setColor(0, 0, 1,  0.6f);
 		 shapeRenderer.rect(Config.SCREEN_WIDTH-120, 0, width, 30);
 		 shapeRenderer.end();
+		 Gdx.gl.glDisable(GL10.GL_BLEND);
 	}
 
 	void moveAi(float delta) {
