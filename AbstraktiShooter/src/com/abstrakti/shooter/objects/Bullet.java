@@ -1,5 +1,6 @@
 package com.abstrakti.shooter.objects;
 
+import com.abstrakti.shooter.io.Drawable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,7 +13,6 @@ public class Bullet extends DynamicObject {
 	private PlayerState status; 
 	
 	public Bullet() {
-		super(PlayerState.values().length);
 		this.movementVector = new Vector2(); 
 		this.movementVector.x = 0;
 		this.movementVector.y = 0;
@@ -37,9 +37,10 @@ public class Bullet extends DynamicObject {
 	}
 	@Override
 	public void update(float delta){
-		super.update(delta);
 		this.moveForward(delta);
 		this.updateMovementVector(delta);
+		Drawable drawable = this.getDrawable(0);
+		drawable.update(delta);
 	}
 	private void updateMovementVector(float delta) {
 		if (this.status != PlayerState.DEAD) {
@@ -55,8 +56,9 @@ public class Bullet extends DynamicObject {
 	}
 	@Override
 	public void draw(SpriteBatch batch){
-		Texture t = new Texture(Gdx.files.internal("../AbstraktiShooter-desktop/textures/entities/bullet.png"));
-		batch.draw(t, this.getPosition().x, this.getPosition().y);
+		Drawable drawable = this.getDrawable(0);
+		drawable.draw(batch);
+		//batch.draw(t, this.getPosition().x, this.getPosition().y);
 	}
 	public float getSpeed() {
 		return this.speed;

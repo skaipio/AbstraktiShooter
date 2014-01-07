@@ -1,17 +1,17 @@
 package com.abstrakti.shooter.objects;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.abstrakti.shooter.Config;
 import com.abstrakti.shooter.animations.SpriteAnimation;
+import com.abstrakti.shooter.io.Drawable;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 
 public abstract class DynamicObject extends GameObject{
 	protected Body body;
-	private SpriteAnimation[] animations;
-	
-	public DynamicObject(int numOfStates){
-		this.animations = new SpriteAnimation[numOfStates];
-	}
+	private Map<Integer, Drawable> drawables = new HashMap<Integer, Drawable>();
 
 	public Vector2 getPosition() {
 		return this.body.getPosition().scl(Config.BOX_TO_WORLD);
@@ -47,12 +47,12 @@ public abstract class DynamicObject extends GameObject{
 		return this.body;
 	}
 	
-	protected SpriteAnimation getAnimationAt(int index){
-		return this.animations[index];
+	protected Drawable getDrawable(int stateOrdinal){
+		return this.drawables.get(stateOrdinal);
 	}
 	
-	void addAnimation(SpriteAnimation animation, int indexToAddAt){
-		this.animations[indexToAddAt] = animation;
+	void addDrawable(Drawable drawable, int stateOrdinal){
+		this.drawables.put(stateOrdinal, drawable);
 	}
 	
 	void setBody(Body body){

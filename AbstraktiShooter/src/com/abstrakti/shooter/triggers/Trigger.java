@@ -6,13 +6,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class Trigger extends DynamicObject {
 
-	public Trigger() {
-		super(1);
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public void draw(SpriteBatch batch){}
+	
+	@Override
+	public void update(float deltaTime) {}
 	
 	public abstract void execute(Player collisionWith);
 }

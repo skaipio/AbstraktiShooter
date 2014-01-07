@@ -1,10 +1,14 @@
 package com.abstrakti.shooter.objects;
 
-public class Ammunition extends DynamicObject {
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-	public Ammunition() {
-		super(1);
-		// TODO Auto-generated constructor stub
+public class Ammunition extends DynamicObject {
+	@Override
+	public void update(float deltaTime) {
+		// TODO Auto-generated method stub
+		
 	}
 
+	@Override
+	public void draw(SpriteBatch batch) {}
 }

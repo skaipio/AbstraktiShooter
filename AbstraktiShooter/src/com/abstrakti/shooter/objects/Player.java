@@ -1,6 +1,6 @@
 package com.abstrakti.shooter.objects;
 
-import com.abstrakti.shooter.animations.SpriteAnimation;
+import com.abstrakti.shooter.io.Drawable;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -13,7 +13,6 @@ public class Player extends DynamicObject {
 	private Vector2 movementVector;
 
 	public Player(){	    
-		super(PlayerState.values().length);
 		this.movementVector = new Vector2(); 
 		this.movementVector.x = 0;
 		this.movementVector.y = 0;
@@ -47,12 +46,10 @@ public class Player extends DynamicObject {
 	}
 	@Override
 	public void update(float delta){
-		super.update(delta);
-	
 		this.updateMovementVector(delta);
-		SpriteAnimation currentAnim = this.getAnimationAt(this.status.ordinal());
-		if (currentAnim != null) {
-			currentAnim.update(delta);
+		Drawable drawable = this.getDrawable(this.status.ordinal());
+		if (drawable != null) {
+			drawable.update(delta);
 		}
 	}
 	
@@ -76,9 +73,9 @@ public class Player extends DynamicObject {
 
 	@Override
 	public void draw(SpriteBatch batch){
-		SpriteAnimation currentAnim = this.getAnimationAt(this.status.ordinal());
-		if (currentAnim != null){
-			currentAnim.draw(batch);
+		Drawable drawable = this.getDrawable(this.status.ordinal());
+		if (drawable != null){
+			drawable.draw(batch);
 		}
 	}
 

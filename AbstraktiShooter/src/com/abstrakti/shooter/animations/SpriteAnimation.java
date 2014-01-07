@@ -1,10 +1,11 @@
 package com.abstrakti.shooter.animations;
 
+import com.abstrakti.shooter.io.Drawable;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-public class SpriteAnimation {
+public class SpriteAnimation implements Drawable {
 	private Sprite[] sprites;
 	private int frames;
 	protected float rotation;

@@ -10,6 +10,4 @@ public class EndOfLevelTrigger extends Trigger {
 		System.out.println("You got to the end alive! Go you!");
 		collisionWith.setStatus(PlayerState.DEAD);
 	}
-
-
 }

@@ -4,6 +4,7 @@ import com.abstrakti.shooter.Config;
 import com.abstrakti.shooter.animations.PlayerIdleAnimation;
 import com.abstrakti.shooter.animations.PlayerWalkAnimation;
 import com.abstrakti.shooter.animations.SpriteAnimation;
+import com.abstrakti.shooter.io.StaticDrawable;
 import com.abstrakti.shooter.managers.AssetManager;
 import com.abstrakti.shooter.triggers.EndOfLevelTrigger;
 import com.abstrakti.shooter.triggers.Trigger;
@@ -21,12 +22,16 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public final class GameObjectFactory {
-	public static Player createPlayer(World world){
+	public static Player createPlayer(World world){		
 		Player player = new Player();
+		
+		AssetManager assets = AssetManager.getInstance();
+		Sprite playerStanding = assets.getSprite("player_pistol_standing");	
+		StaticDrawable playerStandingDrawable = new StaticDrawable(playerStanding, player);
+		player.addDrawable(playerStandingDrawable, PlayerState.IDLE.ordinal());
 		SpriteAnimation playerWalking = new PlayerWalkAnimation(player);
-		player.addAnimation(playerWalking, PlayerState.WALKING.ordinal());
-		SpriteAnimation playerStanding = new PlayerIdleAnimation(player);
-		player.addAnimation(playerStanding, PlayerState.IDLE.ordinal());
+		player.addDrawable(playerWalking, PlayerState.WALKING.ordinal());
+		
 		
 		CircleShape shape = new CircleShape();  
 		shape.setRadius(15f*Config.WORLD_TO_BOX); 
@@ -54,6 +59,11 @@ public final class GameObjectFactory {
 	
 	public static Bullet createBullet(World world) {
 		Bullet b = new Bullet();
+		
+		AssetManager assets = AssetManager.getInstance();		
+		Sprite bulletSprite = assets.getSprite("bullet");
+		StaticDrawable bulletDrawable = new StaticDrawable(bulletSprite, b);
+		b.addDrawable(bulletDrawable, 0);
 		//System.out.println(position);
 	//	b.setPosition(100,100);
 		
@@ -123,12 +133,14 @@ public final class GameObjectFactory {
 	}
 	
 	public static Ammunition createAmmunition(World world){
-		Sprite ammoSprite = new Sprite();
-		ammoSprite.setRegion(AssetManager.getInstance().getEntityTexture("pistol_ammo"));
-		SpriteAnimation spriteAnimation = new SpriteAnimation(1, 0);
-		spriteAnimation.addFrameAt(0, ammoSprite);
+		AssetManager assets = AssetManager.getInstance();
+		
 		Ammunition ammo = new Ammunition();
-		ammo.addAnimation(spriteAnimation, 0);
+		
+		Sprite ammoSprite = assets.getSprite("pistol_ammo");
+		StaticDrawable ammoDrawable = new StaticDrawable(ammoSprite, ammo);
+		
+		ammo.addDrawable(ammoDrawable, 0);
 		
 		// muita juttuja?
 		
