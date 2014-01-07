@@ -23,6 +23,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -47,6 +49,7 @@ public class GameScreen implements Screen {
 	SpriteBatch fontSpriteBatch;
 	ArrayList<Bullet> bullets;
 	public GameState gameState;
+	Texture ui_Texture;
 
 	private GameScreen() {
 		Gdx.input.setInputProcessor(input);
@@ -70,6 +73,7 @@ public class GameScreen implements Screen {
 				Gdx.files.internal("../AbstraktiShooter-desktop/textures/fonts/arial.png"), false);
 		this.font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		fontSpriteBatch = new SpriteBatch();
+		ui_Texture = new Texture(Gdx.files.internal("../AbstraktiShooter-desktop/textures/ui/ui_background.png"));
 	}
 
 	private void setCursorImage() {
@@ -139,10 +143,24 @@ public class GameScreen implements Screen {
 	private void drawUI() {
 		CharSequence str = "Ammo: " + currentLevel.getPlayer().getAmmo();
 		CharSequence str2 = "Health: " + currentLevel.getPlayer().getHealth();
+		
+		drawHealth();
 		fontSpriteBatch.begin();
-		this.font.draw(fontSpriteBatch, str, 825, 50);
-		this.font.draw(fontSpriteBatch, str2, 25, 50);
+		this.fontSpriteBatch.draw(ui_Texture,0,0);
+		//this.font.draw(fontSpriteBatch, str, 825, 50);
+		//this.font.draw(fontSpriteBatch, str2, 25, 50);
+
 		fontSpriteBatch.end();
+	}
+	
+	private void drawHealth() {
+		float width = (currentLevel.getPlayer().getHealth()/20F) *120;
+		ShapeRenderer shapeRenderer = new ShapeRenderer();
+		 shapeRenderer.begin(ShapeType.Filled);
+		 shapeRenderer.setColor(1, 0, 0, 0);
+		 shapeRenderer.rect(0, 0, width, 30);
+		 shapeRenderer.end();
+		 
 	}
 
 	void moveAi(float delta) {
