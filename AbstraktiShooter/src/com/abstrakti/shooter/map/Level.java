@@ -157,7 +157,8 @@ public class Level {
 			if ( body.getUserData() instanceof Player) {
 				Player p = (Player)body.getUserData();
 				if ( p.getStatus()  == PlayerState.DEAD) {	
-					physicsWorld.destroyBody(body);
+					p.getBody().setActive(false);
+					//physicsWorld.destroyBody(body);
 				}
 			}
 		}
