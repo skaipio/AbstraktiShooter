@@ -44,7 +44,10 @@ public class GameScreen implements Screen {
 	public GameState gameState;
 	Texture ui_Texture;
 	private ShapeRenderer shapeRenderer;
-
+	Matrix4  debugMatrix;
+	Box2DDebugRenderer  debugRenderer;
+	SpriteBatch debugBatch;
+	
 	private GameScreen() {
 		Gdx.input.setInputProcessor(input);
 		this.batch = new SpriteBatch();
@@ -61,8 +64,15 @@ public class GameScreen implements Screen {
 
 		setCursorImage();
 		loadFonts(); 
-		
+		loadDebug();
 
+	}
+	
+	private void loadDebug() {
+		debugMatrix=new Matrix4(this.camera.combined);
+		debugRenderer=new Box2DDebugRenderer();
+		debugMatrix.scale(Config.BOX_TO_WORLD, Config.BOX_TO_WORLD, 1f);
+		debugBatch = new SpriteBatch();
 	}
 	private void loadFonts() {
 		this.font = new BitmapFont(Gdx.files.internal("../AbstraktiShooter-desktop/textures/fonts/arial.fnt"),
@@ -104,11 +114,12 @@ public class GameScreen implements Screen {
 					obj.draw(batch);
 				}
 			}
-			batch.end();
 			
+			batch.end();
+			this.drawBox2dDebug();
 			this.drawUI();
 			this.handlePlayerInput(delta);
-			this.drawBox2dDebug();
+			
 			this.moveAi(delta);
 
 		} else {
@@ -117,14 +128,12 @@ public class GameScreen implements Screen {
 	}
 
 	private void drawBox2dDebug() {
-		SpriteBatch spritebatch = new SpriteBatch();
-		Matrix4  debugMatrix=new Matrix4(this.camera.combined);
-		Box2DDebugRenderer  debugRenderer=new Box2DDebugRenderer();
+		debugMatrix=new Matrix4(this.camera.combined);
 		debugMatrix.scale(Config.BOX_TO_WORLD, Config.BOX_TO_WORLD, 1f);
-
-		spritebatch.begin();
+		
+		debugBatch.begin();
 		debugRenderer.render(currentLevel.getWorld(), debugMatrix);
-		spritebatch.end();
+		debugBatch.end();
 
 	}
 	private void checkPlayerState() {
