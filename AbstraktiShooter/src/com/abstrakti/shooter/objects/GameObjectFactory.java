@@ -31,7 +31,7 @@ public final class GameObjectFactory {
 		player.addDrawable(playerStandingDrawable, PlayerState.IDLE.ordinal());
 		SpriteAnimation playerWalking = new PlayerWalkAnimation(player);
 		player.addDrawable(playerWalking, PlayerState.WALKING.ordinal());
-		Sprite playerDead = assets.getSprite("corpse");
+		Sprite playerDead = assets.getSprite("corpse2");
 		StaticDrawable playerDeadDrawable = new StaticDrawable(playerDead, player);
 		player.addDrawable(playerDeadDrawable, PlayerState.DEAD.ordinal());
 		
