@@ -23,6 +23,7 @@ public class StaticDrawable implements Drawable {
 	
 	@Override
 	public void draw(SpriteBatch batch){
+		if (this.position == null) return;
 		this.sprite.setPosition(this.position.x, this.position.y);
 		this.sprite.setRotation(this.rotation);
 		
