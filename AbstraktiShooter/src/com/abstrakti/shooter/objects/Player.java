@@ -86,11 +86,9 @@ public class Player extends DynamicObject {
 		Drawable drawable = this.getDrawable(this.status.ordinal());
 		if (drawable != null){
 			drawable.draw(batch);
-			float x = this.getX()+15;
-			float y = this.getY()+15;
-
-			
-			
+			float x = this.getX()-40;
+			float y = this.getY()-25;
+		
 			effect.setPosition(x, y);
 			effect.draw(batch);
 			effect.update(0.05F);

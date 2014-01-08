@@ -39,7 +39,7 @@ public final class GameObjectFactory {
 		shape.setRadius(15f*Config.WORLD_TO_BOX);
 		*/
 		PolygonShape shape = new PolygonShape();
-		 shape.setAsBox(10*Config.WORLD_TO_BOX, 10*Config.WORLD_TO_BOX);
+		 shape.setAsBox(40/2*Config.WORLD_TO_BOX, 25/2*Config.WORLD_TO_BOX);
 		
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
