@@ -10,6 +10,13 @@ bullet
   orig: 8, 8
   offset: 0, 0
   index: -1
+particle
+  rotate: false
+  xy: 140, 9
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
 pistol_ammo
   rotate: false
   xy: 120, 5

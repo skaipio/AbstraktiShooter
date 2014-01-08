@@ -21,6 +21,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -66,6 +67,7 @@ public class GameScreen implements Screen {
 
 		setCursorImage();
 		loadFonts(); 
+		
 
 	}
 	private void loadFonts() {
@@ -94,6 +96,7 @@ public class GameScreen implements Screen {
 
 		checkPlayerState();
 		if (this.gameState == GameState.RUNNING) {
+			
 			batch.begin();
 			Array<Body> bodies = new Array<Body>();
 			this.currentLevel.getWorld().getBodies(bodies);
@@ -108,9 +111,11 @@ public class GameScreen implements Screen {
 				}
 			}
 			batch.end();
+			
 			this.drawUI();
 			this.handlePlayerInput(delta);
 			this.moveAi(delta);
+
 		} else {
 			displayGameOver();
 		}
@@ -121,7 +126,6 @@ public class GameScreen implements Screen {
 			this.gameState = gameState.GAME_OVER;
 		}
 	}
-
 
 	private void displayGameOver() {
 		Gdx.gl.glClearColor(0, 0, 0, 1);

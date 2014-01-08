@@ -55,6 +55,7 @@ public abstract class DynamicObject extends GameObject{
 		this.drawables.put(stateOrdinal, drawable);
 	}
 	
+	
 	void setBody(Body body){
 		this.body = body;
 	}
