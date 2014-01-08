@@ -3,12 +3,10 @@ package com.abstrakti.shooter.io;
 import java.util.ArrayList;
 
 import com.abstrakti.shooter.Config;
-import com.abstrakti.shooter.managers.AssetManager;
 import com.abstrakti.shooter.map.Level;
 import com.abstrakti.shooter.objects.Bullet;
 import com.abstrakti.shooter.objects.DynamicObject;
 import com.abstrakti.shooter.objects.GameObject;
-import com.abstrakti.shooter.objects.GameObjectFactory;
 import com.abstrakti.shooter.objects.Player;
 import com.abstrakti.shooter.objects.PlayerState;
 import com.abstrakti.shooter.objects.Wall;
@@ -21,8 +19,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -30,12 +26,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.ContactImpulse;
-import com.badlogic.gdx.physics.box2d.ContactListener;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.Manifold;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
 public class GameScreen implements Screen {
@@ -51,10 +41,12 @@ public class GameScreen implements Screen {
 	ArrayList<Bullet> bullets;
 	public GameState gameState;
 	Texture ui_Texture;
+	private ShapeRenderer shapeRenderer;
 
 	private GameScreen() {
 		Gdx.input.setInputProcessor(input);
 		this.batch = new SpriteBatch();
+		this.shapeRenderer = new ShapeRenderer();
 
 		this.gameState = GameState.RUNNING;
 		float w = Gdx.graphics.getWidth();
@@ -162,7 +154,6 @@ public class GameScreen implements Screen {
 		Gdx.gl.glEnable(GL10.GL_BLEND);
 	    Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
 		float width = (currentLevel.getPlayer().getHealth()/20F) *120;
-		ShapeRenderer shapeRenderer = new ShapeRenderer();
 		 shapeRenderer.begin(ShapeType.Filled);
 		 shapeRenderer.setColor(1, 0, 0, 0.6f);
 		 shapeRenderer.rect(0, 0, width, 30);
@@ -174,7 +165,6 @@ public class GameScreen implements Screen {
 		float width = (currentLevel.getPlayer().getAmmo()/100F) *120;
 		Gdx.gl.glEnable(GL10.GL_BLEND);
 	    Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
-		ShapeRenderer shapeRenderer = new ShapeRenderer();
 		 shapeRenderer.begin(ShapeType.Filled);
 		 shapeRenderer.setColor(0, 0, 1,  0.6f);
 		 shapeRenderer.rect(Config.SCREEN_WIDTH-120, 0, width, 30);

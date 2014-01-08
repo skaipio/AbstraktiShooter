@@ -1,7 +1,6 @@
 package com.abstrakti.shooter.objects;
 
 import com.abstrakti.shooter.Config;
-import com.abstrakti.shooter.animations.PlayerIdleAnimation;
 import com.abstrakti.shooter.animations.PlayerWalkAnimation;
 import com.abstrakti.shooter.animations.SpriteAnimation;
 import com.abstrakti.shooter.io.StaticDrawable;

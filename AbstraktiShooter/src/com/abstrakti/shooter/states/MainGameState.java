@@ -75,7 +75,7 @@ class MainGameState extends State {
 			}
 
 			public void checkCollisionBulletAndPlayer(Fixture fixtureA, Fixture fixtureB) {  	
-				Object sound;
+//				Object sound;
 				if (((fixtureA.getBody().getUserData() instanceof Bullet) && (fixtureB.getBody().getUserData() instanceof Player))) {
 					System.out.println("bullet and player");
 					Bullet b = (Bullet)fixtureA.getBody().getUserData();
