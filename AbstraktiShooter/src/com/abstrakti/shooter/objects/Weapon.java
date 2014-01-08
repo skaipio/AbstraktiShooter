@@ -49,10 +49,16 @@ public class Weapon {
 	}
 	private void shootBullet(World physiscsWorld, Vector2 position, float angle) {
 		Bullet b = GameObjectFactory.createBullet(physiscsWorld);
-		float x = position.x;
-		float y = position.y;
-		x += 20*(float) Math.cos(angle);
-		y += -20*(float) Math.sin(angle);
+		
+		//horizontal position of the bullets
+		float x = position.x+15.5f; //12
+		float y = position.y+7.5f;
+		
+		//vertical  position of the bullets
+		System.out.println(Math.toDegrees(angle));
+		x += 27*(float) Math.cos(angle);
+		y += -27*(float) Math.sin(angle);
+
 		Vector2 newPosition = new Vector2(x,y);
 		b.setPosition(newPosition);
 		b.setRotation(angle);

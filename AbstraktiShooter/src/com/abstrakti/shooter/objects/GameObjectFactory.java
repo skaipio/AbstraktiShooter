@@ -34,9 +34,12 @@ public final class GameObjectFactory {
 		StaticDrawable playerDeadDrawable = new StaticDrawable(playerDead, player);
 		player.addDrawable(playerDeadDrawable, PlayerState.DEAD.ordinal());
 		
-		
+		/*
 		CircleShape shape = new CircleShape();  
-		shape.setRadius(15f*Config.WORLD_TO_BOX); 
+		shape.setRadius(15f*Config.WORLD_TO_BOX);
+		*/
+		PolygonShape shape = new PolygonShape();
+		 shape.setAsBox(10*Config.WORLD_TO_BOX, 10*Config.WORLD_TO_BOX);
 		
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
@@ -74,6 +77,8 @@ public final class GameObjectFactory {
 		
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
+		bodyDef.bullet = true;
+		bodyDef.fixedRotation = true;
 		//bodyDef.position.set(100,100); //set the starting position
 		
 		Body body = world.createBody(bodyDef);

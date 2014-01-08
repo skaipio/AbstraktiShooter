@@ -215,7 +215,7 @@ public class GameScreen implements Screen {
 
 	private float calculatePlayerAngle(int mouseX, int mouseY, float playerX, float playerY) {
 		//System.out.println(Math.toDegrees((float)Math.atan2((float)mouseY-playerY, (float)mouseX-playerX)));
-		return ((float)Math.atan2((float)mouseY-playerY, (float)mouseX-playerX));
+		return ((float)Math.atan2((float)mouseY+10-(playerY), (float)mouseX-(playerX+20)));
 	}
 
 	@Override
