@@ -24,6 +24,6 @@ public class PlayerWalkAnimation extends SpriteAnimation{
 	public void update(float deltaTime){
 		super.update(deltaTime);
 		this.position = this.owner.getPosition();		
-		this.rotation = (float) -Math.toDegrees(this.owner.getAngle());
+		this.rotation = -(float)Math.toDegrees(this.owner.getAngle());
 	}	
 }

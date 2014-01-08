@@ -24,8 +24,10 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.Array;
 
 public class GameScreen implements Screen {
@@ -106,6 +108,7 @@ public class GameScreen implements Screen {
 			
 			this.drawUI();
 			this.handlePlayerInput(delta);
+			this.drawBox2dDebug();
 			this.moveAi(delta);
 
 		} else {
@@ -113,6 +116,17 @@ public class GameScreen implements Screen {
 		}
 	}
 
+	private void drawBox2dDebug() {
+		SpriteBatch spritebatch = new SpriteBatch();
+		Matrix4  debugMatrix=new Matrix4(this.camera.combined);
+		Box2DDebugRenderer  debugRenderer=new Box2DDebugRenderer();
+		debugMatrix.scale(Config.BOX_TO_WORLD, Config.BOX_TO_WORLD, 1f);
+
+		spritebatch.begin();
+		debugRenderer.render(currentLevel.getWorld(), debugMatrix);
+		spritebatch.end();
+
+	}
 	private void checkPlayerState() {
 		if (currentLevel.getPlayer().getStatus() == PlayerState.DEAD) {
 			this.gameState = gameState.GAME_OVER;
