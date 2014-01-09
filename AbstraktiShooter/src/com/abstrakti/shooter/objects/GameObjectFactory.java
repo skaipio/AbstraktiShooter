@@ -34,13 +34,15 @@ public final class GameObjectFactory {
 		StaticDrawable playerDeadDrawable = new StaticDrawable(playerDead, player);
 		player.addDrawable(playerDeadDrawable, PlayerState.DEAD.ordinal());
 		
-		/*
+	
 		CircleShape shape = new CircleShape();  
-		shape.setRadius(15f*Config.WORLD_TO_BOX);
-		*/
+		shape.setRadius(16f*Config.WORLD_TO_BOX);
+	
+		
+		/*
 		PolygonShape shape = new PolygonShape();
 		 shape.setAsBox(40/2*Config.WORLD_TO_BOX, 25/2*Config.WORLD_TO_BOX);
-		
+		*/
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
 		
