@@ -86,8 +86,8 @@ public class GameScreen implements Screen {
 
 	private void setCursorImage() {
 		Pixmap pm = new Pixmap(Gdx.files.internal("../AbstraktiShooter-desktop/textures/mousecursor/cursor.png"));
-		int xHotSpot = pm.getWidth() / 2;
-		int yHotSpot = pm.getHeight() / 2;
+		int xHotSpot = pm.getWidth()/2;
+		int yHotSpot = pm.getHeight()/2;
 
 		Gdx.input.setCursorImage(pm, xHotSpot, yHotSpot);
 		pm.dispose();
@@ -237,8 +237,8 @@ public class GameScreen implements Screen {
 		} else {
 			p.releaseTrigger();
 		}
-
-		p.setRotation(calculatePlayerAngle(Gdx.input.getX(), Gdx.input.getY(), Config.SCREEN_WIDTH/2, Config.SCREEN_HEIGHT/2));
+//player location on the screen - playertexture/2
+		p.setRotation(calculatePlayerAngle(Gdx.input.getX(), Gdx.input.getY(), Config.SCREEN_WIDTH/2-20, Config.SCREEN_HEIGHT/2+25/2));
 
 	}
 	private void switchDebugMode() {
