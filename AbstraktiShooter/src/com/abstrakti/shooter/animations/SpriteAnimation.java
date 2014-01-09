@@ -1,10 +1,11 @@
 package com.abstrakti.shooter.animations;
 
+import com.abstrakti.shooter.io.Drawable;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-public class SpriteAnimation {
+public class SpriteAnimation implements Drawable {
 	private Sprite[] sprites;
 	private int frames;
 	protected float rotation;
@@ -18,7 +19,7 @@ public class SpriteAnimation {
 		this.frameTime = frameTime;
 	}
 	
-	protected void addFrameAt(int index, Sprite frame){
+	public void addFrameAt(int index, Sprite frame){
 		this.sprites[index] = frame;
 	}
 	
@@ -33,7 +34,7 @@ public class SpriteAnimation {
 	
 	public void draw(SpriteBatch batch){
 		int frameIndex = (int) (this.stateTime / frameTime);
-		this.sprites[frameIndex].setPosition(position.x, position.y);
+		this.sprites[frameIndex].setPosition(position.x-sprites[frameIndex].getWidth()/2, position.y-sprites[frameIndex].getHeight()/2);
 		this.sprites[frameIndex].setRotation(this.rotation);		
 		this.sprites[frameIndex].draw(batch);
 	}

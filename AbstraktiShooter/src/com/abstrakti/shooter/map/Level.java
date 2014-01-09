@@ -63,7 +63,7 @@ public class Level {
 				MapProperties cellProperties = cell.getTile().getProperties();
 				
 				if (cellProperties.get("collision").equals("true") ) {								
-					Vector2 position = new Vector2(tileSize*i*Config.WORLD_TO_BOX, tileSize*j*Config.WORLD_TO_BOX);
+					Vector2 position = new Vector2(tileSize/2*Config.WORLD_TO_BOX+tileSize*i*Config.WORLD_TO_BOX, tileSize/2*Config.WORLD_TO_BOX+tileSize*j*Config.WORLD_TO_BOX);
 					GameObjectFactory.createWall(physicsWorld, position);
 				}
 				if (cellProperties.get("tag").equals("concrete_floor") ) {								
@@ -159,7 +159,8 @@ public class Level {
 			if ( body.getUserData() instanceof Player) {
 				Player p = (Player)body.getUserData();
 				if ( p.getStatus()  == PlayerState.DEAD) {	
-					physicsWorld.destroyBody(body);
+					p.getBody().setActive(false);
+					//physicsWorld.destroyBody(body);
 				}
 			}
 		}

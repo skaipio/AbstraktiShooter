@@ -1,13 +1,15 @@
 package com.abstrakti.shooter.objects;
 
 import com.abstrakti.shooter.Config;
-import com.abstrakti.shooter.animations.PlayerIdleAnimation;
 import com.abstrakti.shooter.animations.PlayerWalkAnimation;
 import com.abstrakti.shooter.animations.SpriteAnimation;
+import com.abstrakti.shooter.io.StaticDrawable;
+import com.abstrakti.shooter.managers.AssetManager;
 import com.abstrakti.shooter.triggers.EndOfLevelTrigger;
 import com.abstrakti.shooter.triggers.Trigger;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -23,15 +25,28 @@ public final class GameObjectFactory {
 	public static World world;
 	
 	public static Player createPlayer(World world){
+
 		Player player = new Player();
+		
+		AssetManager assets = AssetManager.getInstance();
+		Sprite playerStanding = assets.getSprite("player_pistol_standing");	
+		StaticDrawable playerStandingDrawable = new StaticDrawable(playerStanding, player);
+		player.addDrawable(playerStandingDrawable, PlayerState.IDLE.ordinal());
 		SpriteAnimation playerWalking = new PlayerWalkAnimation(player);
-		player.addAnimation(playerWalking, PlayerState.WALKING.ordinal());
-		SpriteAnimation playerStanding = new PlayerIdleAnimation(player);
-		player.addAnimation(playerStanding, PlayerState.IDLE.ordinal());
+		player.addDrawable(playerWalking, PlayerState.WALKING.ordinal());
+		Sprite playerDead = assets.getSprite("corpse2");
+		StaticDrawable playerDeadDrawable = new StaticDrawable(playerDead, player);
+		player.addDrawable(playerDeadDrawable, PlayerState.DEAD.ordinal());
 		
+	
 		CircleShape shape = new CircleShape();  
-		shape.setRadius(15f*Config.WORLD_TO_BOX); 
+		shape.setRadius(16f*Config.WORLD_TO_BOX);
+	
 		
+		/*
+		PolygonShape shape = new PolygonShape();
+		 shape.setAsBox(40/2*Config.WORLD_TO_BOX, 25/2*Config.WORLD_TO_BOX);
+		*/
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
 		
@@ -55,6 +70,11 @@ public final class GameObjectFactory {
 	
 	public static Bullet createBullet(World world) {
 		Bullet b = new Bullet();
+		
+		AssetManager assets = AssetManager.getInstance();		
+		Sprite bulletSprite = assets.getSprite("bullet");
+		StaticDrawable bulletDrawable = new StaticDrawable(bulletSprite, b);
+		b.addDrawable(bulletDrawable, 0);
 		//System.out.println(position);
 	//	b.setPosition(100,100);
 		
@@ -63,6 +83,8 @@ public final class GameObjectFactory {
 		
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
+		bodyDef.bullet = true;
+		bodyDef.fixedRotation = true;
 		//bodyDef.position.set(100,100); //set the starting position
 		
 		Body body = world.createBody(bodyDef);
@@ -123,8 +145,19 @@ public final class GameObjectFactory {
         body.setUserData(new EndOfLevelTrigger());
 	}
 	
-	public static Magazine createMagazine() {
-		Magazine m = new Magazine();
+
+	public static Ammunition createAmmunition(){
+		AssetManager assets = AssetManager.getInstance();
+		
+		Ammunition ammo = new Ammunition();
+		
+		Sprite ammoSprite = assets.getSprite("pistol_ammo");
+		StaticDrawable ammoDrawable = new StaticDrawable(ammoSprite, ammo);
+		
+		ammo.addDrawable(ammoDrawable, 0);
+		
+		// muita juttuja?
+		
 		//System.out.println(position);
 	//	b.setPosition(100,100);
 		
@@ -136,7 +169,7 @@ public final class GameObjectFactory {
 		//bodyDef.position.set(100,100); //set the starting position
 		
 		Body body = world.createBody(bodyDef);
-		body.setUserData(m);
+		body.setUserData(ammo);
 	    
 	    FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
@@ -150,8 +183,8 @@ public final class GameObjectFactory {
 		
 		shape.dispose();
 		
-		return m;
-		
+		return ammo;
+
 	}
 
 }

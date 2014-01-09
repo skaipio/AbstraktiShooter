@@ -1,6 +1,8 @@
 package com.abstrakti.shooter.objects;
 
-import com.abstrakti.shooter.animations.SpriteAnimation;
+import com.abstrakti.shooter.io.Drawable;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -11,9 +13,10 @@ public class Player extends DynamicObject {
 	private int health;
 	private Weapon handGun;
 	private Vector2 movementVector;
+	ParticleEffect bloodEffect, gunEffect;
+	
 
-	public Player(){	    
-		super(PlayerState.values().length);
+	public Player(){	 
 		this.movementVector = new Vector2(); 
 		this.movementVector.x = 0;
 		this.movementVector.y = 0;
@@ -22,21 +25,27 @@ public class Player extends DynamicObject {
 		this.health = 1;
 		this.handGun = new Weapon(WeaponFiremode.SINGLE);
 		this.handGun.addAmmo(100);
+		bloodEffect = new ParticleEffect();
+		bloodEffect.load(Gdx.files.internal("../AbstraktiShooter-desktop/textures/particle-effects/blood.vep"), Gdx.files.internal("../AbstraktiShooter-desktop/textures/entities/"));
+		gunEffect = new ParticleEffect();
+		gunEffect.load(Gdx.files.internal("../AbstraktiShooter-desktop/textures/particle-effects/fire.p"), Gdx.files.internal("../AbstraktiShooter-desktop/textures/entities/"));
 	}
 
 	public void hurt(int amount){
 		this.health -= amount;
+		bloodEffect.start();
 		if (this.health <=0) {
-			this.status = PlayerState.DEAD;
-			
-			Magazine b = GameObjectFactory.createMagazine();
+			this.status = PlayerState.DEAD; 
+
+			Ammunition ammo = GameObjectFactory.createAmmunition();
 			float x = this.getPosition().x;
 			float y = this.getPosition().y;
 			//x += 20*(float) Math.cos(angle);
 			//y += -20*(float) Math.sin(angle);
 			Vector2 newPosition = new Vector2(x,y);
-			b.setPosition(newPosition);
+			ammo.setPosition(newPosition);
 			//b.setRotation(angle);
+
 		}
 	}
 	public PlayerState getStatus(){
@@ -56,12 +65,12 @@ public class Player extends DynamicObject {
 	}
 	@Override
 	public void update(float delta){
-		super.update(delta);
-	
+
 		this.updateMovementVector(delta);
-		SpriteAnimation currentAnim = this.getAnimationAt(this.status.ordinal());
-		if (currentAnim != null) {
-			currentAnim.update(delta);
+		
+		Drawable drawable = this.getDrawable(this.status.ordinal());
+		if (drawable != null) {
+			drawable.update(delta);
 		}
 	}
 	
@@ -85,9 +94,28 @@ public class Player extends DynamicObject {
 
 	@Override
 	public void draw(SpriteBatch batch){
-		SpriteAnimation currentAnim = this.getAnimationAt(this.status.ordinal());
-		if (currentAnim != null){
-			currentAnim.draw(batch);
+		Drawable drawable = this.getDrawable(this.status.ordinal());
+		if (drawable != null){
+			drawable.draw(batch);
+			float x = this.getX();
+			float y = this.getY();
+		
+			bloodEffect.setPosition(x, y);
+			bloodEffect.draw(batch);
+			bloodEffect.update(0.05F);
+			
+			
+			x += 22*(float) Math.cos(getAngle());
+			y += -22*(float) Math.sin(getAngle());
+			
+			gunEffect.setPosition(x, y);
+			
+			for (int i = 0; i < gunEffect.getEmitters().size; i++) { //get the list of emitters - things that emit particles
+				gunEffect.getEmitters().get(i).getAngle().setLow(getAngle()); //low is the minimum rotation
+				gunEffect.getEmitters().get(i).getAngle().setHigh(getAngle()); //high is the max rotation
+	         }
+			gunEffect.draw(batch);
+			gunEffect.update(0.05F);
 		}
 	}
 
@@ -120,7 +148,10 @@ public class Player extends DynamicObject {
 
 	}
 	public void shoot(World physiscsWorld) {
-		this.handGun.fireGun(physiscsWorld, this.getPosition(), this.getAngle());
+		boolean gunFired =  this.handGun.fireGun(physiscsWorld, this.getPosition(), this.getAngle());
+		if (gunFired) {
+			gunEffect.start();
+		}
 	}
 	public void releaseTrigger() {
 		this.handGun.releaseTrigger();
