@@ -6,6 +6,7 @@ import java.util.Map;
 import com.abstrakti.shooter.Config;
 import com.abstrakti.shooter.animations.SpriteAnimation;
 import com.abstrakti.shooter.io.Drawable;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 
@@ -17,10 +18,7 @@ public abstract class DynamicObject extends GameObject{
 		
 		Vector2 v =  this.body.getPosition().scl(Config.BOX_TO_WORLD);
 		
-		/*
-		v.x -= 24/2+6;
-		v.y -= 40/2-7;
-		*/;
+
 		return v;
 		
 	}
@@ -35,9 +33,11 @@ public abstract class DynamicObject extends GameObject{
 		this.setPosition(vector.x, vector.y);
 	}
 	public void setPosition(float x, float y){
+
 		this.body.setTransform(x*Config.WORLD_TO_BOX,  y*Config.WORLD_TO_BOX, 0);		
 	}
 	public void setPosition(float x, float y, float angle){
+
 		this.body.setTransform(x*Config.WORLD_TO_BOX,  y*Config.WORLD_TO_BOX, angle);		
 	}
 	public void setVelocity(Vector2 velocity){
@@ -61,6 +61,10 @@ public abstract class DynamicObject extends GameObject{
 	
 	void addDrawable(Drawable drawable, int stateOrdinal){
 		this.drawables.put(stateOrdinal, drawable);
+	}
+	
+	public void draw(SpriteBatch batch) {
+		draw(batch);
 	}
 	
 	

@@ -34,7 +34,7 @@ public class SpriteAnimation implements Drawable {
 	
 	public void draw(SpriteBatch batch){
 		int frameIndex = (int) (this.stateTime / frameTime);
-		this.sprites[frameIndex].setPosition(position.x, position.y);
+		this.sprites[frameIndex].setPosition(position.x-sprites[frameIndex].getWidth()/2, position.y-sprites[frameIndex].getHeight()/2);
 		this.sprites[frameIndex].setRotation(this.rotation);		
 		this.sprites[frameIndex].draw(batch);
 	}

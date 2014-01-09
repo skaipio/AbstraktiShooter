@@ -47,6 +47,7 @@ public class GameScreen implements Screen {
 	Matrix4  debugMatrix;
 	Box2DDebugRenderer  debugRenderer;
 	SpriteBatch debugBatch;
+	boolean debugMode;
 	
 	private GameScreen() {
 		Gdx.input.setInputProcessor(input);
@@ -60,7 +61,7 @@ public class GameScreen implements Screen {
 		camera = new OrthographicCamera();
 		//camera.setToOrtho(false, w / 32, h / 32);	
 		camera.setToOrtho(false, w, h);	
-		camera.zoom = 1.00f;
+		camera.zoom = 0.75f;
 
 		setCursorImage();
 		loadFonts(); 
@@ -69,6 +70,7 @@ public class GameScreen implements Screen {
 	}
 	
 	private void loadDebug() {
+		debugMode = true;
 		debugMatrix=new Matrix4(this.camera.combined);
 		debugRenderer=new Box2DDebugRenderer();
 		debugMatrix.scale(Config.BOX_TO_WORLD, Config.BOX_TO_WORLD, 1f);
@@ -116,7 +118,9 @@ public class GameScreen implements Screen {
 			}
 			
 			batch.end();
-			this.drawBox2dDebug();
+			if (debugMode == true) {
+				this.drawBox2dDebug();
+			}
 			this.drawUI();
 			this.handlePlayerInput(delta);
 			
@@ -225,6 +229,9 @@ public class GameScreen implements Screen {
 		if (KEYS[Keys.D] == true) {
 			p.strafeRight(delta);	
 		}
+		if (KEYS[Keys.F12]== true ) {
+			switchDebugMode(); 
+		}
 		if (MOUSEBUTTONS[Buttons.LEFT] == true) {
 			p.shoot(this.currentLevel.getWorld());
 		} else {
@@ -233,6 +240,13 @@ public class GameScreen implements Screen {
 
 		p.setRotation(calculatePlayerAngle(Gdx.input.getX(), Gdx.input.getY(), Config.SCREEN_WIDTH/2, Config.SCREEN_HEIGHT/2));
 
+	}
+	private void switchDebugMode() {
+		if (debugMode == true) {
+			debugMode = false;
+		} else {
+			debugMode = true;
+		}
 	}
 
 
