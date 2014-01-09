@@ -36,7 +36,9 @@ public class Level {
 	private ArrayList<AiController> enemies;
 	
 	public Level(String levelname){
-		this.physicsWorld = new World(Vector2.Zero, true);	
+		this.physicsWorld = new World(Vector2.Zero, true);
+		GameObjectFactory.world = this.physicsWorld;
+		
 		TmxMapLoader loader = new TmxMapLoader();
 		
 		this.map = loader.load(levelname);

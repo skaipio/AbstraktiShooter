@@ -27,7 +27,16 @@ public class Player extends DynamicObject {
 	public void hurt(int amount){
 		this.health -= amount;
 		if (this.health <=0) {
-			this.status = PlayerState.DEAD; 
+			this.status = PlayerState.DEAD;
+			
+			Magazine b = GameObjectFactory.createMagazine();
+			float x = this.getPosition().x;
+			float y = this.getPosition().y;
+			//x += 20*(float) Math.cos(angle);
+			//y += -20*(float) Math.sin(angle);
+			Vector2 newPosition = new Vector2(x,y);
+			b.setPosition(newPosition);
+			//b.setRotation(angle);
 		}
 	}
 	public PlayerState getStatus(){

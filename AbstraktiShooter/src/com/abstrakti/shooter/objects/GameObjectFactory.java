@@ -19,6 +19,9 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public final class GameObjectFactory {
+	
+	public static World world;
+	
 	public static Player createPlayer(World world){
 		Player player = new Player();
 		SpriteAnimation playerWalking = new PlayerWalkAnimation(player);
@@ -118,6 +121,37 @@ public final class GameObjectFactory {
         Body body = world.createBody(bodyDef);
         body.createFixture(sensor);
         body.setUserData(new EndOfLevelTrigger());
+	}
+	
+	public static Magazine createMagazine() {
+		Magazine m = new Magazine();
+		//System.out.println(position);
+	//	b.setPosition(100,100);
+		
+		CircleShape shape = new CircleShape();  
+		shape.setRadius(5f*Config.WORLD_TO_BOX); 
+		
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyType.DynamicBody;
+		//bodyDef.position.set(100,100); //set the starting position
+		
+		Body body = world.createBody(bodyDef);
+		body.setUserData(m);
+	    
+	    FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		fixtureDef.density = 1.0f;
+
+		fixtureDef.friction = 0.0f;
+		fixtureDef.restitution = 0;
+		body.createFixture(fixtureDef);
+		
+		//m.setBody(body);
+		
+		shape.dispose();
+		
+		return m;
+		
 	}
 
 }
