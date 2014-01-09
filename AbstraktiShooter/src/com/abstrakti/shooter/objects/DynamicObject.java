@@ -14,7 +14,15 @@ public abstract class DynamicObject extends GameObject{
 	private Map<Integer, Drawable> drawables = new HashMap<Integer, Drawable>();
 
 	public Vector2 getPosition() {
-		return this.body.getPosition().scl(Config.BOX_TO_WORLD);
+		
+		Vector2 v =  this.body.getPosition().scl(Config.BOX_TO_WORLD);
+		
+		/*
+		v.x -= 24/2+6;
+		v.y -= 40/2-7;
+		*/;
+		return v;
+		
 	}
 	public float getX() {
 		return getPosition().x;

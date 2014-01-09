@@ -51,8 +51,8 @@ public class Weapon {
 		Bullet b = GameObjectFactory.createBullet(physiscsWorld);
 		
 		//horizontal position of the bullets
-		float x = position.x+15.5f; //12
-		float y = position.y+7.5f;
+		float x = position.x;
+		float y = position.y;
 		
 		//vertical  position of the bullets
 		System.out.println(Math.toDegrees(angle));
