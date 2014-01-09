@@ -13,9 +13,8 @@ public class Player extends DynamicObject {
 	private int health;
 	private Weapon handGun;
 	private Vector2 movementVector;
-	ParticleEffect effect;
+	ParticleEffect bloodEffect, gunEffect;
 	
-	boolean bloodEffect = false; 
 
 	public Player(){	 
 		this.movementVector = new Vector2(); 
@@ -26,13 +25,15 @@ public class Player extends DynamicObject {
 		this.health = 1;
 		this.handGun = new Weapon(WeaponFiremode.SINGLE);
 		this.handGun.addAmmo(100);
-		effect = new ParticleEffect();
-		effect.load(Gdx.files.internal("../AbstraktiShooter-desktop/textures/particle-effects/blood.vep"), Gdx.files.internal("../AbstraktiShooter-desktop/textures/entities/"));
+		bloodEffect = new ParticleEffect();
+		bloodEffect.load(Gdx.files.internal("../AbstraktiShooter-desktop/textures/particle-effects/blood.vep"), Gdx.files.internal("../AbstraktiShooter-desktop/textures/entities/"));
+		gunEffect = new ParticleEffect();
+		gunEffect.load(Gdx.files.internal("../AbstraktiShooter-desktop/textures/particle-effects/fire.p"), Gdx.files.internal("../AbstraktiShooter-desktop/textures/entities/"));
 	}
 
 	public void hurt(int amount){
 		this.health -= amount;
-		effect.start();
+		bloodEffect.start();
 		if (this.health <=0) {
 			this.status = PlayerState.DEAD; 
 		}
@@ -89,9 +90,22 @@ public class Player extends DynamicObject {
 			float x = this.getX();
 			float y = this.getY();
 		
-			effect.setPosition(x, y);
-			effect.draw(batch);
-			effect.update(0.05F);
+			bloodEffect.setPosition(x, y);
+			bloodEffect.draw(batch);
+			bloodEffect.update(0.05F);
+			
+			
+			x += 22*(float) Math.cos(getAngle());
+			y += -22*(float) Math.sin(getAngle());
+			
+			gunEffect.setPosition(x, y);
+			
+			for (int i = 0; i < gunEffect.getEmitters().size; i++) { //get the list of emitters - things that emit particles
+				gunEffect.getEmitters().get(i).getAngle().setLow(getAngle()); //low is the minimum rotation
+				gunEffect.getEmitters().get(i).getAngle().setHigh(getAngle()); //high is the max rotation
+	         }
+			gunEffect.draw(batch);
+			gunEffect.update(0.05F);
 		}
 	}
 
@@ -124,7 +138,10 @@ public class Player extends DynamicObject {
 
 	}
 	public void shoot(World physiscsWorld) {
-		this.handGun.fireGun(physiscsWorld, this.getPosition(), this.getAngle());
+		boolean gunFired =  this.handGun.fireGun(physiscsWorld, this.getPosition(), this.getAngle());
+		if (gunFired) {
+			gunEffect.start();
+		}
 	}
 	public void releaseTrigger() {
 		this.handGun.releaseTrigger();
