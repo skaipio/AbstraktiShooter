@@ -169,6 +169,7 @@ public class GameScreen implements Screen {
 		
 		drawHealth();
 		drawAmmo();
+
 		fontSpriteBatch.begin();
 		this.fontSpriteBatch.draw(ui_Texture,0,0);
 		//this.font.draw(fontSpriteBatch, str, 825, 50);

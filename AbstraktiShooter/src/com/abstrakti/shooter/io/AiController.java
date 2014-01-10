@@ -3,6 +3,8 @@ package com.abstrakti.shooter.io;
 import com.abstrakti.shooter.objects.EnemyAiState;
 import com.abstrakti.shooter.objects.Player;
 import com.abstrakti.shooter.objects.PlayerState;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class AiController {
@@ -13,12 +15,15 @@ public class AiController {
 	
 	private static float defaultBulletDelay = 1;
 	private static float time = 0;
+	
+	private int direction;
 
 	public AiController(Player puppet, World physicsWorld) {
 		this.puppet = puppet;
 		this.physicsWorld = physicsWorld;
 		this.currentState = EnemyAiState.IDLE;
 		this.observationRadius = 200;
+		this.direction = chooseDirection();
 	}
 
 	public void act(float delta) {
@@ -71,12 +76,27 @@ public class AiController {
 				time = defaultBulletDelay;
 				puppet.releaseTrigger();
 		}
-		puppet.moveForward(5);
+		puppet.moveForward(delta);
+		if (direction == 1) {
+			puppet.strafeLeft(delta); 
+		} else {
+			puppet.strafeRight(delta);
+		}
+			
 		this.currentState = EnemyAiState.IDLE;
 	}
 
 	private double calculateDistance(float x1, float y1, float x2, float y2) {
 		return Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+	}
+	
+	private boolean lookForPlayer() {
+//&&		 reportRayFixture(humanPlayer, puppet.getPosition(), , 1);
+	
+		return true;
+	}
+	private int chooseDirection() {
+		return (int) (Math.floor(Math.random() * 2) + 1);
 	}
 
 	private void turnToPlayer() {

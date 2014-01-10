@@ -7,10 +7,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 public class Bullet extends DynamicObject {
-	private float speed = 128*7f;
+	private float speed = 1000f;
 	private Vector2 movementVector;
 	private int health;
 	private PlayerState status; 
+//	private sparkleEffect;
 	
 	public Bullet() {
 		this.movementVector = new Vector2(); 
@@ -25,19 +26,29 @@ public class Bullet extends DynamicObject {
 	public void setStatus(PlayerState state){
 		this.status = state;
 	}
+	public void rebound() {
+	//	sparkle.start();
+	}
 	public void hurt(int amount){
 		this.health -= amount;
 		if (this.health <=0) {
 			this.status = PlayerState.DEAD; 
 		}
 	}
-	public void moveForward(float delta) {
+	
+	public void setRotation(float angle) {
+		super.setRotation(angle);
 		this.movementVector.x += (float) Math.cos(this.getAngle());
 		this.movementVector.y += -(float) Math.sin(this.getAngle());
 	}
+	/*
+	public void moveForward(float delta) {
+		this.movementVector.x += (float) Math.cos(this.getAngle());
+		this.movementVector.y += -(float) Math.sin(this.getAngle());
+	}*/
 	@Override
 	public void update(float delta){
-		this.moveForward(delta);
+		//this.moveForward(delta);
 		this.updateMovementVector(delta);
 		Drawable drawable = this.getDrawable(0);
 		drawable.update(delta);
