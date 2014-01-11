@@ -79,8 +79,6 @@ public final class GameObjectFactory {
 		Sprite bulletSprite = assets.getSprite("bullet");
 		StaticDrawable bulletDrawable = new StaticDrawable(bulletSprite, b);
 		b.addDrawable(bulletDrawable, 0);
-		//System.out.println(position);
-	//	b.setPosition(100,100);
 		
 		CircleShape shape = new CircleShape();  
 		shape.setRadius(1f*Config.WORLD_TO_BOX); 
@@ -89,15 +87,13 @@ public final class GameObjectFactory {
 		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.bullet = true;
 		bodyDef.fixedRotation = true;
-		//bodyDef.position.set(100,100); //set the starting position
 		
 		Body body = world.createBody(bodyDef);
 		body.setUserData(b);
 	    
 	    FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
-		fixtureDef.density = 1.0f;
-
+		fixtureDef.density = 10.0f;
 		fixtureDef.friction = 0.0f;
 		fixtureDef.restitution = 0;
 		body.createFixture(fixtureDef);

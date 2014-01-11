@@ -95,6 +95,7 @@ class MainGameState extends State {
 					System.out.println("wall and bullet ");
 					Bullet b = (Bullet)fixtureB.getBody().getUserData();
 					b.hurt(1);
+					b.rebound();
 					//bulletWallSound.play(1.0f);
 				}
 				/*
