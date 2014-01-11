@@ -71,8 +71,6 @@ public final class GameObjectFactory {
 		Sprite bulletSprite = assets.getSprite("bullet");
 		StaticDrawable bulletDrawable = new StaticDrawable(bulletSprite, b);
 		b.addDrawable(bulletDrawable, 0);
-		//System.out.println(position);
-	//	b.setPosition(100,100);
 		
 		CircleShape shape = new CircleShape();  
 		shape.setRadius(1f*Config.WORLD_TO_BOX); 

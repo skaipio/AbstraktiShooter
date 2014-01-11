@@ -81,7 +81,7 @@ public class GameScreen implements Screen {
 				Gdx.files.internal("../AbstraktiShooter-desktop/textures/fonts/arial.png"), false);
 		this.font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		fontSpriteBatch = new SpriteBatch();
-		ui_Texture = new Texture(Gdx.files.internal("../AbstraktiShooter-desktop/textures/ui/ui_background.png"));
+		ui_Texture = new Texture(Gdx.files.internal("../AbstraktiShooter-desktop/textures/ui/ui_background_big.png"));
 	}
 
 	private void setCursorImage() {
@@ -164,7 +164,7 @@ public class GameScreen implements Screen {
 
 
 	private void drawUI() {
-		CharSequence str = "Ammo: " + currentLevel.getPlayer().getAmmo();
+		CharSequence str = "" + currentLevel.getPlayer().getAmmo();
 		CharSequence str2 = "Health: " + currentLevel.getPlayer().getHealth();
 		
 		drawHealth();
@@ -172,7 +172,7 @@ public class GameScreen implements Screen {
 
 		fontSpriteBatch.begin();
 		this.fontSpriteBatch.draw(ui_Texture,0,0);
-		//this.font.draw(fontSpriteBatch, str, 825, 50);
+		//this.font.draw(fontSpriteBatch, str, 850, 25);
 		//this.font.draw(fontSpriteBatch, str2, 25, 50);
 
 		fontSpriteBatch.end();
@@ -181,21 +181,21 @@ public class GameScreen implements Screen {
 	private void drawHealth() {
 		Gdx.gl.glEnable(GL10.GL_BLEND);
 	    Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
-		float width = (currentLevel.getPlayer().getHealth()/20F) *120;
+		float width = (currentLevel.getPlayer().getHealth()/20F) *180;
 		 shapeRenderer.begin(ShapeType.Filled);
 		 shapeRenderer.setColor(1, 0, 0, 0.6f);
-		 shapeRenderer.rect(0, 0, width, 30);
+		 shapeRenderer.rect(0, 0, width, 45);
 		 shapeRenderer.end();
 		 Gdx.gl.glDisable(GL10.GL_BLEND);
 		
 	}
 	private void drawAmmo() {
-		float width = (currentLevel.getPlayer().getAmmo()/100F) *120;
+		float width = (currentLevel.getPlayer().getAmmo()/100F) *180;
 		Gdx.gl.glEnable(GL10.GL_BLEND);
 	    Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
 		 shapeRenderer.begin(ShapeType.Filled);
-		 shapeRenderer.setColor(0, 0, 1,  0.6f);
-		 shapeRenderer.rect(Config.SCREEN_WIDTH-120, 0, width, 30);
+		 shapeRenderer.setColor(1, 1, 1,  0.6f);
+		 shapeRenderer.rect(Config.SCREEN_WIDTH-185, 0, width+5, 45);
 		 shapeRenderer.end();
 		 Gdx.gl.glDisable(GL10.GL_BLEND);
 	}
