@@ -6,6 +6,7 @@ import java.util.Iterator;
 import com.abstrakti.shooter.Config;
 import com.abstrakti.shooter.io.AiController;
 import com.abstrakti.shooter.io.GameScreen;
+import com.abstrakti.shooter.objects.Ammunition;
 import com.abstrakti.shooter.objects.Bullet;
 import com.abstrakti.shooter.objects.GameObject;
 import com.abstrakti.shooter.objects.GameObjectFactory;
@@ -156,6 +157,12 @@ public class Level {
 					physicsWorld.destroyBody(body);
 				}
 			}
+			if ( body.getUserData() instanceof Ammunition) {
+				Ammunition a = (Ammunition)body.getUserData();
+				if (a.getStatus() == PlayerState.DEAD) {
+					physicsWorld.destroyBody(body);
+				}
+			}
 			if ( body.getUserData() instanceof Player) {
 				Player p = (Player)body.getUserData();
 				if ( p.getStatus()  == PlayerState.DEAD) {	
@@ -164,6 +171,9 @@ public class Level {
 				}
 			}
 		}
+		
+		GameObjectFactory.createAmmunitions();
+		
 		this.physicsWorld.step(deltaTime, 6, 2);
 	}
 	

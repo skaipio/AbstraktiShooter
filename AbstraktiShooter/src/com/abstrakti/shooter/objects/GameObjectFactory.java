@@ -10,6 +10,7 @@ import com.abstrakti.shooter.triggers.Trigger;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -19,10 +20,13 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.utils.Array;
 
 public final class GameObjectFactory {
 	
 	public static World world;
+	private static Array<Ammunition> ammunitionToAdd = new Array<Ammunition>();
+	
 	
 	public static Player createPlayer(World world){
 
@@ -146,10 +150,9 @@ public final class GameObjectFactory {
 	}
 	
 
-	public static Ammunition createAmmunition(){
+	public static Ammunition createAmmunition(Ammunition ammo){
 		AssetManager assets = AssetManager.getInstance();
 		
-		Ammunition ammo = new Ammunition();
 		
 		Sprite ammoSprite = assets.getSprite("pistol_ammo");
 		StaticDrawable ammoDrawable = new StaticDrawable(ammoSprite, ammo);
@@ -162,12 +165,11 @@ public final class GameObjectFactory {
 	//	b.setPosition(100,100);
 		
 		CircleShape shape = new CircleShape();  
-		shape.setRadius(5f*Config.WORLD_TO_BOX); 
+		shape.setRadius(7f*Config.WORLD_TO_BOX); 
 		
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
 		//bodyDef.position.set(100,100); //set the starting position
-		
 		Body body = world.createBody(bodyDef);
 		body.setUserData(ammo);
 	    
@@ -177,9 +179,15 @@ public final class GameObjectFactory {
 
 		fixtureDef.friction = 0.0f;
 		fixtureDef.restitution = 0;
+		fixtureDef.isSensor = true;
 		body.createFixture(fixtureDef);
+		body.setLinearDamping(4f);
 		
-		//m.setBody(body);
+		// random direction
+		float randomAngle = (float) (MathUtils.random()*2.0f*Math.PI);
+        body.setLinearVelocity(new Vector2((float)4*MathUtils.cos(randomAngle), (float)4*MathUtils.sin(randomAngle)));
+    
+		ammo.setBody(body);
 		
 		shape.dispose();
 		
@@ -187,4 +195,20 @@ public final class GameObjectFactory {
 
 	}
 
+	public static void addAmmunition(Vector2 position, int amount) {
+		Ammunition ammo = new Ammunition(position, amount);
+		
+		ammunitionToAdd.add(ammo);
+	}
+
+	public static void createAmmunitions() {
+		for (Ammunition ammo: ammunitionToAdd) {
+			createAmmunition(ammo);
+			ammo.setPosition(ammo.getInitPosition());
+		}
+		
+		ammunitionToAdd.clear();
+	}
+	
+	
 }

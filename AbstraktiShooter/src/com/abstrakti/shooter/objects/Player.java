@@ -24,7 +24,7 @@ public class Player extends DynamicObject {
 		this.status = PlayerState.IDLE;
 		this.health = 1;
 		this.handGun = new Weapon(WeaponFiremode.SINGLE);
-		this.handGun.addAmmo(100);
+		this.handGun.addAmmo(10);
 		bloodEffect = new ParticleEffect();
 		bloodEffect.load(Gdx.files.internal("../AbstraktiShooter-desktop/textures/particle-effects/blood.vep"), Gdx.files.internal("../AbstraktiShooter-desktop/textures/entities/"));
 		gunEffect = new ParticleEffect();
@@ -36,15 +36,10 @@ public class Player extends DynamicObject {
 		bloodEffect.start();
 		if (this.health <=0) {
 			this.status = PlayerState.DEAD; 
-
-			Ammunition ammo = GameObjectFactory.createAmmunition();
-			float x = this.getPosition().x;
-			float y = this.getPosition().y;
-			//x += 20*(float) Math.cos(angle);
-			//y += -20*(float) Math.sin(angle);
-			Vector2 newPosition = new Vector2(x,y);
-			ammo.setPosition(newPosition);
-			//b.setRotation(angle);
+			if (this.getAmmo() > 0) {
+				GameObjectFactory.addAmmunition(this.getPosition(), this.getAmmo());
+			}
+			
 
 		}
 	}
@@ -62,6 +57,9 @@ public class Player extends DynamicObject {
 	}
 	public void setHealth(int amount) {
 		this.health += amount;
+	}
+	public void pickAmmunition(Ammunition a) {
+		this.handGun.addAmmo(a.withdrawAmmo());
 	}
 	@Override
 	public void update(float delta){

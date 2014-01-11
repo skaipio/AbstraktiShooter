@@ -5,8 +5,10 @@ import com.abstrakti.shooter.managers.AssetManager;
 import com.abstrakti.shooter.managers.StateManager;
 import com.abstrakti.shooter.map.Level;
 import com.abstrakti.shooter.map.Tile;
+import com.abstrakti.shooter.objects.Ammunition;
 import com.abstrakti.shooter.objects.Bullet;
 import com.abstrakti.shooter.objects.Player;
+import com.abstrakti.shooter.objects.PlayerState;
 import com.abstrakti.shooter.objects.Wall;
 import com.abstrakti.shooter.triggers.Trigger;
 import com.badlogic.gdx.Gdx;
@@ -52,8 +54,42 @@ class MainGameState extends State {
 				checkCollisionBulletAndWall(fixtureA, fixtureB);
 				checkCollisionBulletAndPlayer(fixtureA, fixtureB);
 				checkCollisionPlayerTrigger(fixtureA, fixtureB);
+				checkCollisionAmmunitionAndPlayer(fixtureA, fixtureB);
+				
 			}
 
+			
+			private void checkCollisionAmmunitionAndPlayer(Fixture fixtureA, Fixture fixtureB) {
+				if ((fixtureA.getBody().getUserData() instanceof Player) && (fixtureB.getBody().getUserData() instanceof Ammunition)) {
+					System.out.println("ammo and player ");
+					Ammunition a = (Ammunition) fixtureB.getBody().getUserData();
+					Player p = (Player) fixtureA.getBody().getUserData();
+					if (p.getStatus() != PlayerState.DEAD) {
+						p.pickAmmunition(a);
+					}
+					
+				}
+				if ((fixtureB.getBody().getUserData() instanceof Player) && (fixtureA.getBody().getUserData() instanceof Ammunition)) {
+						System.out.println("player and ammo ");
+						Ammunition a2 = (Ammunition) fixtureA.getBody().getUserData();
+						Player p2 = (Player) fixtureB.getBody().getUserData();
+						if (p2.getStatus() != PlayerState.DEAD) {
+							p2.pickAmmunition(a2);
+						}
+				}
+					
+					
+					//Bullet b = (Bullet)fixtureB.getBody().getUserData();
+					//b.hurt(1);
+					//bulletWallSound.play(1.0f);
+				
+				/*
+                 if ((fixtureA.getBody().getUserData() instanceof Bullet) && (fixtureB.getBody().getUserData() instanceof Wall)) {
+                 	System.out.println("bullet and wall");
+                 }  */
+			}
+			
+			
 			private void checkCollisionBulletAndWall(Fixture fixtureA, Fixture fixtureB) {
 				if ((fixtureA.getBody().getUserData() instanceof Wall) && (fixtureB.getBody().getUserData() instanceof Bullet)) {
 					System.out.println("wall and bullet ");
