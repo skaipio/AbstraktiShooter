@@ -123,7 +123,6 @@ public class GameScreen implements Screen {
 			}
 			this.drawUI();
 			this.handlePlayerInput(delta);
-			
 			this.moveAi(delta);
 
 		} else {
@@ -147,11 +146,11 @@ public class GameScreen implements Screen {
 	}
 
 	private void displayGameOver() {
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+	//	Gdx.gl.glClearColor(0, 0, 0, 1);
+	//	Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		CharSequence str = "GAME OVER";
 		fontSpriteBatch.begin();
-		this.font.draw(fontSpriteBatch, str, 400, 400);
+		this.font.draw(fontSpriteBatch, str, 325, 375);
 		fontSpriteBatch.end();
 		/*
 		boolean[] MOUSEBUTTONS = input.getMouseButtons();
