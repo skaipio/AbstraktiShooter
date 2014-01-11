@@ -5,56 +5,63 @@ filter: Nearest,Nearest
 repeat: none
 bullet
   rotate: false
-  xy: 0, 0
+  xy: 39, 14
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
 corpse
   rotate: false
-  xy: 0, 8
+  xy: 0, 12
   size: 39, 52
   orig: 39, 52
   offset: 0, 0
   index: -1
 corpse2
   rotate: false
-  xy: 39, 18
+  xy: 39, 22
   size: 32, 42
   orig: 32, 42
   offset: 0, 0
   index: -1
+medpack
+  rotate: false
+  xy: 0, 0
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
 particle
   rotate: false
-  xy: 39, 10
+  xy: 71, 31
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
 pistol_ammo
   rotate: false
-  xy: 191, 40
+  xy: 191, 44
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 player_pistol_leftstep
   rotate: false
-  xy: 71, 35
+  xy: 71, 39
   size: 40, 25
   orig: 40, 25
   offset: 0, 0
   index: -1
 player_pistol_rightstep
   rotate: false
-  xy: 111, 35
+  xy: 111, 39
   size: 40, 25
   orig: 40, 25
   offset: 0, 0
   index: -1
 player_pistol_standing
   rotate: false
-  xy: 151, 35
+  xy: 151, 39
   size: 40, 25
   orig: 40, 25
   offset: 0, 0
