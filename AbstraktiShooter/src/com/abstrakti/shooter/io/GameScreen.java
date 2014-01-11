@@ -15,6 +15,8 @@ import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL11;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -124,7 +126,7 @@ public class GameScreen implements Screen {
 			this.drawUI();
 			this.handlePlayerInput(delta);
 			this.moveAi(delta);
-
+		//	displayGameOver();
 		} else {
 			displayGameOver();
 		}
