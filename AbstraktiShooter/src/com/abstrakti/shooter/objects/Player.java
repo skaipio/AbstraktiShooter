@@ -4,6 +4,7 @@ import com.abstrakti.shooter.io.Drawable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -46,11 +47,19 @@ public class Player extends DynamicObject {
 		if (this.health <=0) {
 			this.status = PlayerState.DEAD; 
 			if (this.getAmmo() > 0) {
-				GameObjectFactory.addAmmunition(this.getPosition(), this.getAmmo());
+				int random = MathUtils.random(1,2);
+				
+				if (random == 1) {
+					GameObjectFactory.addAmmunition(this.getPosition(), this.getAmmo());
+				} else if (random == 2) {
+					GameObjectFactory.addMedpak(this.getPosition());
+				}
+				
+				
 			}
-			
-
 		}
+
+		
 	}
 	public PlayerState getStatus(){
 		return this.status;
@@ -68,7 +77,12 @@ public class Player extends DynamicObject {
 		this.health += amount;
 	}
 	public void pickAmmunition(Ammunition a) {
-		this.handGun.addAmmo(a.withdrawAmmo());
+		this.handGun.addAmmo(a.withdraw());
+	}
+	
+	public void pickMedpack(Medpack a) {
+		// TODO Auto-generated method stub
+		this.setHealth(a.withdraw());
 	}
 	@Override
 	public void update(float delta){
@@ -163,4 +177,6 @@ public class Player extends DynamicObject {
 	public void releaseTrigger() {
 		this.handGun.releaseTrigger();
 	}
+
+	
 }

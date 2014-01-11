@@ -25,7 +25,7 @@ import com.badlogic.gdx.utils.Array;
 public final class GameObjectFactory {
 	
 	public static World world;
-	private static Array<Ammunition> ammunitionToAdd = new Array<Ammunition>();
+	private static Array<GameObject> itemsToAdd = new Array<GameObject>();
 	
 	
 	public static Player createPlayer(World world){
@@ -190,21 +190,84 @@ public final class GameObjectFactory {
 		return ammo;
 
 	}
+	
+	private static Medpack createMedpack(Medpack medpack) {
+		// TODO Auto-generated method stub
+AssetManager assets = AssetManager.getInstance();
+		
+		
+		Sprite medpackSprite = assets.getSprite("medpack");
+		StaticDrawable ammoDrawable = new StaticDrawable(medpackSprite, medpack);
+		
+		medpack.addDrawable(ammoDrawable, 0);
+		
+		// muita juttuja?
+		
+		//System.out.println(position);
+	//	b.setPosition(100,100);
+		
+		CircleShape shape = new CircleShape();  
+		shape.setRadius(7f*Config.WORLD_TO_BOX); 
+		
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyType.DynamicBody;
+		//bodyDef.position.set(100,100); //set the starting position
+		Body body = world.createBody(bodyDef);
+		body.setUserData(medpack);
+	    
+	    FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		fixtureDef.density = 1.0f;
+
+		fixtureDef.friction = 0.0f;
+		fixtureDef.restitution = 0;
+		fixtureDef.isSensor = true;
+		body.createFixture(fixtureDef);
+		body.setLinearDamping(4f);
+		
+		// random direction
+		float randomAngle = (float) (MathUtils.random()*2.0f*Math.PI);
+        body.setLinearVelocity(new Vector2((float)4*MathUtils.cos(randomAngle), (float)4*MathUtils.sin(randomAngle)));
+    
+		medpack.setBody(body);
+		
+		shape.dispose();
+		
+		return medpack;
+	}
 
 	public static void addAmmunition(Vector2 position, int amount) {
 		Ammunition ammo = new Ammunition(position, amount);
 		
-		ammunitionToAdd.add(ammo);
+		itemsToAdd.add(ammo);
 	}
-
+	public static void addMedpak(Vector2 position) {
+		// TODO Auto-generated method stub
+		Medpack medpack = new Medpack(position);
+		itemsToAdd.add(medpack);
+	}
+	
 	public static void createAmmunitions() {
-		for (Ammunition ammo: ammunitionToAdd) {
-			createAmmunition(ammo);
-			ammo.setPosition(ammo.getInitPosition());
+		for (GameObject g: itemsToAdd) {
+			if (g instanceof Ammunition) {
+				
+				Ammunition ammo = (Ammunition) g;
+				createAmmunition(ammo);
+				ammo.setPosition(ammo.getInitPosition());
+			}
+			
+			if(g instanceof Medpack) {
+				Medpack medpack = (Medpack) g;
+				createMedpack(medpack);
+				medpack.setPosition(medpack.getInitPosition());
+			}
 		}
 		
-		ammunitionToAdd.clear();
+		itemsToAdd.clear();
 	}
+
 	
-	
+
 }
+	
+	

@@ -10,6 +10,7 @@ import com.abstrakti.shooter.objects.Ammunition;
 import com.abstrakti.shooter.objects.Bullet;
 import com.abstrakti.shooter.objects.GameObject;
 import com.abstrakti.shooter.objects.GameObjectFactory;
+import com.abstrakti.shooter.objects.Medpack;
 import com.abstrakti.shooter.objects.Player;
 import com.abstrakti.shooter.objects.PlayerState;
 import com.abstrakti.shooter.objects.Wall;
@@ -163,6 +164,13 @@ public class Level {
 					physicsWorld.destroyBody(body);
 				}
 			}
+			if ( body.getUserData() instanceof Medpack) {
+				Medpack a = (Medpack)body.getUserData();
+				if (a.getStatus() == PlayerState.DEAD) {
+					physicsWorld.destroyBody(body);
+				}
+			}
+			
 			if ( body.getUserData() instanceof Player) {
 				Player p = (Player)body.getUserData();
 				if ( p.getStatus()  == PlayerState.DEAD) {	

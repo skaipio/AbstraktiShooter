@@ -7,6 +7,7 @@ import com.abstrakti.shooter.map.Level;
 import com.abstrakti.shooter.map.Tile;
 import com.abstrakti.shooter.objects.Ammunition;
 import com.abstrakti.shooter.objects.Bullet;
+import com.abstrakti.shooter.objects.Medpack;
 import com.abstrakti.shooter.objects.Player;
 import com.abstrakti.shooter.objects.PlayerState;
 import com.abstrakti.shooter.objects.Wall;
@@ -55,7 +56,7 @@ class MainGameState extends State {
 				checkCollisionBulletAndPlayer(fixtureA, fixtureB);
 				checkCollisionPlayerTrigger(fixtureA, fixtureB);
 				checkCollisionAmmunitionAndPlayer(fixtureA, fixtureB);
-				
+				checkCollisionMedpackAndPlayer(fixtureA, fixtureB);
 			}
 
 			
@@ -87,6 +88,29 @@ class MainGameState extends State {
                  if ((fixtureA.getBody().getUserData() instanceof Bullet) && (fixtureB.getBody().getUserData() instanceof Wall)) {
                  	System.out.println("bullet and wall");
                  }  */
+			}
+			
+			
+			private void checkCollisionMedpackAndPlayer(Fixture fixtureA, Fixture fixtureB) {
+				if ((fixtureA.getBody().getUserData() instanceof Player) && (fixtureB.getBody().getUserData() instanceof Medpack)) {
+					System.out.println("ammo and player ");
+					Medpack a = (Medpack) fixtureB.getBody().getUserData();
+					Player p = (Player) fixtureA.getBody().getUserData();
+					if (p.getStatus() != PlayerState.DEAD) {
+						p.pickMedpack(a);
+					}
+					
+				}
+				if ((fixtureB.getBody().getUserData() instanceof Player) && (fixtureA.getBody().getUserData() instanceof Medpack)) {
+						System.out.println("player and ammo ");
+						Medpack a2 = (Medpack) fixtureA.getBody().getUserData();
+						Player p2 = (Player) fixtureB.getBody().getUserData();
+						if (p2.getStatus() != PlayerState.DEAD) {
+							p2.pickMedpack(a2);
+						}
+				}
+					
+					
 			}
 			
 			

@@ -4,14 +4,14 @@ import com.abstrakti.shooter.io.Drawable;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-public class Ammunition extends DynamicObject {
+public class Medpack extends DynamicObject {
 	private int amount;
 	private Vector2 initPosition;
 	private PlayerState status;
 	
-	public Ammunition(Vector2 position, int amount) {
+	public Medpack(Vector2 position) {
 		this.initPosition = position;
-		this.amount = amount;
+		this.amount = 10;
 		
 	}
 	
