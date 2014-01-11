@@ -1,6 +1,7 @@
 package com.abstrakti.shooter.objects;
 
 import com.abstrakti.shooter.io.Drawable;
+import com.abstrakti.shooter.states.PlayerState;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 

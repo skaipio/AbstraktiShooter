@@ -1,6 +1,8 @@
 package com.abstrakti.shooter.objects;
 
 import com.abstrakti.shooter.io.Drawable;
+import com.abstrakti.shooter.states.PlayerState;
+import com.abstrakti.shooter.triggers.UseRangeSensor;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,6 +16,7 @@ public class Player extends DynamicObject {
 	private int health;
 	private Weapon handGun;
 	private Vector2 movementVector;
+	private UseRangeSensor useRangeSensor;
 	ParticleEffect bloodEffect, gunEffect;
 	private TeamState team;
 	
@@ -177,6 +180,12 @@ public class Player extends DynamicObject {
 	public void releaseTrigger() {
 		this.handGun.releaseTrigger();
 	}
-
 	
+	public void useDoor(){
+		this.useRangeSensor.useClosestDoor();
+	}
+	
+	void setUseRangeSensor(UseRangeSensor useRange){
+		this.useRangeSensor = useRange;
+	}
 }

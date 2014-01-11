@@ -8,8 +8,9 @@ import com.abstrakti.shooter.objects.Bullet;
 import com.abstrakti.shooter.objects.DynamicObject;
 import com.abstrakti.shooter.objects.GameObject;
 import com.abstrakti.shooter.objects.Player;
-import com.abstrakti.shooter.objects.PlayerState;
 import com.abstrakti.shooter.objects.Wall;
+import com.abstrakti.shooter.states.GameState;
+import com.abstrakti.shooter.states.PlayerState;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
@@ -230,6 +231,9 @@ public class GameScreen implements Screen {
 		}
 		if (KEYS[Keys.D] == true) {
 			p.strafeRight(delta);	
+		}
+		if (KEYS[Keys.E] == true) {
+			p.useDoor();
 		}
 		if (KEYS[Keys.F12]== true ) {
 			switchDebugMode(); 

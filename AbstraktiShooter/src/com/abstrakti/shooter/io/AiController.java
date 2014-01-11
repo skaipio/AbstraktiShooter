@@ -1,10 +1,8 @@
 package com.abstrakti.shooter.io;
 
-import com.abstrakti.shooter.objects.EnemyAiState;
 import com.abstrakti.shooter.objects.Player;
-import com.abstrakti.shooter.objects.PlayerState;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Fixture;
+import com.abstrakti.shooter.states.EnemyAiState;
+import com.abstrakti.shooter.states.PlayerState;
 import com.badlogic.gdx.physics.box2d.World;
 
 /*

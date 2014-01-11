@@ -29,4 +29,6 @@ public class StaticDrawable implements Drawable {
 		
 		this.sprite.draw(batch);
 	}
+	@Override
+	public void resetState() {}
 }

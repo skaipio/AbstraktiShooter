@@ -31,16 +31,23 @@ medpack
   orig: 12, 12
   offset: 0, 0
   index: -1
+metal_door
+  rotate: false
+  xy: 191, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 particle
   rotate: false
-  xy: 71, 31
+  xy: 231, 4
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
 pistol_ammo
   rotate: false
-  xy: 191, 44
+  xy: 231, 12
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
@@ -64,6 +71,48 @@ player_pistol_standing
   xy: 151, 39
   size: 40, 25
   orig: 40, 25
+  offset: 0, 0
+  index: -1
+slideDoor1
+  rotate: false
+  xy: 223, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+slideDoor2
+  rotate: false
+  xy: 71, 7
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+slideDoor3
+  rotate: false
+  xy: 103, 7
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+slideDoor4
+  rotate: false
+  xy: 135, 7
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+slideDoor5
+  rotate: false
+  xy: 167, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+slideDoor6
+  rotate: false
+  xy: 199, 0
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
   index: -1
 

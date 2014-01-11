@@ -89,7 +89,7 @@
  </tileset>
  <layer name="Tiles" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJztmItuwyAMRbNl3fravjmfXqoUybWM7QQbWOsrWRVNTDgYzGOaQqFQ6LX0mewC7CyU0/sL508Z9vHQNdkHME2Z86cM+3hodA4p3jnWo3NI9V8L7/03juO0xuWU7PD4L/0umjKMKy5ngz4/hXc081/i+BKeW1rpW5o4aeLd2yw4vhu2t/QtC448P+7rHBzLmrJm3cPt9eKwyleab9dwzBPfZ7PR+uHNoVULjjyGS33Zm6O0ZzgS88NbePxJ6xzsQ268tOaoUWsOGH8pb0rnD278eHPAeqX9CH7O5e/W8ajZo7wDR84RcL33zFdeHFqfETj27O+pOUaJWn+4M0nvPXyJI7frd7VFit3oHH+ruXLsOadgH4lDO5e2cFBt2NP/Hhz3/Kg9D2nvETjj9mQ1HJRPj70bzk+ZF9/HbMlZPTi0Y3TLHAmOVXiMWNyp9eCwOO8GR3BY1OfBId1vSTajM4amPmpNPYA64Pmlti9GsJH3vMHxrNr50NIs70tDoVfWDY9TJKI=
+   eJztmAsOwyAIQLt1/9+Ze/S5dCaMKNAK6jZIyOJarE8UwWFwcXFx+S3ZBr0CvTDt8P5E2acU21jILegGqKRN2acU21hI7xycv6Ove+fg+r9l3vs2jtMw++UcdP/+L/xOkjb0K25HhTbHzDuS/c9x7Jjnmpr7lsRPEn+3Vg2OQ8Xx5r6lwRH3x+ucg2tZ0pace3i8Vhxa8Ury7RKOcaDnbFQ6P6w5pFKDI67h3Fy25sjlDKfE/rAWvP64cw7OIbVeanOUSG0O6H8ubnL1B7V+rDlgv1w+gp9T8bu2P0pylH/giDECnveW8cqKQ2rTA8ea/F7KkTp/qJqkdg6fihXUuO6zTpzvWtciHMdjVlOONXUKtuE4pHtpCUdqDFb7YynHKz5K6yHpPQKlVE5WwpGyaZG74fgUefF9zJKY1YJDukaX7BHnmAWvEY07tRYcGvWucziHRn8WHNz9FqcjqjEk/aXO1D3oA9YvpXPRg/ac8zrHp5Tuh5qqeV/q4vLL8gRNXiSt
   </data>
  </layer>
  <objectgroup name="Spawns" width="50" height="50">
@@ -126,4 +126,9 @@
    </properties>
   </object>
  </objectgroup>
+ <layer name="Doors" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1zEBAAAIw7A5wL9bNPCOxEDvJgAAcDelLQAA4Be/AQAAAF0WbzwALg==
+  </data>
+ </layer>
 </map>

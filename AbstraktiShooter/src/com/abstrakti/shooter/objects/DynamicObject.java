@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.abstrakti.shooter.Config;
-import com.abstrakti.shooter.animations.SpriteAnimation;
 import com.abstrakti.shooter.io.Drawable;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -63,9 +62,7 @@ public abstract class DynamicObject extends GameObject{
 		this.drawables.put(stateOrdinal, drawable);
 	}
 	
-	public void draw(SpriteBatch batch) {
-		draw(batch);
-	}
+	public void draw(SpriteBatch batch) {}
 	
 	
 	void setBody(Body body){

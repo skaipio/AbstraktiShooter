@@ -101,3 +101,10 @@ stairs_down_concrete_border
   orig: 32, 32
   offset: 0, 0
   index: -1
+w_slideDoor
+  rotate: false
+  xy: 448, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1

@@ -1,21 +1,25 @@
 package com.abstrakti.shooter.objects;
 
 import com.abstrakti.shooter.Config;
+import com.abstrakti.shooter.animations.DoorClosingAnimation;
+import com.abstrakti.shooter.animations.DoorOpeningAnimation;
 import com.abstrakti.shooter.animations.PlayerWalkAnimation;
 import com.abstrakti.shooter.animations.SpriteAnimation;
 import com.abstrakti.shooter.io.StaticDrawable;
 import com.abstrakti.shooter.managers.AssetManager;
+import com.abstrakti.shooter.states.DoorState;
+import com.abstrakti.shooter.states.PlayerState;
 import com.abstrakti.shooter.triggers.EndOfLevelTrigger;
-import com.abstrakti.shooter.triggers.Trigger;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+import com.abstrakti.shooter.triggers.UseRangeSensor;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -63,9 +67,20 @@ public final class GameObjectFactory {
 
 		fixtureDef.friction = 0.0f;
 		fixtureDef.restitution = 0;
-		body.createFixture(fixtureDef);
+		Fixture playerFixture = body.createFixture(fixtureDef);
+		playerFixture.setUserData(player);
+		
+		shape.setRadius(32*Config.WORLD_TO_BOX);
+		FixtureDef useRangeDef = new FixtureDef();
+		useRangeDef.shape = shape;
+		useRangeDef.isSensor = true;
+		Fixture useRange = body.createFixture(useRangeDef);
+		UseRangeSensor useRangeSensor = new UseRangeSensor(player);
+		useRange.setUserData(useRangeSensor);
+				
 		
 		player.setBody(body);
+		player.setUseRangeSensor(useRangeSensor);
 		
 		shape.dispose();
 		
@@ -145,7 +160,43 @@ public final class GameObjectFactory {
         body.setUserData(new EndOfLevelTrigger());
 	}
 	
+	public static void createDoor(World world, Vector2 position){
+		int tileSize = Config.TILE_SIZE;
+		float tileSizeHalved = tileSize / 2f;
+		
+		AssetManager assets = AssetManager.getInstance();	
+		
+		Door door = new Door();
+		Sprite doorClosed = assets.getSprite("slideDoor1");
+		Sprite doorOpen = assets.getSprite("slideDoor6");
+		door.addDrawable(new StaticDrawable(doorClosed, door), DoorState.CLOSED.ordinal());
+		door.addDrawable(new DoorClosingAnimation(door), DoorState.CLOSING.ordinal());
+		door.addDrawable(new DoorOpeningAnimation(door), DoorState.OPENING.ordinal());
+		door.addDrawable(new StaticDrawable(doorOpen, door), DoorState.OPEN.ordinal());
+		
+		PolygonShape boxShape = new PolygonShape();
+        boxShape.setAsBox(tileSizeHalved*Config.WORLD_TO_BOX,tileSizeHalved*Config.WORLD_TO_BOX);
+        
+        BodyDef myBodyDef2 = new BodyDef();
+        myBodyDef2.type = BodyType.StaticBody; //this will be a static$       
+        myBodyDef2.angle = 0; //set the starting angle
+        
+        myBodyDef2.position.set(position); //set the starting position
 
+        Body body2 = world.createBody(myBodyDef2);    
+
+        FixtureDef boxFixtureDef2 = new FixtureDef();
+        boxFixtureDef2.shape = boxShape;
+        boxFixtureDef2.density = 1;
+        body2.createFixture(boxFixtureDef2);
+        body2.setUserData(door);		
+        
+        door.setBody(body2);
+        door.setState(DoorState.CLOSED);
+        
+        boxShape.dispose();
+	}
+	
 	public static Ammunition createAmmunition(Ammunition ammo){
 		AssetManager assets = AssetManager.getInstance();
 		

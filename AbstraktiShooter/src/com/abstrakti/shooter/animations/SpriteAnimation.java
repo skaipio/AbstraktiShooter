@@ -23,10 +23,6 @@ public class SpriteAnimation implements Drawable {
 		this.sprites[index] = frame;
 	}
 	
-	public void reset(){
-		this.stateTime = 0f;
-	}
-	
 	public void update(float deltaTime){
 		this.stateTime += deltaTime;
 		this.stateTime = this.stateTime % (frameTime * frames);
@@ -34,8 +30,15 @@ public class SpriteAnimation implements Drawable {
 	
 	public void draw(SpriteBatch batch){
 		int frameIndex = (int) (this.stateTime / frameTime);
-		this.sprites[frameIndex].setPosition(position.x-sprites[frameIndex].getWidth()/2, position.y-sprites[frameIndex].getHeight()/2);
+		float spriteWidth = sprites[frameIndex].getWidth();
+		float spriteHeight = sprites[frameIndex].getHeight();
+		this.sprites[frameIndex].setPosition(position.x-spriteWidth/2, position.y-spriteHeight/2);
 		this.sprites[frameIndex].setRotation(this.rotation);		
 		this.sprites[frameIndex].draw(batch);
+	}
+
+	@Override
+	public void resetState() {
+		this.stateTime = 0f;
 	}
 }

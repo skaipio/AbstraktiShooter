@@ -7,9 +7,9 @@ import com.abstrakti.shooter.map.Level;
 import com.abstrakti.shooter.map.Tile;
 import com.abstrakti.shooter.objects.Ammunition;
 import com.abstrakti.shooter.objects.Bullet;
+import com.abstrakti.shooter.objects.GameObject;
 import com.abstrakti.shooter.objects.Medpack;
 import com.abstrakti.shooter.objects.Player;
-import com.abstrakti.shooter.objects.PlayerState;
 import com.abstrakti.shooter.objects.Wall;
 import com.abstrakti.shooter.triggers.Trigger;
 import com.badlogic.gdx.Gdx;
@@ -54,7 +54,7 @@ class MainGameState extends State {
 
 				checkCollisionBulletAndWall(fixtureA, fixtureB);
 				checkCollisionBulletAndPlayer(fixtureA, fixtureB);
-				checkCollisionPlayerTrigger(fixtureA, fixtureB);
+				checkTriggerCollisions(fixtureA, fixtureB);
 				checkCollisionAmmunitionAndPlayer(fixtureA, fixtureB);
 				checkCollisionMedpackAndPlayer(fixtureA, fixtureB);
 			}
@@ -127,17 +127,30 @@ class MainGameState extends State {
                  	System.out.println("bullet and wall");
                  }  */
 			}
-			public void checkCollisionPlayerTrigger(Fixture fixtureA, Fixture fixtureB) {
-				if ((fixtureA.getBody().getUserData() instanceof Trigger && (fixtureB.getBody().getUserData() instanceof Player))){
-					Trigger trigger = (Trigger)fixtureA.getBody().getUserData();
-					Player player = (Player)fixtureB.getBody().getUserData();
-					trigger.execute(player);
+			public void checkTriggerCollisions(Fixture fixtureA, Fixture fixtureB) {
+//				if ((fixtureA.getUserData() instanceof Trigger && (fixtureB.getBody().getUserData() instanceof GameObject))){
+//					Trigger trigger = (Trigger)fixtureA.getUserData();
+//					GameObject obj = (GameObject)fixtureB.getBody().getUserData();
+//					trigger.contact(obj);
+//				}
+				if ((fixtureB.getUserData() instanceof Trigger && (fixtureA.getBody().getUserData() instanceof GameObject))){
+					Trigger trigger = (Trigger)fixtureB.getUserData();
+					GameObject obj = (GameObject)fixtureA.getBody().getUserData();
+					trigger.contact(obj);
+				}
+			}
+			public void checkTriggerEndOfContact(Fixture fixtureA, Fixture fixtureB) {
+				if (fixtureA == null || fixtureB == null) return;
+				if ((fixtureA.getUserData() instanceof Trigger && (fixtureB.getBody().getUserData() instanceof GameObject))){
+					Trigger trigger = (Trigger)fixtureA.getUserData();
+					GameObject obj = (GameObject)fixtureB.getBody().getUserData();
+					trigger.endOfContact(obj);
 				}
 			}
 
 			public void checkCollisionBulletAndPlayer(Fixture fixtureA, Fixture fixtureB) {  	
 //				Object sound;
-				if (((fixtureA.getBody().getUserData() instanceof Bullet) && (fixtureB.getBody().getUserData() instanceof Player))) {
+				if (((fixtureA.getBody().getUserData() instanceof Bullet) && (fixtureB.getUserData() instanceof Player))) {
 					System.out.println("bullet and player");
 					Bullet b = (Bullet)fixtureA.getBody().getUserData();
 					b.hurt(1);
@@ -145,7 +158,7 @@ class MainGameState extends State {
 					p.hurt(1);
 					bulletFleshSound.play(1.0f);
 				}
-				if (((fixtureA.getBody().getUserData() instanceof Player) && (fixtureB.getBody().getUserData() instanceof Bullet))) {
+				if (((fixtureA.getUserData() instanceof Player) && (fixtureB.getBody().getUserData() instanceof Bullet))) {
 					System.out.println("player and bullet");
 					Bullet b = (Bullet)fixtureB.getBody().getUserData();
 					b.hurt(1);
@@ -159,6 +172,7 @@ class MainGameState extends State {
                 Fixture fixtureA = contact.getFixtureA();
                 Fixture fixtureB = contact.getFixtureB();
                // Gdx.app.log("endContact", "between " + fixtureA.toString() + " and " + fixtureB.toString());
+                this.checkTriggerEndOfContact(fixtureA, fixtureB);
             }
 
 			@Override
