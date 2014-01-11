@@ -150,7 +150,7 @@ public class GameScreen implements Screen {
 	//	Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		CharSequence str = "GAME OVER";
 		fontSpriteBatch.begin();
-		this.font.draw(fontSpriteBatch, str, 325, 375);
+		this.font.draw(fontSpriteBatch, str, 325, 425);
 		fontSpriteBatch.end();
 		/*
 		boolean[] MOUSEBUTTONS = input.getMouseButtons();
