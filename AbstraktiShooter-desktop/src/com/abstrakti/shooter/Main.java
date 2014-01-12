@@ -18,9 +18,9 @@ public class Main {
 		//settings.filterMag = TextureFilter.Linear;
 		//settings.filterMin = TextureFilter.Linear;
 	    
-	//	TexturePacker2.process(settings, "textures/tiles", "../AbstraktiShooter-android/assets", "tileAtlas");
-//		TexturePacker2.process(settings, "textures/entities", "../AbstraktiShooter-android/assets", "entityAtlas");
-		//TexturePacker2.process(settings, "textures/tileset", "../AbstraktiShooter-android/assets", "tileset");
+		TexturePacker2.process(settings, "textures/tiles", "../AbstraktiShooter-android/assets", "tileAtlas");
+		TexturePacker2.process(settings, "textures/entities", "../AbstraktiShooter-android/assets", "entityAtlas");
+		TexturePacker2.process(settings, "textures/tileset", "../AbstraktiShooter-android/assets", "tileset");
 		
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "AbstraktiShooter";

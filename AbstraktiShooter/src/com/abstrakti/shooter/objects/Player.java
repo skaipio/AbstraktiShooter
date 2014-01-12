@@ -30,7 +30,7 @@ public class Player extends DynamicObject {
 		this.status = PlayerState.IDLE;
 		this.health = 1;
 		this.handGun = new Weapon(WeaponFiremode.SINGLE);
-		this.handGun.addAmmo(10);
+		this.handGun.addAmmo(100);
 		bloodEffect = new ParticleEffect();
 		bloodEffect.load(Gdx.files.internal("../AbstraktiShooter-desktop/textures/particle-effects/blood.vep"), Gdx.files.internal("../AbstraktiShooter-desktop/textures/entities/"));
 		gunEffect = new ParticleEffect();
@@ -65,6 +65,8 @@ public class Player extends DynamicObject {
 
 		
 	}
+	
+
 	public PlayerState getStatus(){
 		return this.status;
 	}

@@ -19,6 +19,9 @@ public final class AssetManager {
 	private Sound pistolSound;
 	private Sound bulletWallSound;
 	private Sound bulletFleshSound;
+	private Sound medpackSound;
+	private Sound ammoSound;
+	
 	
 	private AssetManager(){}
 	
@@ -49,6 +52,8 @@ public final class AssetManager {
 		pistolSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/bullet_launch.wav"));
 		bulletWallSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/bullet_hit_wall.wav"));
 		bulletFleshSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/bullet_hit_flesh.wav"));
+		medpackSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/medpack.wav"));
+		ammoSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/ammo.wav"));
 	}
 	
 	/**
@@ -74,7 +79,13 @@ public final class AssetManager {
 	public Sound getbulletWallSound(){
 		return this.bulletWallSound;
 	}
-	public Sound getbulletFleshSound() {
+	public Sound getbulletFleshSound(){
 		return this.bulletFleshSound;
+	}
+	public Sound getMedpackSound() {
+		return this.medpackSound;
+	}
+	public Sound getAmmoSound(){
+		return this.ammoSound;
 	}
 }

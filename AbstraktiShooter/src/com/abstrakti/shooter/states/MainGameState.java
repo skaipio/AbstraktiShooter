@@ -28,12 +28,16 @@ class MainGameState extends State {
 	private Level currentLevel;
 	private Sound bulletFleshSound;
 	private Sound bulletWallSound;
+	private Sound medpackSound;
+	private Sound ammoSound;
 	
 
 	public MainGameState(StateManager manager, SpriteBatch batch) {
 		super(manager);	
 		this.bulletFleshSound = AssetManager.getInstance().getbulletFleshSound();
 		this.bulletWallSound = AssetManager.getInstance().getbulletWallSound();
+		this.medpackSound = AssetManager.getInstance().getMedpackSound();
+		this.ammoSound = AssetManager.getInstance().getAmmoSound();
 	}
 
 	@Override
@@ -69,6 +73,7 @@ class MainGameState extends State {
 					Player p = (Player) fixtureA.getBody().getUserData();
 					if (p.getStatus() != PlayerState.DEAD) {
 						p.pickAmmunition(a);
+						ammoSound.play(0.5f);
 					}
 					
 				}
@@ -78,6 +83,7 @@ class MainGameState extends State {
 						Player p2 = (Player) fixtureB.getBody().getUserData();
 						if (p2.getStatus() != PlayerState.DEAD) {
 							p2.pickAmmunition(a2);
+							ammoSound.play(0.5f);
 						}
 				}
 					
@@ -100,6 +106,7 @@ class MainGameState extends State {
 					Player p = (Player) fixtureA.getBody().getUserData();
 					if (p.getStatus() != PlayerState.DEAD) {
 						p.pickMedpack(a);
+						medpackSound.play(0.25f);
 					}
 					
 				}
@@ -109,6 +116,7 @@ class MainGameState extends State {
 						Player p2 = (Player) fixtureB.getBody().getUserData();
 						if (p2.getStatus() != PlayerState.DEAD) {
 							p2.pickMedpack(a2);
+							medpackSound.play(0.25f);
 						}
 				}
 					
@@ -132,7 +140,7 @@ class MainGameState extends State {
 					Bullet b = (Bullet)fixtureB.getBody().getUserData();
 					b.hurt(1);
 					b.rebound();
-					//bulletWallSound.play(1.0f);
+					bulletWallSound.play(0.25f);
 				}
 				/*
                  if ((fixtureA.getBody().getUserData() instanceof Bullet) && (fixtureB.getBody().getUserData() instanceof Wall)) {
