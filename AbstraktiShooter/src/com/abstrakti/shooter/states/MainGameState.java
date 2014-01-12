@@ -7,6 +7,7 @@ import com.abstrakti.shooter.map.Level;
 import com.abstrakti.shooter.map.Tile;
 import com.abstrakti.shooter.objects.Ammunition;
 import com.abstrakti.shooter.objects.Bullet;
+import com.abstrakti.shooter.objects.Door;
 import com.abstrakti.shooter.objects.GameObject;
 import com.abstrakti.shooter.objects.Medpack;
 import com.abstrakti.shooter.objects.Player;
@@ -57,6 +58,7 @@ class MainGameState extends State {
 				checkTriggerCollisions(fixtureA, fixtureB);
 				checkCollisionAmmunitionAndPlayer(fixtureA, fixtureB);
 				checkCollisionMedpackAndPlayer(fixtureA, fixtureB);
+				checkCollisionBulletAndDoor(fixtureA, fixtureB);
 			}
 
 			
@@ -112,11 +114,21 @@ class MainGameState extends State {
 					
 					
 			}
+			private void checkCollisionBulletAndDoor(Fixture fixtureA, Fixture fixtureB) {
+					
+				if ((fixtureA.getBody().getUserData() instanceof Door) && (fixtureB.getBody().getUserData() instanceof Bullet)) {
+					System.out.println("bullet and door ");			
+					Bullet b = (Bullet)fixtureB.getBody().getUserData();
+					b.hurt(1);
+					b.rebound();
+				}
+				
+			}
 			
 			
 			private void checkCollisionBulletAndWall(Fixture fixtureA, Fixture fixtureB) {
 				if ((fixtureA.getBody().getUserData() instanceof Wall) && (fixtureB.getBody().getUserData() instanceof Bullet)) {
-					System.out.println("wall and bullet ");
+
 					Bullet b = (Bullet)fixtureB.getBody().getUserData();
 					b.hurt(1);
 					b.rebound();

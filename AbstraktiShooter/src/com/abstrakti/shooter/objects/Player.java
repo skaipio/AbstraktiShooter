@@ -14,6 +14,7 @@ public class Player extends DynamicObject {
 	private float speed = 32*7f; //per second
 	private PlayerState status; 
 	private int health;
+	public final int MAXHEALTH = 100;
 	private Weapon handGun;
 	private Vector2 movementVector;
 	private UseRangeSensor useRangeSensor;
@@ -76,8 +77,13 @@ public class Player extends DynamicObject {
 	public int getHealth() {
 		return this.health;
 	}
+	
 	public void setHealth(int amount) {
-		this.health += amount;
+		if ((this.health + amount) > MAXHEALTH) {
+			this.health = MAXHEALTH;
+		} else {
+			this.health += amount; 
+		}
 	}
 	public void pickAmmunition(Ammunition a) {
 		this.handGun.addAmmo(a.withdraw());
