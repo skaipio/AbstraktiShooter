@@ -125,10 +125,13 @@ class MainGameState extends State {
 			private void checkCollisionBulletAndDoor(Fixture fixtureA, Fixture fixtureB) {
 					
 				if ((fixtureA.getBody().getUserData() instanceof Door) && (fixtureB.getBody().getUserData() instanceof Bullet)) {
-					System.out.println("bullet and door ");			
-					Bullet b = (Bullet)fixtureB.getBody().getUserData();
-					b.kill();
-					b.rebound();
+					System.out.println("bullet and door ");
+					
+					Door d = (Door)(fixtureA.getBody().getUserData());
+					if (d.getState() != DoorState.OPEN) {
+						Bullet b = (Bullet)fixtureB.getBody().getUserData();
+						b.kill();
+					}
 				}
 				
 			}

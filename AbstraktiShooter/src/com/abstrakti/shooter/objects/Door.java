@@ -21,7 +21,9 @@ public class Door extends DynamicObject {
 			drawable.resetState();
 		}
 	}
-
+	public DoorState getState() {
+		return this.doorState;
+	}
 	@Override
 	public void update(float deltaTime) {
 		Drawable drawable = this.getDrawable(this.doorState.ordinal());
