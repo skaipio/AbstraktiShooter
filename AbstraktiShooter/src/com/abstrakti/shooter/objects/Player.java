@@ -55,7 +55,6 @@ public class Player extends DynamicObject {
 			this.status = PlayerState.DEAD; 
 			if (this.getAmmo() > 0) {
 				int random = MathUtils.random(1,2);
-				
 				if (random == 1) {
 					GameObjectFactory.addAmmunition(this.getPosition(), this.getAmmo());
 				} else if (random == 2) {

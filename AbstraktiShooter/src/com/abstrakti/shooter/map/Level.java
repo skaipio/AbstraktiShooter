@@ -14,7 +14,6 @@ import com.abstrakti.shooter.objects.Medpack;
 import com.abstrakti.shooter.objects.Player;
 import com.abstrakti.shooter.objects.Wall;
 import com.abstrakti.shooter.states.PlayerState;
-import com.abstrakti.shooter.triggers.Trigger;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
@@ -199,7 +198,7 @@ public class Level {
 					p.getBody().setActive(false);
 					//physicsWorld.destroyBody(body);
 				}
-			}d
+			}
 		}
 		
 		GameObjectFactory.createAmmunitions();

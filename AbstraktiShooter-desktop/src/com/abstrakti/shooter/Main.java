@@ -2,7 +2,6 @@ package com.abstrakti.shooter;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.tools.imagepacker.TexturePacker2;
 import com.badlogic.gdx.tools.imagepacker.TexturePacker2.Settings;
 
@@ -18,9 +17,10 @@ public class Main {
 		//settings.filterMag = TextureFilter.Linear;
 		//settings.filterMin = TextureFilter.Linear;
 	    
-//		TexturePacker2.process(settings, "textures/tiles", "../AbstraktiShooter-android/assets", "tileAtlas");
+		
+	//	TexturePacker2.process(settings, "textures/tiles", "../AbstraktiShooter-android/assets", "tileAtlas");
 //		TexturePacker2.process(settings, "textures/entities", "../AbstraktiShooter-android/assets", "entityAtlas");
-//		TexturePacker2.process(settings, "textures/tileset", "../AbstraktiShooter-android/assets", "tileset");
+		//TexturePacker2.process(settings, "textures/tileset", "../AbstraktiShooter-android/assets", "tileset");
 		
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "AbstraktiShooter";

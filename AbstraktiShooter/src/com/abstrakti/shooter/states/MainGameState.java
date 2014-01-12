@@ -34,10 +34,10 @@ class MainGameState extends State {
 
 	public MainGameState(StateManager manager, SpriteBatch batch) {
 		super(manager);	
-		this.bulletFleshSound = AssetManager.getInstance().getbulletFleshSound();
-		this.bulletWallSound = AssetManager.getInstance().getbulletWallSound();
-		this.medpackSound = AssetManager.getInstance().getMedpackSound();
-		this.ammoSound = AssetManager.getInstance().getAmmoSound();
+		this.bulletFleshSound = AssetManager.getInstance().getSound("bulletFleshSound");
+		this.bulletWallSound =  AssetManager.getInstance().getSound("bulletWallSound");
+		this.medpackSound = AssetManager.getInstance().getSound("medpackSound");
+		this.ammoSound = AssetManager.getInstance().getSound("ammoSound");
 	}
 
 	@Override

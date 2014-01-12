@@ -3,7 +3,6 @@ package com.abstrakti.shooter.managers;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.abstrakti.shooter.io.StaticDrawable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -16,6 +15,7 @@ public final class AssetManager {
 	private TextureAtlas entityAtlas;
 	private TextureAtlas tileAtlas;
 	private Map<String, Sprite> spriteMap = new HashMap<String, Sprite>();
+	private Map<String, Sound> soundMap = new HashMap<String, Sound>();
 	private Sound pistolSound;
 	private Sound bulletWallSound;
 	private Sound bulletFleshSound;
@@ -49,11 +49,20 @@ public final class AssetManager {
 	}
 	
 	public void loadSounds(){
+		this.soundMap.put("pistolSound", Gdx.audio.newSound(Gdx.files.internal("sound-effects/bullet_launch.wav")));
+		this.soundMap.put("bulletWallSound", Gdx.audio.newSound(Gdx.files.internal("sound-effects/bullet_hit_wall.wav")));
+		this.soundMap.put("bulletFleshSound", Gdx.audio.newSound(Gdx.files.internal("sound-effects/bullet_hit_flesh.wav")));
+		this.soundMap.put("medpackSound", Gdx.audio.newSound(Gdx.files.internal("sound-effects/medpack.wav")));
+		this.soundMap.put("ammoSound", Gdx.audio.newSound(Gdx.files.internal("sound-effects/ammo.wav")));
+		
+		
+		/*
 		pistolSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/bullet_launch.wav"));
 		bulletWallSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/bullet_hit_wall.wav"));
 		bulletFleshSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/bullet_hit_flesh.wav"));
 		medpackSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/medpack.wav"));
 		ammoSound = Gdx.audio.newSound(Gdx.files.internal("sound-effects/ammo.wav"));
+		*/
 	}
 	
 	/**
@@ -72,6 +81,10 @@ public final class AssetManager {
 		return this.spriteMap.get(name);
 	}
 	
+	public Sound getSound(String name) {
+		return this.soundMap.get(name);
+	}
+	
 	public Sound getPistolSound(){
 		return this.pistolSound;
 	}
@@ -88,4 +101,5 @@ public final class AssetManager {
 	public Sound getAmmoSound(){
 		return this.ammoSound;
 	}
+		
 }

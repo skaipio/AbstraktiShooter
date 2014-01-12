@@ -1,7 +1,6 @@
 package com.abstrakti.shooter.objects;
 
 import com.abstrakti.shooter.managers.AssetManager;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -16,7 +15,7 @@ public class Weapon {
 	public Weapon(WeaponFiremode firemode) {
 		this.triggerStatus = false;
 		this.firemode = firemode;
-		this.sound = AssetManager.getInstance().getPistolSound();
+		this.sound = AssetManager.getInstance().getSound("pistolSound");
 	}
 	
 	public int getAmmo() {
