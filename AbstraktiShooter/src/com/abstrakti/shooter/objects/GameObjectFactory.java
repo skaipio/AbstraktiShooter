@@ -156,8 +156,8 @@ public final class GameObjectFactory {
         sensor.isSensor = true;
         
         Body body = world.createBody(bodyDef);
-        body.createFixture(sensor);
-        body.setUserData(new EndOfLevelTrigger());
+        Fixture sensorFixture = body.createFixture(sensor);
+        sensorFixture.setUserData(new EndOfLevelTrigger());
 	}
 	
 	public static void createDoor(World world, Vector2 position){

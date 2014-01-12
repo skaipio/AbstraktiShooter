@@ -18,10 +18,8 @@ public class UseRangeSensor extends Trigger {
 	@Override
 	public void contact(GameObject collider) {
 		if (collider instanceof Door) {
-
 			Door door = (Door) collider;
 			this.doorsInRange.add(door);
-
 		}
 	}
 
