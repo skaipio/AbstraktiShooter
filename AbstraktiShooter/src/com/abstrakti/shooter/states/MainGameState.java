@@ -161,9 +161,9 @@ class MainGameState extends State {
 			}
 			public void checkTriggerEndOfContact(Fixture fixtureA, Fixture fixtureB) {
 				if (fixtureA == null || fixtureB == null) return;
-				if ((fixtureA.getUserData() instanceof Trigger && (fixtureB.getBody().getUserData() instanceof GameObject))){
-					Trigger trigger = (Trigger)fixtureA.getUserData();
-					GameObject obj = (GameObject)fixtureB.getBody().getUserData();
+				if ((fixtureB.getUserData() instanceof Trigger && (fixtureA.getBody().getUserData() instanceof GameObject))){
+					Trigger trigger = (Trigger)fixtureB.getUserData();
+					GameObject obj = (GameObject)fixtureA.getBody().getUserData();
 					trigger.endOfContact(obj);
 				}
 			}

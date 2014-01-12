@@ -11,9 +11,10 @@ public class Door extends DynamicObject {
 	void setState(DoorState state){
 		this.doorState = state;
 		if (this.doorState == DoorState.CLOSING){
-			this.getBody().setActive(true);
+			this.getBody().getFixtureList().first().setSensor(false);
 		}else if(this.doorState == DoorState.OPEN){
-			this.getBody().setActive(false);
+			//this.getBody().setActive(false);
+			this.getBody().getFixtureList().first().setSensor(true);
 		}
 		Drawable drawable = this.getDrawable(this.doorState.ordinal());
 		if (drawable != null){
