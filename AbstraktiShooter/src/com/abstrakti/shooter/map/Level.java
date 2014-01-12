@@ -199,7 +199,7 @@ public class Level {
 					p.getBody().setActive(false);
 					//physicsWorld.destroyBody(body);
 				}
-			}
+			}d
 		}
 		
 		GameObjectFactory.createAmmunitions();

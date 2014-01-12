@@ -226,7 +226,7 @@ public final class GameObjectFactory {
 
 		fixtureDef.friction = 0.0f;
 		fixtureDef.restitution = 0;
-		fixtureDef.isSensor = true;
+		fixtureDef.isSensor = false;
 		body.createFixture(fixtureDef);
 		body.setLinearDamping(4f);
 		
@@ -272,7 +272,7 @@ AssetManager assets = AssetManager.getInstance();
 
 		fixtureDef.friction = 0.0f;
 		fixtureDef.restitution = 0;
-		fixtureDef.isSensor = true;
+		fixtureDef.isSensor = false;
 		body.createFixture(fixtureDef);
 		body.setLinearDamping(4f);
 		
