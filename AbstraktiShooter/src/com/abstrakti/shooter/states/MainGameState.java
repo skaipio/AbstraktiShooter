@@ -148,12 +148,12 @@ class MainGameState extends State {
                  }  */
 			}
 			public void checkTriggerCollisions(Fixture fixtureA, Fixture fixtureB) {
-//				if ((fixtureA.getUserData() instanceof Trigger && (fixtureB.getBody().getUserData() instanceof GameObject))){
-//					Trigger trigger = (Trigger)fixtureA.getUserData();
-//					GameObject obj = (GameObject)fixtureB.getBody().getUserData();
-//					trigger.contact(obj);
-//				}
-				if ((fixtureB.getUserData() instanceof Trigger && (fixtureA.getBody().getUserData() instanceof GameObject))){
+				if ((fixtureA.getUserData() instanceof Trigger && (fixtureB.getBody().getUserData() instanceof GameObject))){
+					Trigger trigger = (Trigger)fixtureA.getUserData();
+					GameObject obj = (GameObject)fixtureB.getBody().getUserData();
+					trigger.contact(obj);
+				}
+				else if ((fixtureB.getUserData() instanceof Trigger && (fixtureA.getBody().getUserData() instanceof GameObject))){
 					Trigger trigger = (Trigger)fixtureB.getUserData();
 					GameObject obj = (GameObject)fixtureA.getBody().getUserData();
 					trigger.contact(obj);

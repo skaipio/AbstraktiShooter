@@ -149,10 +149,11 @@ public class Level {
 			System.out.println(key);
 		}
 
-		int x = (Integer)properties.get("x");
-		int y = (Integer)properties.get("y");
-		float width = Float.parseFloat((String) properties.get("width"));
-		float height = Float.parseFloat((String)properties.get("height"));
+		int tileSize = Config.TILE_SIZE;
+		int x = (Integer)properties.get("x")+tileSize;
+		int y = (Integer)properties.get("y")+tileSize/2;
+		float width = Float.parseFloat((String) properties.get("width"))*tileSize/2;
+		float height = Float.parseFloat((String)properties.get("height"))*tileSize/2;
 		Rectangle triggerZone = new Rectangle(x, y, width, height);
 		GameObjectFactory.createEndOfLevelTrigger(this.physicsWorld, triggerZone);
 	}
