@@ -176,19 +176,20 @@ class MainGameState extends State {
 					System.out.println("bullet and player, damage" +b.getDamage());
 					Player p = (Player)fixtureB.getBody().getUserData();
 					p.hurt(b.getDamage());
-					b.kill();
 					if (b.getDamage() != 0) {
 						bulletFleshSound.play(1.0f);
 					}
+					b.kill();
+
 				} if (((fixtureA.getUserData() instanceof Player) && (fixtureB.getBody().getUserData() instanceof Bullet))) {
 					Bullet b = (Bullet)fixtureB.getBody().getUserData();
 					System.out.println("bullet and player, damage" +b.getDamage());
 					Player p = (Player)fixtureA.getBody().getUserData();
 					p.hurt(b.getDamage());
-					b.kill();
 					if (b.getDamage() != 0) {
 						bulletFleshSound.play(1.0f);
 					}
+					b.kill();
 				}
 			}
 
