@@ -10,16 +10,17 @@ import com.badlogic.gdx.math.Vector2;
 public class Bullet extends DynamicObject {
 	private float speed = 1000f;
 	private Vector2 movementVector;
-	private int health;
+	//private int health;
 	private PlayerState status; 
 //	private sparkleEffect;
+	private int damage;
 	
 	public Bullet() {
 		this.movementVector = new Vector2(); 
 		this.movementVector.x = 0;
 		this.movementVector.y = 0;
-		this.health = 1;
-		
+		//this.health = 1;
+		this.damage = 1;
 	}
 	public PlayerState getStatus(){
 		return this.status;
@@ -30,12 +31,13 @@ public class Bullet extends DynamicObject {
 	public void rebound() {
 	//	sparkle.start();
 	}
+	/*
 	public void hurt(int amount){
 		this.health -= amount;
 		if (this.health <=0) {
 			this.status = PlayerState.DEAD; 
 		}
-	}
+	}*/
 	
 	public void setRotation(float angle) {
 		super.setRotation(angle);
@@ -65,6 +67,13 @@ public class Bullet extends DynamicObject {
 			}
 			this.setVelocity(this.movementVector);
 		}
+	}
+	public void kill() {
+		this.status = PlayerState.DEAD;
+		this.damage = 0;
+	}
+	public int getDamage() {
+		return this.damage;
 	}
 	@Override
 	public void draw(SpriteBatch batch){

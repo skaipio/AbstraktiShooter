@@ -28,7 +28,7 @@ public class AiController {
 
 	public AiController(Player puppet, World physicsWorld) {
 		this.puppet = puppet;
-		puppet.setHealth(5);
+		puppet.setHealth(1);
 		this.physicsWorld = physicsWorld;
 		this.currentState = EnemyAiState.IDLE;
 		this.observationRadius = 200;

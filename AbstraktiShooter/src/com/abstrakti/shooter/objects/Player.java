@@ -46,8 +46,11 @@ public class Player extends DynamicObject {
 	}
 
 	public void hurt(int amount){
+		System.out.println("hurting " + amount);
 		this.health -= amount;
-		bloodEffect.start();
+		if ( amount !=0 ) {
+			bloodEffect.start();
+		}
 		if (this.health <=0) {
 			this.status = PlayerState.DEAD; 
 			if (this.getAmmo() > 0) {

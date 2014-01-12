@@ -127,7 +127,7 @@ class MainGameState extends State {
 				if ((fixtureA.getBody().getUserData() instanceof Door) && (fixtureB.getBody().getUserData() instanceof Bullet)) {
 					System.out.println("bullet and door ");			
 					Bullet b = (Bullet)fixtureB.getBody().getUserData();
-					b.hurt(1);
+					b.kill();
 					b.rebound();
 				}
 				
@@ -138,7 +138,7 @@ class MainGameState extends State {
 				if ((fixtureA.getBody().getUserData() instanceof Wall) && (fixtureB.getBody().getUserData() instanceof Bullet)) {
 
 					Bullet b = (Bullet)fixtureB.getBody().getUserData();
-					b.hurt(1);
+					b.kill();
 					b.rebound();
 					bulletWallSound.play(0.25f);
 				}
@@ -169,22 +169,26 @@ class MainGameState extends State {
 			}
 
 			public void checkCollisionBulletAndPlayer(Fixture fixtureA, Fixture fixtureB) {  	
-//				Object sound;
+				
 				if (((fixtureA.getBody().getUserData() instanceof Bullet) && (fixtureB.getUserData() instanceof Player))) {
-					System.out.println("bullet and player");
+
 					Bullet b = (Bullet)fixtureA.getBody().getUserData();
-					b.hurt(1);
+					System.out.println("bullet and player, damage" +b.getDamage());
 					Player p = (Player)fixtureB.getBody().getUserData();
-					p.hurt(1);
-					bulletFleshSound.play(1.0f);
-				}
-				if (((fixtureA.getUserData() instanceof Player) && (fixtureB.getBody().getUserData() instanceof Bullet))) {
-					System.out.println("player and bullet");
+					p.hurt(b.getDamage());
+					b.kill();
+					if (b.getDamage() != 0) {
+						bulletFleshSound.play(1.0f);
+					}
+				} if (((fixtureA.getUserData() instanceof Player) && (fixtureB.getBody().getUserData() instanceof Bullet))) {
 					Bullet b = (Bullet)fixtureB.getBody().getUserData();
-					b.hurt(1);
+					System.out.println("bullet and player, damage" +b.getDamage());
 					Player p = (Player)fixtureA.getBody().getUserData();
-					p.hurt(1);
-					bulletFleshSound.play(1.0f);
+					p.hurt(b.getDamage());
+					b.kill();
+					if (b.getDamage() != 0) {
+						bulletFleshSound.play(1.0f);
+					}
 				}
 			}
 
