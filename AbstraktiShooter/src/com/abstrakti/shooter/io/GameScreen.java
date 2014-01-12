@@ -80,15 +80,15 @@ public class GameScreen implements Screen {
 		debugBatch = new SpriteBatch();
 	}
 	private void loadFonts() {
-		this.font = new BitmapFont(Gdx.files.internal("../AbstraktiShooter-desktop/textures/fonts/arial.fnt"),
-				Gdx.files.internal("../AbstraktiShooter-desktop/textures/fonts/arial.png"), false);
+		this.font = new BitmapFont(Gdx.files.internal("fonts/arial.fnt"),
+				Gdx.files.internal("fonts/arial.png"), false);
 		this.font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		fontSpriteBatch = new SpriteBatch();
-		ui_Texture = new Texture(Gdx.files.internal("../AbstraktiShooter-desktop/textures/ui/ui_background_big.png"));
+		ui_Texture = new Texture(Gdx.files.internal("ui/ui_background_big.png"));
 	}
 
 	private void setCursorImage() {
-		Pixmap pm = new Pixmap(Gdx.files.internal("../AbstraktiShooter-desktop/textures/mousecursor/cursor.png"));
+		Pixmap pm = new Pixmap(Gdx.files.internal("mousecursor/cursor.png"));
 		int xHotSpot = pm.getWidth()/2;
 		int yHotSpot = pm.getHeight()/2;
 

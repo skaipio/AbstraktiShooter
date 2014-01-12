@@ -34,8 +34,8 @@ public final class AssetManager {
 	}
 	
 	public void loadSpriteSheet(){
-		this.entityAtlas = new TextureAtlas(Gdx.files.internal("../AbstraktiShooter-android/assets/entityAtlas.atlas"));
-		this.tileAtlas = new TextureAtlas(Gdx.files.internal("../AbstraktiShooter-android/assets/tileAtlas.atlas"));
+		this.entityAtlas = new TextureAtlas(Gdx.files.internal("entityAtlas.atlas"));
+		this.tileAtlas = new TextureAtlas(Gdx.files.internal("tileAtlas.atlas"));
 		for (AtlasRegion region : this.entityAtlas.getRegions()) {
 			System.out.println(region.name);
 			Sprite sprite = new Sprite();

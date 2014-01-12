@@ -32,9 +32,9 @@ public class Player extends DynamicObject {
 		this.handGun = new Weapon(WeaponFiremode.SINGLE);
 		this.handGun.addAmmo(100);
 		bloodEffect = new ParticleEffect();
-		bloodEffect.load(Gdx.files.internal("../AbstraktiShooter-desktop/textures/particle-effects/blood.vep"), Gdx.files.internal("../AbstraktiShooter-desktop/textures/entities/"));
+		bloodEffect.load(Gdx.files.internal("particle-effects/blood.vep"), Gdx.files.internal("particle-effects"));
 		gunEffect = new ParticleEffect();
-		gunEffect.load(Gdx.files.internal("../AbstraktiShooter-desktop/textures/particle-effects/fire.p"), Gdx.files.internal("../AbstraktiShooter-desktop/textures/entities/"));
+		gunEffect.load(Gdx.files.internal("particle-effects/fire.p"), Gdx.files.internal("particle-effects"));
 	}
 	
 	public void setTeamState(TeamState team) {
