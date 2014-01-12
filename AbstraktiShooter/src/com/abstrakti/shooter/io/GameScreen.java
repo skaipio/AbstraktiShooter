@@ -51,6 +51,7 @@ public class GameScreen implements Screen {
 	Box2DDebugRenderer  debugRenderer;
 	SpriteBatch debugBatch;
 	boolean debugMode;
+	ArrayList<Player> players;
 	
 	private GameScreen() {
 		Gdx.input.setInputProcessor(input);
@@ -108,6 +109,7 @@ public class GameScreen implements Screen {
 			
 			batch.begin();
 			Array<Body> bodies = new Array<Body>();
+			players = new ArrayList<Player>();
 			this.currentLevel.getWorld().getBodies(bodies);
 
 			for (Body body: bodies) {
@@ -116,8 +118,21 @@ public class GameScreen implements Screen {
 					if (Wall.class.isInstance(obj)) {
 						continue;
 					}
-					obj.draw(batch);
+					if (Player.class.isInstance(obj)) {
+						Player p = (Player)obj;
+						if(p.getStatus() != PlayerState.DEAD) {
+							players.add(p);
+						} else {
+							obj.draw(batch);
+						}
+					} else {
+						obj.draw(batch);
+					}
 				}
+			}
+			
+			for (Player p : players) {
+				p.draw(batch);
 			}
 			
 			batch.end();
