@@ -83,7 +83,7 @@ public class AiController {
 		puppet.stopMovement();
 		time -= delta;
 		if (time <= 0) {
-				puppet.shoot(physicsWorld);
+				puppet.shoot(physicsWorld, delta);
 				time = defaultBulletDelay;
 				puppet.releaseTrigger();
 				this.direction = chooseDirection();

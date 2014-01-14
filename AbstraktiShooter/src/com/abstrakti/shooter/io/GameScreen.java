@@ -253,7 +253,7 @@ public class GameScreen implements Screen {
 			switchDebugMode(); 
 		}
 		if (MOUSEBUTTONS[Buttons.LEFT] == true) {
-			p.shoot(this.currentLevel.getWorld());
+			p.shoot(this.currentLevel.getWorld(), delta);
 		} else {
 			p.releaseTrigger();
 		}

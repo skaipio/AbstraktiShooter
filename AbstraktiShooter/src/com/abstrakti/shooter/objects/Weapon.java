@@ -6,16 +6,19 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class Weapon {
-	private WeaponFiremode firemode;
+	protected WeaponFiremode firemode;
+	protected int numberOfBulletsPerShot;
 	private boolean triggerStatus;
 	private int ammo;
 	private int MAXAMMO = 100;
-	private Sound sound;
+	protected Sound sound;
+	protected float fireRate;
+	protected int reloadingTime;
+	protected float damage;
+	private static float time = 0;
 	
-	public Weapon(WeaponFiremode firemode) {
+	public Weapon() {
 		this.triggerStatus = false;
-		this.firemode = firemode;
-		this.sound = AssetManager.getInstance().getSound("pistolSound");
 	}
 	
 	public int getAmmo() {
@@ -32,16 +35,25 @@ public class Weapon {
 	
 	/* Checks the firemode before firing, the trigger needs to be released later if the firemode is single.
 	 */
-	public boolean fireGun(World physiscsWorld, Vector2 position, float angle) {
+	public boolean fireGun(World physiscsWorld, Vector2 position, float angle, float delta){
+		time -= delta;
 		if (this.ammo == 0) {
 			return false;
 		} else if (this.firemode == WeaponFiremode.SINGLE && this.triggerStatus == true) {
 			return false;
+		} else if (this.firemode == WeaponFiremode.CONTINUOS) {
+			if (time <= 0) {
+				time = fireRate;	
+				this.ammo--;
+				this.shootMultipleBullets(physiscsWorld, position,angle,numberOfBulletsPerShot); 
+				sound.play(1.0f);
+				return true;
+			}
+			return false;
 		} else {
 			this.triggerStatus = true;
 			this.ammo--;
-			this.shootBullet(physiscsWorld, position,angle); 
-//			System.out.println("BANG, ammo" + " " + ammo);
+			this.shootMultipleBullets(physiscsWorld, position,angle,numberOfBulletsPerShot); 
 			sound.play(1.0f);
 			return true;
 		}
@@ -53,16 +65,17 @@ public class Weapon {
 		y += -27*(float) Math.sin(angle);
 		
 		Bullet b = GameObjectFactory.createBullet(physiscsWorld);
-		//horizontal position of the bullets
-
-		
-		//vertical  position of the bullets
-		//System.out.println(Math.toDegrees(angle));
-
 
 		Vector2 newPosition = new Vector2(x,y);
 		b.setPosition(newPosition);
 		b.setRotation(angle);
+	}
+	private void shootMultipleBullets(World physiscsWorld, Vector2 position, float angle, int numberOfBullets) {
+		for (int i=0; i<numberOfBullets; i++) {
+			shootBullet(physiscsWorld, position, angle);
+			angle += 0.01f;
+		}
+		
 	}
 	public void releaseTrigger() {
 		this.triggerStatus = false;

@@ -29,7 +29,7 @@ public class Player extends DynamicObject {
 
 		this.status = PlayerState.IDLE;
 		this.health = 1;
-		this.handGun = new Weapon(WeaponFiremode.SINGLE);
+		this.handGun = new Pistol();
 		this.handGun.addAmmo(100);
 		bloodEffect = new ParticleEffect();
 		bloodEffect.load(Gdx.files.internal("particle-effects/blood.vep"), Gdx.files.internal("particle-effects"));
@@ -181,8 +181,8 @@ public class Player extends DynamicObject {
 
 
 	}
-	public void shoot(World physiscsWorld) {
-		boolean gunFired =  this.handGun.fireGun(physiscsWorld, this.getPosition(), this.getAngle());
+	public void shoot(World physiscsWorld, float delta) {
+		boolean gunFired =  this.handGun.fireGun(physiscsWorld, this.getPosition(), this.getAngle(), delta);
 		if (gunFired) {
 			gunEffect.start();
 		}
