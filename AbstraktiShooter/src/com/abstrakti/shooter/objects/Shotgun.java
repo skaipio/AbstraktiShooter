@@ -5,7 +5,7 @@ import com.abstrakti.shooter.managers.AssetManager;
 public class Shotgun extends Weapon {
 
 	Shotgun() {
-		this.sound = AssetManager.getInstance().getSound("pistolSound");
+		this.sound = AssetManager.getInstance().getSound("shotgun");
 		this.numberOfBulletsPerShot = 6;
 		this.reloadingTime = 2;
 		this.firemode = WeaponFiremode.SINGLE;

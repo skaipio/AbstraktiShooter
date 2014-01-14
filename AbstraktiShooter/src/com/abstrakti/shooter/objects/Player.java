@@ -20,6 +20,7 @@ public class Player extends DynamicObject {
 	private UseRangeSensor useRangeSensor;
 	ParticleEffect bloodEffect, gunEffect;
 	private TeamState team;
+	int currentWeapon = 0;
 	
 
 	public Player(){	 
@@ -29,12 +30,16 @@ public class Player extends DynamicObject {
 
 		this.status = PlayerState.IDLE;
 		this.health = 1;
-		this.handGun = new Pistol();
+		this.handGun = new Machinegun();
 		this.handGun.addAmmo(100);
 		bloodEffect = new ParticleEffect();
 		bloodEffect.load(Gdx.files.internal("particle-effects/blood.vep"), Gdx.files.internal("particle-effects"));
 		gunEffect = new ParticleEffect();
 		gunEffect.load(Gdx.files.internal("particle-effects/fire.p"), Gdx.files.internal("particle-effects"));
+	}
+	
+	public void changeWeapon(int number) {
+		this.currentWeapon = number;
 	}
 	
 	public void setTeamState(TeamState team) {
@@ -180,6 +185,10 @@ public class Player extends DynamicObject {
 	public void turnRight() {
 
 
+	}
+	public void throwGrenade(World physiscsWorld, float delta){
+		
+		
 	}
 	public void shoot(World physiscsWorld, float delta) {
 		boolean gunFired =  this.handGun.fireGun(physiscsWorld, this.getPosition(), this.getAngle(), delta);

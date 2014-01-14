@@ -54,6 +54,8 @@ public final class AssetManager {
 		this.soundMap.put("bulletFleshSound", Gdx.audio.newSound(Gdx.files.internal("sound-effects/bullet_hit_flesh.wav")));
 		this.soundMap.put("medpackSound", Gdx.audio.newSound(Gdx.files.internal("sound-effects/medpack.wav")));
 		this.soundMap.put("ammoSound", Gdx.audio.newSound(Gdx.files.internal("sound-effects/ammo.wav")));
+		this.soundMap.put("shotgun", Gdx.audio.newSound(Gdx.files.internal("sound-effects/shotgun.wav")));
+		this.soundMap.put("machinegun", Gdx.audio.newSound(Gdx.files.internal("sound-effects/uzi.wav")));
 		
 		
 		/*

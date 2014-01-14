@@ -86,6 +86,54 @@ public final class GameObjectFactory {
 		return player;
 	}
 	
+	public static Grenade createGrenade(World world, Vector2 position, float angle){
+		Grenade grenade = new Grenade(position);
+
+
+		AssetManager assets = AssetManager.getInstance();
+
+
+		Sprite grenadeSprite = assets.getSprite("grenade_throwed");
+		StaticDrawable grenadeDrawable = new StaticDrawable(grenadeSprite, grenade);
+
+		grenade.addDrawable(grenadeDrawable, 0);
+
+		CircleShape shape = new CircleShape();  
+		shape.setRadius(7f*Config.WORLD_TO_BOX); 
+
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyType.DynamicBody;
+		Body body = world.createBody(bodyDef);
+		body.setUserData(grenade);
+
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		fixtureDef.density = 1.0f;
+
+		fixtureDef.friction = 0.0f;
+		fixtureDef.restitution = 0;
+		fixtureDef.isSensor = false;
+		body.createFixture(fixtureDef);
+		body.setLinearDamping(4f);
+
+		body.setLinearVelocity(new Vector2((float)4*MathUtils.cos(angle), (float)4*MathUtils.sin(angle)));
+
+		grenade.setBody(body);
+
+		shape.dispose();
+
+
+
+		return grenade;
+	}
+	
+	/*
+	public static Explosion(World world){
+		Explosion explosion = new Explosion();
+		
+		return explosion;
+	}
+	*/
 	public static Bullet createBullet(World world) {
 		Bullet b = new Bullet();
 		
@@ -250,11 +298,6 @@ AssetManager assets = AssetManager.getInstance();
 		StaticDrawable ammoDrawable = new StaticDrawable(medpackSprite, medpack);
 		
 		medpack.addDrawable(ammoDrawable, 0);
-		
-		// muita juttuja?
-		
-		//System.out.println(position);
-	//	b.setPosition(100,100);
 		
 		CircleShape shape = new CircleShape();  
 		shape.setRadius(7f*Config.WORLD_TO_BOX); 
