@@ -6,7 +6,7 @@ public class Shotgun extends Weapon {
 
 	Shotgun() {
 		this.sound = AssetManager.getInstance().getSound("shotgun");
-		this.numberOfBulletsPerShot = 6;
+		this.numberOfProjectilesPerShot = 6;
 		this.reloadingTime = 2;
 		this.firemode = WeaponFiremode.SINGLE;
 		this.damage = 0.5f;

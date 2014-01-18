@@ -5,7 +5,7 @@ filter: Nearest,Nearest
 repeat: none
 bullet
   rotate: false
-  xy: 39, 14
+  xy: 231, 4
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
@@ -24,6 +24,13 @@ corpse2
   orig: 32, 42
   offset: 0, 0
   index: -1
+grenade_throwed
+  rotate: false
+  xy: 39, 14
+  size: 10, 8
+  orig: 10, 8
+  offset: 0, 0
+  index: -1
 medpack
   rotate: false
   xy: 0, 0
@@ -40,7 +47,7 @@ metal_door
   index: -1
 particle
   rotate: false
-  xy: 231, 4
+  xy: 12, 4
   size: 8, 8
   orig: 8, 8
   offset: 0, 0

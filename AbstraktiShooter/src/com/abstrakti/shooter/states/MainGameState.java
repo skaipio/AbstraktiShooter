@@ -8,7 +8,10 @@ import com.abstrakti.shooter.map.Tile;
 import com.abstrakti.shooter.objects.Ammunition;
 import com.abstrakti.shooter.objects.Bullet;
 import com.abstrakti.shooter.objects.Door;
+import com.abstrakti.shooter.objects.DynamicObject;
 import com.abstrakti.shooter.objects.GameObject;
+import com.abstrakti.shooter.objects.GameObjectFactory;
+import com.abstrakti.shooter.objects.Grenade;
 import com.abstrakti.shooter.objects.Medpack;
 import com.abstrakti.shooter.objects.Player;
 import com.abstrakti.shooter.objects.Wall;
@@ -63,6 +66,7 @@ class MainGameState extends State {
 				checkCollisionAmmunitionAndPlayer(fixtureA, fixtureB);
 				checkCollisionMedpackAndPlayer(fixtureA, fixtureB);
 				checkCollisionBulletAndDoor(fixtureA, fixtureB);
+				checkCollisionGrenadeAndPlayer(fixtureA, fixtureB);
 			}
 
 			
@@ -134,6 +138,21 @@ class MainGameState extends State {
 					}
 				}
 				
+			}
+			private void checkCollisionGrenadeAndPlayer(Fixture fixtureA, Fixture fixtureB) {
+				if ((fixtureA.getBody().getUserData() instanceof DynamicObject) && (fixtureB.getBody().getUserData() instanceof Grenade)) {
+					
+					if ( !(fixtureA.getBody().getUserData() instanceof Wall) ) 	{
+						if (fixtureA.isSensor() == false) {
+						System.out.println("player and grenade");
+						Grenade g = (Grenade)fixtureB.getBody().getUserData();
+						DynamicObject d = (DynamicObject)fixtureA.getBody().getUserData();
+						GameObjectFactory.applyBlastImpulse(d.getBody(),  g.getPosition(), d.getPosition(), g.getDamage() );
+						g.kill();
+						}
+					}
+					
+				}
 			}
 			
 			

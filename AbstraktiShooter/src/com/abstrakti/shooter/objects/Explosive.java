@@ -13,8 +13,8 @@ public class Explosive extends DynamicObject {
 	private PlayerState status;
 	protected float timer;
 	
-	public Explosive(Vector2 position) {
-		this.initPosition = position;
+	public Explosive() {
+		this.status = PlayerState.IDLE;
 	}
 	
 	public PlayerState getStatus(){
@@ -28,16 +28,15 @@ public class Explosive extends DynamicObject {
 	public void explode() {
 		
 	}
-	
-	
-	public Vector2 getPosition() {
-		return this.initPosition;
+
+	public float getDamage() {
+		return this.damage;
 	}
 	
 	@Override
 	public void update(float deltaTime) {
 		// TODO Auto-generated method stub
-		Drawable drawable = this.getDrawable(0);
+		Drawable drawable = this.getDrawable(0); 
 		drawable.update(deltaTime);
 	}
 

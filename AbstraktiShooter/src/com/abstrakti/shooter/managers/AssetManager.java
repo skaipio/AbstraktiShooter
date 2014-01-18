@@ -16,12 +16,14 @@ public final class AssetManager {
 	private TextureAtlas tileAtlas;
 	private Map<String, Sprite> spriteMap = new HashMap<String, Sprite>();
 	private Map<String, Sound> soundMap = new HashMap<String, Sound>();
+	
+	/*
 	private Sound pistolSound;
 	private Sound bulletWallSound;
 	private Sound bulletFleshSound;
 	private Sound medpackSound;
 	private Sound ammoSound;
-	
+	*/
 	
 	private AssetManager(){}
 	
@@ -56,6 +58,7 @@ public final class AssetManager {
 		this.soundMap.put("ammoSound", Gdx.audio.newSound(Gdx.files.internal("sound-effects/ammo.wav")));
 		this.soundMap.put("shotgun", Gdx.audio.newSound(Gdx.files.internal("sound-effects/shotgun.wav")));
 		this.soundMap.put("machinegun", Gdx.audio.newSound(Gdx.files.internal("sound-effects/uzi.wav")));
+		this.soundMap.put("game-over", Gdx.audio.newSound(Gdx.files.internal("sound-effects/game-over.wav")));
 		
 		
 		/*
@@ -87,6 +90,7 @@ public final class AssetManager {
 		return this.soundMap.get(name);
 	}
 	
+	/*
 	public Sound getPistolSound(){
 		return this.pistolSound;
 	}
@@ -102,6 +106,6 @@ public final class AssetManager {
 	}
 	public Sound getAmmoSound(){
 		return this.ammoSound;
-	}
+	}*/
 		
 }

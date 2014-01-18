@@ -11,12 +11,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class Player extends DynamicObject {
-	private float speed = 32*7f; //per second
 	private PlayerState status; 
 	private int health;
 	public final int MAXHEALTH = 100;
 	private Weapon handGun;
-	private Vector2 movementVector;
 	private UseRangeSensor useRangeSensor;
 	ParticleEffect bloodEffect, gunEffect;
 	private TeamState team;
@@ -24,10 +22,6 @@ public class Player extends DynamicObject {
 	
 
 	public Player(){	 
-		this.movementVector = new Vector2(); 
-		this.movementVector.x = 0;
-		this.movementVector.y = 0;
-
 		this.status = PlayerState.IDLE;
 		this.health = 1;
 		this.handGun = new Machinegun();
@@ -104,30 +98,14 @@ public class Player extends DynamicObject {
 	}
 	@Override
 	public void update(float delta){
-
-		this.updateMovementVector(delta);
-		
 		Drawable drawable = this.getDrawable(this.status.ordinal());
 		if (drawable != null) {
 			drawable.update(delta);
 		}
 	}
 	
-	private void updateMovementVector(float delta) {
-		if (this.status != PlayerState.DEAD) {
-			this.movementVector.nor();
-			this.movementVector.scl(delta*this.getSpeed());
-			if (this.movementVector.x != 0 || this.movementVector.y != 0){
-				this.setStatus(PlayerState.WALKING);
-			}else{
-				this.setStatus(PlayerState.IDLE);
-			}
-			this.setVelocity(this.movementVector);
-		}
-	}
 	public void stopMovement() {
-		this.movementVector.x = 0;
-		this.movementVector.y = 0;
+		this.setStatus(PlayerState.IDLE);
 	}
 	
 
@@ -158,37 +136,31 @@ public class Player extends DynamicObject {
 		}
 	}
 
-	public float getSpeed() {
-		return this.speed;
+	public void  applyMovementImpulse(float impulseX, float impulseY) {
+		this.setStatus(PlayerState.WALKING);
+		//this.getBody().setLinearVelocity(this.getBody().getLinearVelocity().add(new Vector2(0.3f*impulseX,0.3f*impulseY)));
+		this.getBody().applyLinearImpulse(new Vector2(7.5f*impulseX,7.5f*impulseY), this.getBody().getPosition(), true);
 	}
-
 
 	public void moveForward(float delta) {
-		this.movementVector.x += (float) Math.cos(this.getAngle());
-		this.movementVector.y += -(float) Math.sin(this.getAngle());
+		float impulseX = (float) Math.cos(this.getAngle());
+		float impulseY = -(float) Math.sin(this.getAngle());
+		applyMovementImpulse(impulseX, impulseY);	
 	}
-	public void moveBackward(float delta) {
-		this.movementVector.x += -(float) Math.cos(this.getAngle());
-		this.movementVector.y += (float) Math.sin(this.getAngle());
+	public void moveBackward(float delta) {	
+		float impulseX = -(float) Math.cos(this.getAngle());
+		float impulseY = (float) Math.sin(this.getAngle());
+		applyMovementImpulse(impulseX, impulseY);
 	}
 	public void strafeLeft(float delta) {
-		this.movementVector.x += -(float) Math.cos(this.getAngle()+Math.toRadians(90));
-		this.movementVector.y += (float) Math.sin(this.getAngle()+Math.toRadians(90));
+		float impulseX = -(float) Math.cos(this.getAngle()+Math.toRadians(90));
+		float impulseY = (float) Math.sin(this.getAngle()+Math.toRadians(90));
+		applyMovementImpulse(impulseX, impulseY);
 	}
 	public void strafeRight(float delta) {
-		this.movementVector.x += (float) Math.cos(this.getAngle()+Math.toRadians(90));
-		this.movementVector.y += -(float) Math.sin(this.getAngle()+Math.toRadians(90));
-	}
-	public void turnLeft() {
-
-	}
-	public void turnRight() {
-
-
-	}
-	public void throwGrenade(World physiscsWorld, float delta){
-		
-		
+		float impulseX = (float) Math.cos(this.getAngle()+Math.toRadians(90));
+		float impulseY = -(float) Math.sin(this.getAngle()+Math.toRadians(90));
+		applyMovementImpulse(impulseX, impulseY);
 	}
 	public void shoot(World physiscsWorld, float delta) {
 		boolean gunFired =  this.handGun.fireGun(physiscsWorld, this.getPosition(), this.getAngle(), delta);

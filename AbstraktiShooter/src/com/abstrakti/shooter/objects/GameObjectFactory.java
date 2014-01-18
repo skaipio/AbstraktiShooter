@@ -47,7 +47,7 @@ public final class GameObjectFactory {
 		
 	
 		CircleShape shape = new CircleShape();  
-		shape.setRadius(16f*Config.WORLD_TO_BOX);
+		shape.setRadius(15f*Config.WORLD_TO_BOX);
 	
 		
 		/*
@@ -56,16 +56,20 @@ public final class GameObjectFactory {
 		*/
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
+		bodyDef.fixedRotation = true;
 		
 		Body body = world.createBody(bodyDef);
+		body.setLinearDamping(10f);
 		body.setUserData(player);
 	    
 	    FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
-		fixtureDef.density = 0.0f;
+		fixtureDef.density = 10.0f;
 
-		fixtureDef.friction = 0.0f;
+		fixtureDef.friction = 1.0f;
 		fixtureDef.restitution = 0;
+		
+		
 		Fixture playerFixture = body.createFixture(fixtureDef);
 		playerFixture.setUserData(player);
 		
@@ -75,8 +79,7 @@ public final class GameObjectFactory {
 		useRangeDef.isSensor = true;
 		Fixture useRange = body.createFixture(useRangeDef);
 		UseRangeSensor useRangeSensor = new UseRangeSensor(player);
-		useRange.setUserData(useRangeSensor);
-				
+		useRange.setUserData(useRangeSensor);	
 		
 		player.setBody(body);
 		player.setUseRangeSensor(useRangeSensor);
@@ -86,45 +89,56 @@ public final class GameObjectFactory {
 		return player;
 	}
 	
+	public static void createExplosion(World world, Vector2 position) {
+		
+	}
+	
+	public static void applyBlastImpulse(Body body, Vector2 blastCenter, Vector2 applyPoint, float blastPower) {
+		Vector2 blastDir = applyPoint.sub(blastCenter);
+		float distance = blastDir.len(); //normalize
+		//ignore bodies exactly at the blast point - blast direction is undefined
+		if ( distance == 0 )
+			return;
+		float invDistance = 1 / distance;
+		float impulseMag = blastPower * invDistance * invDistance;
+		body.applyLinearImpulse( blastDir.scl(impulseMag), applyPoint, false);
+	}
+	
 	public static Grenade createGrenade(World world, Vector2 position, float angle){
-		Grenade grenade = new Grenade(position);
-
-
+		//Body need to be created first
+		Grenade g = new Grenade();
 		AssetManager assets = AssetManager.getInstance();
 
-
+		/*Sprite*/
 		Sprite grenadeSprite = assets.getSprite("grenade_throwed");
-		StaticDrawable grenadeDrawable = new StaticDrawable(grenadeSprite, grenade);
-
-		grenade.addDrawable(grenadeDrawable, 0);
-
+		StaticDrawable grenadeDrawable = new StaticDrawable(grenadeSprite, g);
+		g.addDrawable(grenadeDrawable, 0);
+		/*Shape*/
 		CircleShape shape = new CircleShape();  
-		shape.setRadius(7f*Config.WORLD_TO_BOX); 
-
+		shape.setRadius(5f*Config.WORLD_TO_BOX);
+		/*Body*/
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
 		Body body = world.createBody(bodyDef);
-		body.setUserData(grenade);
-
+		
+		body.setUserData(g);
+		/*Body definition*/
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
-		fixtureDef.density = 1.0f;
-
-		fixtureDef.friction = 0.0f;
-		fixtureDef.restitution = 0;
+		fixtureDef.density = 0.0f;
+		fixtureDef.friction = 1f;
+		fixtureDef.restitution = 0.1f;
 		fixtureDef.isSensor = false;
 		body.createFixture(fixtureDef);
-		body.setLinearDamping(4f);
-
-		body.setLinearVelocity(new Vector2((float)4*MathUtils.cos(angle), (float)4*MathUtils.sin(angle)));
-
-		grenade.setBody(body);
-
+		body.setLinearDamping(1f);
+		body.applyLinearImpulse(new Vector2((float)20*MathUtils.cos(angle), (float)-20*MathUtils.sin(angle)), position, true);
+		//body.setLinearVelocity(new Vector2((float)50*MathUtils.cos(angle), (float)-50*MathUtils.sin(angle)));
+		g.setBody(body);
 		shape.dispose();
 
-
-
-		return grenade;
+		g.setPosition(position, angle);
+	//	applyBlastImpulse(body, position, position, 10);
+		return g;
 	}
 	
 	/*
@@ -357,6 +371,12 @@ AssetManager assets = AssetManager.getInstance();
 		}
 		
 		itemsToAdd.clear();
+	}
+
+	public static void applyBlastDamage(Player p, Vector2 position,
+			Vector2 position2, float damage) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

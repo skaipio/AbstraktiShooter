@@ -5,24 +5,35 @@ import com.badlogic.gdx.InputProcessor;
 public class PlayerInputProcessor implements InputProcessor {
 	private boolean[] KEYS = new boolean[603];
 	private boolean[] MOUSEBUTTONS = new boolean[3];
+	private boolean[] UPKEYS = new boolean[603];
 
 	@Override
 	public boolean keyDown (int keycode) {
 		KEYS[keycode] = true;
+		UPKEYS[keycode] = false;
 		return true;
 	}
 	@Override
 	public boolean keyUp (int keycode) {
 		KEYS[keycode] = false;
+		UPKEYS[keycode] = true;
 		return true;
 	}
 	public boolean[] getKeys() {
 		return this.KEYS;
 	}
+	public boolean[] getUpKeys() {
+		return this.UPKEYS;
+	}
 	public boolean[] getMouseButtons() {
 		return this.MOUSEBUTTONS;
 	}
-
+	public void setUpKey(int keyCode) {
+		UPKEYS[keyCode] = false;
+	}
+	public void setDownKey(int keyCode) {
+		KEYS[keyCode] = false;
+	}
 	@Override
 	public boolean keyTyped (char character) {
 		return false;

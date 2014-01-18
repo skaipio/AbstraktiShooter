@@ -9,7 +9,7 @@ public class Machinegun extends Weapon {
 		this.fireRate = 0.05f;
 		this.firemode = WeaponFiremode.CONTINUOS;
 		this.damage = 0.5f;
-		this.numberOfBulletsPerShot = 1;
+		this.numberOfProjectilesPerShot = 1;
 		this.reloadingTime = 1;
 	}
 }

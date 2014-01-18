@@ -3,6 +3,7 @@ package com.abstrakti.shooter.io;
 import java.util.ArrayList;
 
 import com.abstrakti.shooter.Config;
+import com.abstrakti.shooter.managers.AssetManager;
 import com.abstrakti.shooter.map.Level;
 import com.abstrakti.shooter.objects.Bullet;
 import com.abstrakti.shooter.objects.DynamicObject;
@@ -159,6 +160,7 @@ public class GameScreen implements Screen {
 	private void checkPlayerState() {
 		if (currentLevel.getPlayer().getStatus() == PlayerState.DEAD) {
 			this.gameState = gameState.GAME_OVER;
+		//	AssetManager.getInstance().getSound("game-over").play();
 		}
 	}
 
@@ -228,30 +230,51 @@ public class GameScreen implements Screen {
 
 	private void handlePlayerInput(float delta) {
 		Player p = currentLevel.getPlayer();
-		boolean[] KEYS = new boolean[603]; 
-		KEYS = input.getKeys();
+		boolean[] DOWNKEYS = new boolean[603]; 
+		DOWNKEYS = input.getKeys();
+		boolean[] UPKEYS = new boolean[603]; 
+		UPKEYS = input.getUpKeys();
 		boolean[] MOUSEBUTTONS = input.getMouseButtons();
 
-		if (KEYS[Keys.W] == true) {
+		if (DOWNKEYS[Keys.W] == true) {
 			p.moveForward(delta);
-		} else {
+		} 
+		
+		if (UPKEYS[Keys.W] == true) {
 			p.stopMovement();
-		}
-		if (KEYS[Keys.S] == true) {
+			input.setUpKey(Keys.W);
+		} 
+		if (UPKEYS[Keys.S] == true) {
+			p.stopMovement();
+			input.setUpKey(Keys.S);
+		} 
+		if (UPKEYS[Keys.A] == true) {
+			p.stopMovement();
+			input.setUpKey(Keys.A);
+		} 
+		if (UPKEYS[Keys.D] == true) {
+			p.stopMovement();
+			input.setUpKey(Keys.D);
+		} 
+		
+		if (DOWNKEYS[Keys.S] == true) {
 			p.moveBackward(delta);
 		}
-		if (KEYS[Keys.A] == true) {
+		if (DOWNKEYS[Keys.A] == true) {
 			p.strafeLeft(delta);
 		}
-		if (KEYS[Keys.D] == true) {
+		if (DOWNKEYS[Keys.D] == true) {
 			p.strafeRight(delta);	
 		}
-		if (KEYS[Keys.E] == true) {
+		if (DOWNKEYS[Keys.E] == true) {
 			p.useDoor();
 		}
-		if (KEYS[Keys.F12]== true ) {
+		if (DOWNKEYS[Keys.F12]== true ) {
 			switchDebugMode(); 
+			input.setDownKey(Keys.F12);
 		}
+		
+		
 		if (MOUSEBUTTONS[Buttons.LEFT] == true) {
 			p.shoot(this.currentLevel.getWorld(), delta);
 		} else {
