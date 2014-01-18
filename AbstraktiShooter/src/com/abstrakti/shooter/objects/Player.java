@@ -19,9 +19,10 @@ public class Player extends DynamicObject {
 	ParticleEffect bloodEffect, gunEffect;
 	private TeamState team;
 	int currentWeapon = 0;
-	
+	Vector2 movementVector;
 
-	public Player(){	 
+	public Player(){
+		movementVector = new Vector2(0,0);
 		this.status = PlayerState.IDLE;
 		this.health = 1;
 		this.handGun = new Machinegun();
@@ -98,12 +99,21 @@ public class Player extends DynamicObject {
 	}
 	@Override
 	public void update(float delta){
+		 this.applyMovementImpulse(delta);
 		Drawable drawable = this.getDrawable(this.status.ordinal());
 		if (drawable != null) {
 			drawable.update(delta);
 		}
 	}
 	
+	public void applyMovementImpulse(float delta) {
+		float speed = 400;
+		movementVector.nor(); //Limit vector length to get rid off diagonal speedup
+		movementVector.scl(speed);
+		movementVector.scl(delta);
+		this.getBody().applyLinearImpulse(this.movementVector, this.getBody().getPosition(), true);
+		movementVector = new Vector2(0,0);
+	}
 	public void stopMovement() {
 		this.setStatus(PlayerState.IDLE);
 	}
@@ -136,31 +146,32 @@ public class Player extends DynamicObject {
 		}
 	}
 
-	public void  applyMovementImpulse(float impulseX, float impulseY) {
+	public void  addMovementImpulse(float impulseX, float impulseY, float delta) {
 		this.setStatus(PlayerState.WALKING);
-		//this.getBody().setLinearVelocity(this.getBody().getLinearVelocity().add(new Vector2(0.3f*impulseX,0.3f*impulseY)));
-		this.getBody().applyLinearImpulse(new Vector2(7.5f*impulseX,7.5f*impulseY), this.getBody().getPosition(), true);
+		Vector2 sumVector = new Vector2(impulseX,impulseY);
+		this.movementVector = movementVector.add(sumVector); 
 	}
+	
 
 	public void moveForward(float delta) {
 		float impulseX = (float) Math.cos(this.getAngle());
 		float impulseY = -(float) Math.sin(this.getAngle());
-		applyMovementImpulse(impulseX, impulseY);	
+		addMovementImpulse(impulseX, impulseY, delta);	
 	}
 	public void moveBackward(float delta) {	
 		float impulseX = -(float) Math.cos(this.getAngle());
 		float impulseY = (float) Math.sin(this.getAngle());
-		applyMovementImpulse(impulseX, impulseY);
+		addMovementImpulse(impulseX, impulseY, delta);
 	}
 	public void strafeLeft(float delta) {
 		float impulseX = -(float) Math.cos(this.getAngle()+Math.toRadians(90));
 		float impulseY = (float) Math.sin(this.getAngle()+Math.toRadians(90));
-		applyMovementImpulse(impulseX, impulseY);
+		addMovementImpulse(impulseX, impulseY, delta);
 	}
 	public void strafeRight(float delta) {
 		float impulseX = (float) Math.cos(this.getAngle()+Math.toRadians(90));
 		float impulseY = -(float) Math.sin(this.getAngle()+Math.toRadians(90));
-		applyMovementImpulse(impulseX, impulseY);
+		addMovementImpulse(impulseX, impulseY, delta);
 	}
 	public void shoot(World physiscsWorld, float delta) {
 		boolean gunFired =  this.handGun.fireGun(physiscsWorld, this.getPosition(), this.getAngle(), delta);

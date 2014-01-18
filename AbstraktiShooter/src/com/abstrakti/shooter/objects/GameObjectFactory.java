@@ -57,9 +57,10 @@ public final class GameObjectFactory {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.fixedRotation = true;
-		
+		bodyDef.linearDamping = 10f ;
+		bodyDef.angularDamping = 0.1f;
 		Body body = world.createBody(bodyDef);
-		body.setLinearDamping(10f);
+		
 		body.setUserData(player);
 	    
 	    FixtureDef fixtureDef = new FixtureDef();
