@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="textureAtlas2" tilewidth="32" tileheight="32">
+  <image source="tileset.png" width="512" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="collision" value="false"/>
+    <property name="tag" value="concrete_floor"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="collision" value="true"/>
+    <property name="tag" value="concrete_wall_corner"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="collision" value="true"/>
+    <property name="tag" value="concrete_wall_corner"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="collision" value="true"/>
+    <property name="tag" value="wall_concrete_end"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="collision" value="true"/>
+    <property name="tag" value="wall_concrete_end"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="collision" value="true"/>
+    <property name="tag" value="wall_concrete_end"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="collision" value="true"/>
+    <property name="tag" value="wall_concrete_fourway"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="collision" value="true"/>
+    <property name="tag" value="wall_concrete_t_junction"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="collision" value="true"/>
+    <property name="tag" value="wall_concrete_t_junction"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="collision" value="true"/>
+    <property name="tag" value="wall_concrete_t_junction"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="collision" value="true"/>
+    <property name="tag" value="wall_concrete_upper"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="collision" value="true"/>
+    <property name="tag" value="wall_concrete_vertical"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="collision" value="true"/>
+    <property name="tag" value="stairs_down"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="collision" value="false"/>
+    <property name="tag" value="stairs_down"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tiles" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztmAsOwyAIQLt1/9+Ze/S5dCaMKNAK6jZIyOJarE8UwWFwcXFx+S3ZBr0CvTDt8P5E2acU21jILegGqKRN2acU21hI7xycv6Ove+fg+r9l3vs2jtMw++UcdP/+L/xOkjb0K25HhTbHzDuS/c9x7Jjnmpr7lsRPEn+3Vg2OQ8Xx5r6lwRH3x+ucg2tZ0pace3i8Vhxa8Ury7RKOcaDnbFQ6P6w5pFKDI67h3Fy25sjlDKfE/rAWvP64cw7OIbVeanOUSG0O6H8ubnL1B7V+rDlgv1w+gp9T8bu2P0pylH/giDECnveW8cqKQ2rTA8ea/F7KkTp/qJqkdg6fihXUuO6zTpzvWtciHMdjVlOONXUKtuE4pHtpCUdqDFb7YynHKz5K6yHpPQKlVE5WwpGyaZG74fgUefF9zJKY1YJDukaX7BHnmAWvEY07tRYcGvWucziHRn8WHNz9FqcjqjEk/aXO1D3oA9YvpXPRg/ac8zrHp5Tuh5qqeV/q4vLL8gRNXiSt
+  </data>
+ </layer>
+ <objectgroup name="Spawns" width="50" height="50">
+  <object name="playerSpawn" type="spawn" x="140" y="426"/>
+  <object type="guardSpawn" x="1347" y="1169"/>
+  <object type="guardSpawn" x="1291" y="1242"/>
+  <object type="guardSpawn" x="1358" y="1267"/>
+  <object type="guardSpawn" x="1446" y="1258"/>
+  <object type="guardSpawn" x="828" y="1313"/>
+  <object type="guardSpawn" x="219" y="1284"/>
+  <object type="guardSpawn" x="162" y="789"/>
+  <object type="guardSpawn" x="374" y="795"/>
+  <object type="guardSpawn" x="343" y="1002"/>
+  <object type="guardSpawn" x="672" y="809"/>
+  <object type="guardSpawn" x="718" y="856"/>
+  <object type="guardSpawn" x="1053" y="970"/>
+  <object type="guardSpawn" x="905" y="694"/>
+  <object type="guardSpawn" x="1027" y="270"/>
+  <object type="guardSpawn" x="968" y="309"/>
+  <object type="guardSpawn" x="801" y="981"/>
+  <object type="guardSpawn" x="670" y="942"/>
+  <object type="guardSpawn" x="865" y="744"/>
+  <object type="guardSpawn" x="1080" y="752"/>
+  <object type="guardSpawn" x="298" y="894"/>
+  <object type="guardSpawn" x="199" y="888"/>
+  <object type="guardSpawn" x="191" y="1335"/>
+  <object type="guardSpawn" x="713" y="408"/>
+ </objectgroup>
+ <objectgroup name="Triggers" width="50" height="50">
+  <object name="end_of_level" x="1376" y="895" width="63" height="53">
+   <properties>
+    <property name="height" value="1.656"/>
+    <property name="width" value="1.969"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="Doors" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1zEBAAAIw7A5wL9bNPCOxEDvJgAAcDelLQAA4Be/AQAAAF0WbzwALg==
+  </data>
+ </layer>
+</map>

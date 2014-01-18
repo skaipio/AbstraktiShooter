@@ -1,0 +1,150 @@
+
+entityAtlas.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+bullet
+  rotate: false
+  xy: 231, 4
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+corpse
+  rotate: false
+  xy: 0, 12
+  size: 39, 52
+  orig: 39, 52
+  offset: 0, 0
+  index: -1
+corpse2
+  rotate: false
+  xy: 39, 22
+  size: 32, 42
+  orig: 32, 42
+  offset: 0, 0
+  index: -1
+grenade_throwed
+  rotate: false
+  xy: 39, 14
+  size: 10, 8
+  orig: 10, 8
+  offset: 0, 0
+  index: -1
+medpack
+  rotate: false
+  xy: 0, 0
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+metal_door
+  rotate: false
+  xy: 191, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+particle
+  rotate: false
+  xy: 12, 4
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+pistol_ammo
+  rotate: false
+  xy: 231, 12
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+player_pistol_leftstep
+  rotate: false
+  xy: 71, 39
+  size: 40, 25
+  orig: 40, 25
+  offset: 0, 0
+  index: -1
+player_pistol_rightstep
+  rotate: false
+  xy: 111, 39
+  size: 40, 25
+  orig: 40, 25
+  offset: 0, 0
+  index: -1
+player_pistol_standing
+  rotate: false
+  xy: 151, 39
+  size: 40, 25
+  orig: 40, 25
+  offset: 0, 0
+  index: -1
+slideDoor1
+  rotate: false
+  xy: 223, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+slideDoor2
+  rotate: false
+  xy: 71, 7
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+slideDoor3
+  rotate: false
+  xy: 103, 7
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+slideDoor4
+  rotate: false
+  xy: 135, 7
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+slideDoor5
+  rotate: false
+  xy: 167, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+slideDoor6
+  rotate: false
+  xy: 199, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+
+entityAtlas2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+original/player_pistol_leftstep - Copy
+  rotate: false
+  xy: 0, 0
+  size: 40, 25
+  orig: 40, 25
+  offset: 0, 0
+  index: -1
+original/player_pistol_rightstep - Copy
+  rotate: false
+  xy: 40, 0
+  size: 40, 25
+  orig: 40, 25
+  offset: 0, 0
+  index: -1
+original/player_pistol_standing - Copy
+  rotate: false
+  xy: 80, 0
+  size: 40, 25
+  orig: 40, 25
+  offset: 0, 0
+  index: -1
